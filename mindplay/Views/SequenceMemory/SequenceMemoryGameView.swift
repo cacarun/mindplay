@@ -33,7 +33,7 @@ struct SequenceMemoryGameView: View {
     // 游戏配置
     private let buttonCount = 9 // 九宮格
     private let buttonColor = Color(red: 0.3, green: 0.5, blue: 0.8) // 统一的按钮颜色
-    private let highlightColor = Color.white // 高亮时的颜色
+    private let highlightColor = Color(red: 0.0, green: 0.3, blue: 0.7) // 高亮时的颜色（更深的蓝色）
     private let sequenceDisplayTime: Double = 0.7
     private let pauseBetweenButtons: Double = 0.3
     private let newRoundDelay: Double = 1.2 // 新一轮开始前的延迟时间
@@ -73,13 +73,16 @@ struct SequenceMemoryGameView: View {
                 
                 Spacer()
                 
-                // 状态提示
-                statusText
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
-                    .animation(.easeInOut, value: gameState)
+                // 状态提示 - 固定高度区域
+                VStack {
+                    statusText
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                        .animation(.easeInOut, value: gameState)
+                }
+                .frame(height: 80) // 固定高度，防止布局移动
                 
                 Spacer()
                 
@@ -104,27 +107,34 @@ struct SequenceMemoryGameView: View {
                 
                 Spacer()
                 
-                // 底部按钮 - 只在开始和游戏结束时显示
-                if gameState == .intro || gameState == .gameOver {
-                    Button(action: {
-                        if gameState == .intro {
-                            startNextLevel()
-                        } else if gameState == .gameOver {
-                            dismiss()
+                // 底部按钮区域 - 固定高度
+                VStack {
+                    if gameState == .intro || gameState == .gameOver {
+                        Button(action: {
+                            if gameState == .intro {
+                                startNextLevel()
+                            } else if gameState == .gameOver {
+                                dismiss()
+                            }
+                        }) {
+                            Text(buttonText)
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .frame(height: 50)
+                                .frame(maxWidth: .infinity)
+                                .background(Color.blue)
+                                .cornerRadius(12)
                         }
-                    }) {
-                        Text(buttonText)
-                            .font(.headline)
-                            .foregroundColor(.white)
+                        .transition(.opacity)
+                        .animation(.easeInOut, value: gameState)
+                    } else {
+                        // 空占位符，保持高度一致
+                        Color.clear
                             .frame(height: 50)
-                            .frame(maxWidth: .infinity)
-                            .background(Color.blue)
-                            .cornerRadius(12)
                     }
-                    .padding(.horizontal)
-                    .transition(.opacity)
-                    .animation(.easeInOut, value: gameState)
                 }
+                .frame(height: 70) // 固定高度
+                .padding(.horizontal)
                 
                 Spacer()
             }
@@ -144,7 +154,8 @@ struct SequenceMemoryGameView: View {
         case .preparing:
             return Text(LocalizedStringKey.getReady.localized)
         case .watching:
-            return Text(LocalizedStringKey.watchSequence.localized)
+            // 在观看序列时不再显示“观看序列”提示
+            return Text("") // 空文本，保持高度不变
         case .repeating:
             return Text(LocalizedStringKey.yourTurn.localized)
         case .wrong:
