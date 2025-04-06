@@ -20,6 +20,9 @@ struct ReactionTimeGameView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var gameDataManager: GameDataManager
     
+    // 添加参数以接收自定义回合数
+    let totalRounds: Int
+    
     @State private var gameState: GameState = .waiting
     @State private var startTime: Date? = nil
     @State private var reactionTime: Double? = nil
@@ -27,9 +30,13 @@ struct ReactionTimeGameView: View {
     @State private var currentRound: Int = 1
     @State private var waitTime: Double = 0
     
-    private let totalRounds = 5
-    private let minWaitTime = 1.5  // Minimum wait time in seconds
-    private let maxWaitTime = 4.0  // Maximum wait time in seconds
+    private let minWaitTime = 1.5  // 最小等待时间（秒）
+    private let maxWaitTime = 4.0  // 最大等待时间（秒）
+    
+    // 添加默认构造函数
+    init(totalRounds: Int = 3) {
+        self.totalRounds = totalRounds
+    }
     
     var body: some View {
         ZStack {
@@ -266,6 +273,6 @@ struct ReactionTimeGameView: View {
 }
 
 #Preview {
-    ReactionTimeGameView()
+    ReactionTimeGameView(totalRounds: 3)
         .environmentObject(GameDataManager())
 }

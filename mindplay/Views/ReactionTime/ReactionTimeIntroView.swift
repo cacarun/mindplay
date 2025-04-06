@@ -10,6 +10,10 @@ import SwiftUI
 struct ReactionTimeIntroView: View {
     @EnvironmentObject var gameDataManager: GameDataManager
     @State private var isShowingGame = false
+    @State private var roundCount = 3 // 默认回合数为3次
+    
+    // 可选的回合次数范围
+    private let roundOptions = [1, 3, 5, 10]
     
     var body: some View {
         ScrollView {
@@ -27,30 +31,69 @@ struct ReactionTimeIntroView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 8)
                 
-                // Best score
-                if let bestScore = gameDataManager.getBestScore(for: .reactionTime) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Your Best")
-                                .font(.headline)
-                                .foregroundColor(.secondary)
-                            
-                            Text(String(format: "%.0f ms", bestScore))
-                                .font(.system(size: 32, weight: .bold))
-                                .foregroundColor(.blue)
+                // 自定义回合次数
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("回合次数")
+                        .font(.headline)
+                        .foregroundColor(.primary)
+                    
+                    HStack(spacing: 10) {
+                        ForEach(roundOptions, id: \.self) { count in
+                            Button(action: {
+                                roundCount = count
+                            }) {
+                                Text("\(count)")
+                                    .font(.headline)
+                                    .frame(minWidth: 44, minHeight: 44)
+                                    .background(roundCount == count ? Color.blue : Color.gray.opacity(0.2))
+                                    .foregroundColor(roundCount == count ? .white : .primary)
+                                    .cornerRadius(8)
+                            }
                         }
                         
                         Spacer()
-                        
-                        // Add percentile comparison here when implemented
                     }
-                    .padding()
-                    .background(Color(.systemBackground))
-                    .cornerRadius(12)
-                    .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
                 }
+                .padding()
+                .background(Color(.systemBackground))
+                .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
                 
-                // Game instructions
+                // 最佳成绩和开始按钮
+                HStack(spacing: 15) {
+                    // 最佳成绩
+                    if let bestScore = gameDataManager.getBestScore(for: .reactionTime) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("最佳成绩")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            
+                            Text(String(format: "%.0f ms", bestScore))
+                                .font(.headline)
+                                .foregroundColor(.blue)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    
+                    // 开始测试按钮
+                    Button(action: {
+                        isShowingGame = true
+                    }) {
+                        Text("开始测试")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(height: 44)
+                            .frame(maxWidth: .infinity)
+                            .background(Color.blue)
+                            .cornerRadius(12)
+                    }
+                }
+                .padding()
+                .background(Color(.systemBackground))
+                .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
+                
+                // 游戏说明
                 VStack(alignment: .leading, spacing: 16) {
                     Text("How to Play")
                         .font(.title2)
@@ -59,7 +102,7 @@ struct ReactionTimeIntroView: View {
                     instructionItem(number: "1", text: "Wait for the screen to turn green")
                     instructionItem(number: "2", text: "Tap the screen as quickly as you can when it changes")
                     instructionItem(number: "3", text: "Your reaction time will be measured in milliseconds")
-                    instructionItem(number: "4", text: "Complete 5 rounds for an average score")
+                    instructionItem(number: "4", text: "Complete \(roundCount) rounds for an average score")
                 }
                 .padding()
                 .background(Color(.systemBackground))
@@ -89,26 +132,14 @@ struct ReactionTimeIntroView: View {
                 .cornerRadius(12)
                 .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
                 
-                // Start button
-                Button(action: {
-                    isShowingGame = true
-                }) {
-                    Text("Start Test")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(12)
-                }
-                .padding(.top, 16)
+                // 删除这里的开始按钮，因为我们已经移动到上面了
             }
             .padding()
         }
         .background(Color(.systemGroupedBackground).ignoresSafeArea())
         .navigationBarTitle("", displayMode: .inline)
         .fullScreenCover(isPresented: $isShowingGame) {
-            ReactionTimeGameView()
+            ReactionTimeGameView(totalRounds: roundCount)
         }
     }
     

@@ -10,6 +10,11 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var gameDataManager: GameDataManager
     
+    // 使用更紧凑的网格布局
+    private let columns = [
+        GridItem(.adaptive(minimum: 150, maximum: 170), spacing: 15)
+    ]
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -18,17 +23,20 @@ struct HomeView: View {
                         .font(.system(size: 36, weight: .bold))
                         .padding(.top, 20)
                     
-                    Text("Train your brain with cognitive games")
+                    Text("训练你的大脑，提升认知能力")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                        .padding(.bottom, 20)
+                        .padding(.bottom, 10)
                     
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 300, maximum: 400), spacing: 16)], spacing: 16) {
+                    // 使用网格布局展示游戏卡片
+                    LazyVGrid(columns: columns, spacing: 15) {
                         ForEach(GameType.allCases) { gameType in
                             GameCardView(gameType: gameType)
                         }
                     }
                     .padding(.horizontal)
+                    
+                    Spacer(minLength: 40)
                 }
             }
             .navigationBarTitle("", displayMode: .inline)
@@ -43,40 +51,27 @@ struct GameCardView: View {
     
     var body: some View {
         NavigationLink(destination: destinationView) {
-            VStack(alignment: .leading, spacing: 12) {
-                HStack {
-                    Image(systemName: gameType.iconName)
-                        .font(.system(size: 24))
-                        .foregroundColor(.white)
-                        .frame(width: 50, height: 50)
-                        .background(Color.blue)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                    
-                    VStack(alignment: .leading) {
-                        Text(gameType.rawValue)
-                            .font(.headline)
-                        
-                        if let bestScore = gameDataManager.getBestScore(for: gameType) {
-                            Text("Best: \(formatScore(bestScore))")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.secondary)
-                }
+            // 简化的游戏卡片设计
+            VStack(spacing: 10) {
+                // 图标
+                Image(systemName: gameType.iconName)
+                    .font(.system(size: 30))
+                    .foregroundColor(.white)
+                    .frame(width: 60, height: 60)
+                    .background(Color.blue)
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
                 
-                Text(gameType.description)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                // 游戏名称
+                Text(gameType.rawValue)
+                    .font(.headline)
+                    .multilineTextAlignment(.center)
                     .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            .padding(16)
+            .frame(minWidth: 120, minHeight: 120)
+            .padding(12)
             .background(Color(.systemBackground))
-            .cornerRadius(12)
+            .cornerRadius(15)
             .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
         }
         .buttonStyle(PlainButtonStyle())
