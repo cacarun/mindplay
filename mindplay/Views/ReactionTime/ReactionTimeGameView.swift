@@ -29,6 +29,7 @@ struct ReactionTimeGameView: View {
     @State private var roundTimes: [Double] = []
     @State private var currentRound: Int = 1
     @State private var waitTime: Double = 0
+    @State private var isFirstRound: Bool = true // 添加状态变量跟踪是否是第一轮
     
     private let minWaitTime = 1.5  // 最小等待时间（秒）
     private let maxWaitTime = 4.0  // 最大等待时间（秒）
@@ -181,18 +182,21 @@ struct ReactionTimeGameView: View {
                     .font(.system(size: 64, weight: .bold))
                     .foregroundColor(.blue)
                 
-                Text("Your reaction time")
+                Text("你的反应时间")
                     .font(.title3)
             }
             
-            Text("Round \(currentRound) of \(totalRounds) completed")
+            Text("第 \(currentRound) 轮 / 共 \(totalRounds) 轮")
                 .font(.headline)
                 .foregroundColor(.secondary)
             
             Button(action: {
                 if currentRound < totalRounds {
                     currentRound += 1
-                    gameState = .waiting
+                    // 非第一轮直接开始下一轮测试
+                    isFirstRound = false // 设置为非第一轮
+                    // 直接开始下一轮
+                    startRound()
                 } else {
                     gameState = .finished
                     // Save the average score
@@ -222,6 +226,7 @@ struct ReactionTimeGameView: View {
     private func startGame() {
         roundTimes = []
         currentRound = 1
+        isFirstRound = true // 重置为第一轮
         gameState = .waiting
     }
     
