@@ -11,6 +11,11 @@
 		8BDB07A22DA21FD30036C18B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07A12DA21FD30036C18B /* ContentView.swift */; };
 		8BDB07A42DA21FD60036C18B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BDB07A32DA21FD60036C18B /* Assets.xcassets */; };
 		8BDB07A72DA21FD60036C18B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BDB07A62DA21FD60036C18B /* Preview Assets.xcassets */; };
+		8BDB07BB2DA233360036C18B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07B42DA233360036C18B /* HomeView.swift */; };
+		8BDB07BC2DA233360036C18B /* ReactionTimeGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07B62DA233360036C18B /* ReactionTimeGameView.swift */; };
+		8BDB07BD2DA233360036C18B /* ReactionTimeIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07B72DA233360036C18B /* ReactionTimeIntroView.swift */; };
+		8BDB07BE2DA233370036C18B /* ReactionTimeResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07B82DA233360036C18B /* ReactionTimeResultView.swift */; };
+		8BDB07BF2DA233370036C18B /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07BA2DA233360036C18B /* GameModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		8BDB07A12DA21FD30036C18B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8BDB07A32DA21FD60036C18B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8BDB07A62DA21FD60036C18B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8BDB07B42DA233360036C18B /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		8BDB07B62DA233360036C18B /* ReactionTimeGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionTimeGameView.swift; sourceTree = "<group>"; };
+		8BDB07B72DA233360036C18B /* ReactionTimeIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionTimeIntroView.swift; sourceTree = "<group>"; };
+		8BDB07B82DA233360036C18B /* ReactionTimeResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionTimeResultView.swift; sourceTree = "<group>"; };
+		8BDB07BA2DA233360036C18B /* GameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +61,8 @@
 		8BDB079E2DA21FD30036C18B /* mindplay */ = {
 			isa = PBXGroup;
 			children = (
+				8BDB07B92DA233360036C18B /* Models */,
+				8BDB07B32DA233360036C18B /* Views */,
 				8BDB079F2DA21FD30036C18B /* mindplayApp.swift */,
 				8BDB07A12DA21FD30036C18B /* ContentView.swift */,
 				8BDB07A32DA21FD60036C18B /* Assets.xcassets */,
@@ -65,6 +77,33 @@
 				8BDB07A62DA21FD60036C18B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8BDB07B32DA233360036C18B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8BDB07B42DA233360036C18B /* HomeView.swift */,
+				8BDB07B52DA233360036C18B /* ReactionTime */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8BDB07B52DA233360036C18B /* ReactionTime */ = {
+			isa = PBXGroup;
+			children = (
+				8BDB07B62DA233360036C18B /* ReactionTimeGameView.swift */,
+				8BDB07B72DA233360036C18B /* ReactionTimeIntroView.swift */,
+				8BDB07B82DA233360036C18B /* ReactionTimeResultView.swift */,
+			);
+			path = ReactionTime;
+			sourceTree = "<group>";
+		};
+		8BDB07B92DA233360036C18B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8BDB07BA2DA233360036C18B /* GameModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +176,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BDB07BB2DA233360036C18B /* HomeView.swift in Sources */,
+				8BDB07BE2DA233370036C18B /* ReactionTimeResultView.swift in Sources */,
 				8BDB07A22DA21FD30036C18B /* ContentView.swift in Sources */,
+				8BDB07BD2DA233360036C18B /* ReactionTimeIntroView.swift in Sources */,
+				8BDB07BC2DA233360036C18B /* ReactionTimeGameView.swift in Sources */,
+				8BDB07BF2DA233370036C18B /* GameModel.swift in Sources */,
 				8BDB07A02DA21FD30036C18B /* mindplayApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,11 +319,14 @@
 				DEVELOPMENT_TEAM = 8ZYRD3DLYX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Mind Play";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -287,9 +334,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.devbyway.mindplay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -304,11 +355,14 @@
 				DEVELOPMENT_TEAM = 8ZYRD3DLYX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Mind Play";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -316,9 +370,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.devbyway.mindplay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

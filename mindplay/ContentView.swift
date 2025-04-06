@@ -12,13 +12,8 @@ struct ContentView: View {
     @StateObject private var gameDataManager = GameDataManager()
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        HomeView()
+            .environmentObject(gameDataManager)
     }
 }
 
