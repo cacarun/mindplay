@@ -19,6 +19,7 @@ enum GameState {
 struct ReactionTimeGameView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var gameDataManager: GameDataManager
+    @EnvironmentObject var languageManager: LanguageManager
     
     // 添加参数以接收自定义回合数
     let totalRounds: Int
@@ -99,18 +100,18 @@ struct ReactionTimeGameView: View {
     
     private var waitingContent: some View {
         VStack(spacing: 24) {
-            Text("Get Ready")
+            Text(LocalizedStringKey.getReady.localized)
                 .font(.largeTitle)
                 .fontWeight(.bold)
             
-            Text("Tap the screen when it turns green")
+            Text(LocalizedStringKey.tapWhenGreen.localized)
                 .font(.title3)
                 .multilineTextAlignment(.center)
             
             Button(action: {
                 startRound()
             }) {
-                Text("Tap to Start Round \(currentRound) of \(totalRounds)")
+                Text(LocalizedStringKey.tapToStartRound.localized(with: currentRound, totalRounds))
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding()
@@ -129,7 +130,7 @@ struct ReactionTimeGameView: View {
     
     private var readyContent: some View {
         VStack {
-            Text("Wait...")
+            Text(LocalizedStringKey.wait.localized)
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
@@ -138,7 +139,7 @@ struct ReactionTimeGameView: View {
     
     private var goContent: some View {
         VStack {
-            Text("TAP NOW!")
+            Text(LocalizedStringKey.tapNow.localized)
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
@@ -147,18 +148,18 @@ struct ReactionTimeGameView: View {
     
     private var tooEarlyContent: some View {
         VStack(spacing: 24) {
-            Text("Too Early!")
+            Text(LocalizedStringKey.tooEarly.localized)
                 .font(.largeTitle)
                 .fontWeight(.bold)
             
-            Text("You tapped before the screen turned green. Let's try again.")
+            Text(LocalizedStringKey.tooEarlyDescription.localized)
                 .font(.title3)
                 .multilineTextAlignment(.center)
             
             Button(action: {
                 startRound()
             }) {
-                Text("Try Again")
+                Text(LocalizedStringKey.tryAgain.localized)
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding()
@@ -182,11 +183,11 @@ struct ReactionTimeGameView: View {
                     .font(.system(size: 64, weight: .bold))
                     .foregroundColor(.blue)
                 
-                Text("你的反应时间")
+                Text(LocalizedStringKey.yourReactionTime.localized)
                     .font(.title3)
             }
             
-            Text("第 \(currentRound) 轮 / 共 \(totalRounds) 轮")
+            Text(LocalizedStringKey.roundOf.localized(with: currentRound, totalRounds))
                 .font(.headline)
                 .foregroundColor(.secondary)
             
@@ -204,7 +205,7 @@ struct ReactionTimeGameView: View {
                     gameDataManager.saveResult(gameType: .reactionTime, score: averageTime)
                 }
             }) {
-                Text(currentRound < totalRounds ? "Next Round" : "See Results")
+                Text(currentRound < totalRounds ? LocalizedStringKey.nextRound.localized : LocalizedStringKey.seeResults.localized)
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding()
@@ -280,4 +281,5 @@ struct ReactionTimeGameView: View {
 #Preview {
     ReactionTimeGameView(totalRounds: 3)
         .environmentObject(GameDataManager())
+        .environmentObject(LanguageManager())
 }

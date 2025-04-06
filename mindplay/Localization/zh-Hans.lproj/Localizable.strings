@@ -1,0 +1,60 @@
+/* 
+  Localizable.strings
+  mindplay
+
+  Chinese localization
+*/
+
+// 通用
+"app_name" = "MindPlay";
+
+// 首页
+"train_your_brain" = "训练你的大脑，提升认知能力";
+
+// 反应时间测试
+"reaction_time_test" = "反应时间测试";
+"test_visual_reaction" = "测试你的视觉反应速度";
+"round_count" = "回合次数";
+"best_score" = "最佳成绩";
+"start_test" = "开始测试";
+"how_to_play" = "游戏规则";
+"wait_for_green" = "等待屏幕变成绿色";
+"tap_when_changes" = "屏幕变色后立即点击屏幕";
+"reaction_measured" = "你的反应时间将以毫秒为单位测量";
+"complete_rounds" = "完成%d轮测试以获得平均成绩";
+"about_the_test" = "关于测试";
+"about_test_description" = "这个测试衡量你的视觉反应时间 - 你对视觉刺激的反应速度。平均反应时间约为250毫秒，但会因年龄、疲劳和练习等多种因素而异。";
+"excellent" = "优秀";
+"good" = "良好";
+"average" = "平均";
+"below_average" = "低于平均";
+
+// 游戏界面
+"get_ready" = "准备好";
+"tap_when_green" = "当屏幕变绿时点击屏幕";
+"tap_to_start_round" = "点击开始第 %d 轮（共 %d 轮）";
+"wait" = "等待...";
+"tap_now" = "立即点击！";
+"too_early" = "太早了！";
+"too_early_description" = "你在屏幕变绿之前就点击了。让我们再试一次。";
+"try_again" = "再试一次";
+"your_reaction_time" = "你的反应时间";
+"round_of" = "第 %d 轮 / 共 %d 轮";
+"next_round" = "下一轮";
+"see_results" = "查看结果";
+
+// 结果页面
+"your_average_reaction_time" = "你的平均反应时间";
+"percentile_excellent" = "太棒了！你超过了90%的人。";
+"percentile_good" = "很好！你超过了70%的人。";
+"percentile_average" = "不错。你处于平均水平。";
+"percentile_below_average" = "你的表现低于60%的人。";
+"statistics" = "统计数据";
+"best_time" = "最佳时间";
+"attempts" = "尝试次数";
+"your_attempts" = "你的尝试";
+"what_this_means" = "这意味着什么？";
+"result_explanation" = "反应时间是指你对刺激做出反应的速度。成年人的平均视觉反应时间为250毫秒。";
+"result_factors" = "影响反应时间的因素包括年龄、疲劳、咖啡因摄入和练习。专业运动员的反应时间通常低于200毫秒。";
+"back_to_menu" = "返回菜单";
+"play_again" = "再玩一次";

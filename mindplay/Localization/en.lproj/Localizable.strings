@@ -1,0 +1,60 @@
+/* 
+  Localizable.strings
+  mindplay
+
+  English localization
+*/
+
+// General
+"app_name" = "MindPlay";
+
+// Home
+"train_your_brain" = "Train your brain with cognitive games";
+
+// Reaction Time Test
+"reaction_time_test" = "Reaction Time Test";
+"test_visual_reaction" = "Test your visual reaction speed";
+"round_count" = "Round Count";
+"best_score" = "Best Score";
+"start_test" = "Start Test";
+"how_to_play" = "How to Play";
+"wait_for_green" = "Wait for the screen to turn green";
+"tap_when_changes" = "Tap the screen as quickly as you can when it changes";
+"reaction_measured" = "Your reaction time will be measured in milliseconds";
+"complete_rounds" = "Complete %d rounds for an average score";
+"about_the_test" = "About the Test";
+"about_test_description" = "This test measures your visual reaction time - how quickly you respond to a visual stimulus. The average reaction time is around 250 milliseconds, but can vary based on many factors including age, fatigue, and practice.";
+"excellent" = "Excellent";
+"good" = "Good";
+"average" = "Average";
+"below_average" = "Below Average";
+
+// Game Interface
+"get_ready" = "Get Ready";
+"tap_when_green" = "Tap the screen when it turns green";
+"tap_to_start_round" = "Tap to Start Round %d of %d";
+"wait" = "Wait...";
+"tap_now" = "TAP NOW!";
+"too_early" = "Too Early!";
+"too_early_description" = "You tapped before the screen turned green. Let's try again.";
+"try_again" = "Try Again";
+"your_reaction_time" = "Your reaction time";
+"round_of" = "Round %d of %d";
+"next_round" = "Next Round";
+"see_results" = "See Results";
+
+// Results Page
+"your_average_reaction_time" = "Your Average Reaction Time";
+"percentile_excellent" = "Excellent! You're in the top 10% of people.";
+"percentile_good" = "Great! You're in the top 30% of people.";
+"percentile_average" = "Good. You're around average.";
+"percentile_below_average" = "You're in the lower 40% of people.";
+"statistics" = "Statistics";
+"best_time" = "Best Time";
+"attempts" = "Attempts";
+"your_attempts" = "Your Attempts";
+"what_this_means" = "What Does This Mean?";
+"result_explanation" = "Reaction time is how quickly you respond to a stimulus. The average adult has a visual reaction time of 250 milliseconds.";
+"result_factors" = "Factors that can affect your reaction time include age, fatigue, caffeine intake, and practice. Professional athletes often have reaction times below 200ms.";
+"back_to_menu" = "Back to Menu";
+"play_again" = "Play Again";

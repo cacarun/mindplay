@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ReactionTimeIntroView: View {
     @EnvironmentObject var gameDataManager: GameDataManager
+    @EnvironmentObject var languageManager: LanguageManager
     @State private var isShowingGame = false
     @State private var roundCount = 3 // 默认回合数为3次
     
@@ -20,11 +21,11 @@ struct ReactionTimeIntroView: View {
             VStack(alignment: .leading, spacing: 24) {
                 // Header
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Reaction Time Test")
+                    Text(LocalizedStringKey.reactionTimeTest.localized)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     
-                    Text("Test your visual reaction speed")
+                    Text(LocalizedStringKey.testVisualReaction.localized)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -33,7 +34,7 @@ struct ReactionTimeIntroView: View {
                 
                 // 自定义回合次数
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("回合次数")
+                    Text(LocalizedStringKey.roundCount.localized)
                         .font(.headline)
                         .foregroundColor(.primary)
                     
@@ -64,7 +65,7 @@ struct ReactionTimeIntroView: View {
                     // 最佳成绩
                     if let bestScore = gameDataManager.getBestScore(for: .reactionTime) {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("最佳成绩")
+                            Text(LocalizedStringKey.bestScore.localized)
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                             
@@ -79,7 +80,7 @@ struct ReactionTimeIntroView: View {
                     Button(action: {
                         isShowingGame = true
                     }) {
-                        Text("开始测试")
+                        Text(LocalizedStringKey.startTest.localized)
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(height: 44)
@@ -95,14 +96,14 @@ struct ReactionTimeIntroView: View {
                 
                 // 游戏说明
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("How to Play")
+                    Text(LocalizedStringKey.howToPlay.localized)
                         .font(.title2)
                         .fontWeight(.bold)
                     
-                    instructionItem(number: "1", text: "Wait for the screen to turn green")
-                    instructionItem(number: "2", text: "Tap the screen as quickly as you can when it changes")
-                    instructionItem(number: "3", text: "Your reaction time will be measured in milliseconds")
-                    instructionItem(number: "4", text: "Complete \(roundCount) rounds for an average score")
+                    instructionItem(number: "1", text: LocalizedStringKey.waitForGreen.localized)
+                    instructionItem(number: "2", text: LocalizedStringKey.tapWhenChanges.localized)
+                    instructionItem(number: "3", text: LocalizedStringKey.reactionMeasured.localized)
+                    instructionItem(number: "4", text: LocalizedStringKey.completeRounds.localized(with: roundCount))
                 }
                 .padding()
                 .background(Color(.systemBackground))
@@ -111,19 +112,19 @@ struct ReactionTimeIntroView: View {
                 
                 // About section
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("About the Test")
+                    Text(LocalizedStringKey.aboutTheTest.localized)
                         .font(.title2)
                         .fontWeight(.bold)
                     
-                    Text("This test measures your visual reaction time - how quickly you respond to a visual stimulus. The average reaction time is around 250 milliseconds, but can vary based on many factors including age, fatigue, and practice.")
+                    Text(LocalizedStringKey.aboutTestDescription.localized)
                         .font(.body)
                         .foregroundColor(.secondary)
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        scoreRangeRow(range: "< 200 ms", description: "Excellent")
-                        scoreRangeRow(range: "200-250 ms", description: "Good")
-                        scoreRangeRow(range: "250-300 ms", description: "Average")
-                        scoreRangeRow(range: "> 300 ms", description: "Below Average")
+                        scoreRangeRow(range: "< 200 ms", description: LocalizedStringKey.excellent.localized)
+                        scoreRangeRow(range: "200-250 ms", description: LocalizedStringKey.good.localized)
+                        scoreRangeRow(range: "250-300 ms", description: LocalizedStringKey.average.localized)
+                        scoreRangeRow(range: "> 300 ms", description: LocalizedStringKey.belowAverage.localized)
                     }
                     .padding(.top, 8)
                 }
@@ -140,6 +141,7 @@ struct ReactionTimeIntroView: View {
         .navigationBarTitle("", displayMode: .inline)
         .fullScreenCover(isPresented: $isShowingGame) {
             ReactionTimeGameView(totalRounds: roundCount)
+                .environmentObject(languageManager)
         }
     }
     

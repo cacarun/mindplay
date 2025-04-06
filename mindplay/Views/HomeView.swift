@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var gameDataManager: GameDataManager
+    @EnvironmentObject var languageManager: LanguageManager
     
     // 使用更紧凑的网格布局
     private let columns = [
@@ -19,11 +20,11 @@ struct HomeView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    Text("MindPlay")
+                    Text(LocalizedStringKey.appName.localized)
                         .font(.system(size: 36, weight: .bold))
                         .padding(.top, 20)
                     
-                    Text("训练你的大脑，提升认知能力")
+                    Text(LocalizedStringKey.trainYourBrain.localized)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .padding(.bottom, 10)
@@ -61,8 +62,8 @@ struct GameCardView: View {
                     .background(Color.blue)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
                 
-                // 游戏名称
-                Text(gameType.rawValue)
+                // 游戏名称 - 使用游戏类型对应的本地化字符串
+                Text(gameType.localizedName)
                     .font(.headline)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)

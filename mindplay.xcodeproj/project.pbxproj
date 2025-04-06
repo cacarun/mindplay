@@ -16,6 +16,9 @@
 		8BDB07BD2DA233360036C18B /* ReactionTimeIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07B72DA233360036C18B /* ReactionTimeIntroView.swift */; };
 		8BDB07BE2DA233370036C18B /* ReactionTimeResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07B82DA233360036C18B /* ReactionTimeResultView.swift */; };
 		8BDB07BF2DA233370036C18B /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07BA2DA233360036C18B /* GameModel.swift */; };
+		8BDB07C52DA2B9800036C18B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BDB07C12DA2B9800036C18B /* Localizable.strings */; };
+		8BDB07C62DA2B9800036C18B /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07C42DA2B9800036C18B /* Localizable.swift */; };
+		8BDB07C82DA2B9A00036C18B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07C72DA2B9A00036C18B /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,10 @@
 		8BDB07B72DA233360036C18B /* ReactionTimeIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionTimeIntroView.swift; sourceTree = "<group>"; };
 		8BDB07B82DA233360036C18B /* ReactionTimeResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionTimeResultView.swift; sourceTree = "<group>"; };
 		8BDB07BA2DA233360036C18B /* GameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		8BDB07C22DA2B9800036C18B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		8BDB07C32DA2B9800036C18B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8BDB07C42DA2B9800036C18B /* Localizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
+		8BDB07C72DA2B9A00036C18B /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +68,7 @@
 		8BDB079E2DA21FD30036C18B /* mindplay */ = {
 			isa = PBXGroup;
 			children = (
+				8BDB07C02DA2B9800036C18B /* Localization */,
 				8BDB07B92DA233360036C18B /* Models */,
 				8BDB07B32DA233360036C18B /* Views */,
 				8BDB079F2DA21FD30036C18B /* mindplayApp.swift */,
@@ -82,6 +90,7 @@
 		8BDB07B32DA233360036C18B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8BDB07C72DA2B9A00036C18B /* SettingsView.swift */,
 				8BDB07B42DA233360036C18B /* HomeView.swift */,
 				8BDB07B52DA233360036C18B /* ReactionTime */,
 			);
@@ -104,6 +113,15 @@
 				8BDB07BA2DA233360036C18B /* GameModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		8BDB07C02DA2B9800036C18B /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				8BDB07C12DA2B9800036C18B /* Localizable.strings */,
+				8BDB07C42DA2B9800036C18B /* Localizable.swift */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +166,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 8BDB07932DA21FD30036C18B;
 			productRefGroup = 8BDB079D2DA21FD30036C18B /* Products */;
@@ -165,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BDB07A72DA21FD60036C18B /* Preview Assets.xcassets in Resources */,
+				8BDB07C52DA2B9800036C18B /* Localizable.strings in Resources */,
 				8BDB07A42DA21FD60036C18B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,14 +199,28 @@
 				8BDB07BB2DA233360036C18B /* HomeView.swift in Sources */,
 				8BDB07BE2DA233370036C18B /* ReactionTimeResultView.swift in Sources */,
 				8BDB07A22DA21FD30036C18B /* ContentView.swift in Sources */,
+				8BDB07C82DA2B9A00036C18B /* SettingsView.swift in Sources */,
 				8BDB07BD2DA233360036C18B /* ReactionTimeIntroView.swift in Sources */,
 				8BDB07BC2DA233360036C18B /* ReactionTimeGameView.swift in Sources */,
 				8BDB07BF2DA233370036C18B /* GameModel.swift in Sources */,
+				8BDB07C62DA2B9800036C18B /* Localizable.swift in Sources */,
 				8BDB07A02DA21FD30036C18B /* mindplayApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8BDB07C12DA2B9800036C18B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BDB07C22DA2B9800036C18B /* zh-Hans */,
+				8BDB07C32DA2B9800036C18B /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8BDB07A82DA21FD60036C18B /* Debug */ = {

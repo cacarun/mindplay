@@ -14,6 +14,14 @@ enum GameType: String, CaseIterable, Identifiable {
     
     var id: String { self.rawValue }
     
+    // 本地化游戏名称
+    var localizedName: String {
+        switch self {
+        case .reactionTime:
+            return LocalizedStringKey.reactionTimeTest.localized
+        }
+    }
+    
     var description: String {
         switch self {
         case .reactionTime:
