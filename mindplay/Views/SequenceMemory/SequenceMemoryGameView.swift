@@ -10,9 +10,9 @@ import AVFoundation
 
 enum SequenceGameState {
     case intro       // 初始状态，显示开始按钮
+    case preparing   // 准备开始新一轮，等待短暂延迟
     case watching    // 用户观看序列
     case repeating   // 用户重复序列
-    case correct     // 用户正确重复了序列
     case wrong       // 用户错误重复了序列
     case gameOver    // 游戏结束
 }
@@ -36,6 +36,7 @@ struct SequenceMemoryGameView: View {
     private let highlightColor = Color.white // 高亮时的颜色
     private let sequenceDisplayTime: Double = 0.7
     private let pauseBetweenButtons: Double = 0.3
+    private let newRoundDelay: Double = 1.2 // 新一轮开始前的延迟时间
     
     // 音效服务
     private let soundService = SoundService.shared
@@ -103,10 +104,10 @@ struct SequenceMemoryGameView: View {
                 
                 Spacer()
                 
-                // 底部按钮
-                if gameState == .intro || gameState == .correct || gameState == .gameOver {
+                // 底部按钮 - 只在开始和游戏结束时显示
+                if gameState == .intro || gameState == .gameOver {
                     Button(action: {
-                        if gameState == .intro || gameState == .correct {
+                        if gameState == .intro {
                             startNextLevel()
                         } else if gameState == .gameOver {
                             dismiss()
@@ -140,12 +141,12 @@ struct SequenceMemoryGameView: View {
         switch gameState {
         case .intro:
             return Text(LocalizedStringKey.watchSequence.localized)
+        case .preparing:
+            return Text(LocalizedStringKey.getReady.localized)
         case .watching:
             return Text(LocalizedStringKey.watchSequence.localized)
         case .repeating:
             return Text(LocalizedStringKey.yourTurn.localized)
-        case .correct:
-            return Text(LocalizedStringKey.correct.localized)
         case .wrong:
             return Text(LocalizedStringKey.wrong.localized)
         case .gameOver:
@@ -157,8 +158,6 @@ struct SequenceMemoryGameView: View {
         switch gameState {
         case .intro:
             return LocalizedStringKey.startSequence.localized
-        case .correct:
-            return LocalizedStringKey.nextRound.localized
         case .gameOver:
             return LocalizedStringKey.backToMenu.localized
         default:
@@ -180,10 +179,15 @@ struct SequenceMemoryGameView: View {
         sequence.append(Int.random(in: 0..<buttonCount))
         userSequence = []
         currentIndex = 0
-        gameState = .watching
         
-        // 开始显示序列
-        showSequence()
+        // 先进入准备状态，给用户一点时间准备
+        gameState = .preparing
+        
+        // 延迟后开始显示序列
+        DispatchQueue.main.asyncAfter(deadline: .now() + newRoundDelay) {
+            self.gameState = .watching
+            self.showSequence()
+        }
     }
     
     private func showSequence() {
@@ -235,11 +239,13 @@ struct SequenceMemoryGameView: View {
                 // 检查是否完成当前序列
                 if userSequence.count == sequence.count {
                     // 完成当前级别
-                    gameState = .correct
                     currentLevel += 1
                     
                     // 保存最高分
                     gameDataManager.saveResult(gameType: .sequenceMemory, score: Double(currentLevel - 1))
+                    
+                    // 自动进入下一轮
+                    startNextLevel()
                 }
             }
         } else {
