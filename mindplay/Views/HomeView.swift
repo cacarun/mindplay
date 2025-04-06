@@ -81,6 +81,8 @@ struct GameCardView: View {
         switch gameType {
         case .reactionTime:
             return AnyView(ReactionTimeIntroView())
+        case .sequenceMemory:
+            return AnyView(SequenceMemoryIntroView())
         }
     }
     
@@ -88,6 +90,8 @@ struct GameCardView: View {
         switch gameType {
         case .reactionTime:
             return String(format: "%.0f ms", score)
+        case .sequenceMemory:
+            return String(format: "%.0f", score)
         }
     }
 }

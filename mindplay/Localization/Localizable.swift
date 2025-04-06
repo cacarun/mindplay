@@ -77,6 +77,22 @@ struct LocalizedStringKey {
     
     // 反应时间测试
     static let reactionTimeTest = "reaction_time_test"
+    
+    // 序列记忆测试
+    static let sequenceMemoryTest = "sequence_memory_test"
+    static let rememberPattern = "remember_pattern"
+    static let watchSequence = "watch_sequence"
+    static let repeatSequence = "repeat_sequence"
+    static let sequenceWillGetLonger = "sequence_will_get_longer"
+    static let level = "level"
+    static let yourTurn = "your_turn"
+    static let correct = "correct"
+    static let wrong = "wrong"
+    static let gameOver = "game_over"
+    static let finalLevel = "final_level"
+    static let startSequence = "start_sequence"
+    static let aboutSequenceTest = "about_sequence_test"
+    static let sequenceTestDescription = "sequence_test_description"
     static let testVisualReaction = "test_visual_reaction"
     static let roundCount = "round_count"
     static let bestScore = "best_score"

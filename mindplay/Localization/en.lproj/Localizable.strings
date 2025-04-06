@@ -14,6 +14,22 @@
 // Reaction Time Test
 "reaction_time_test" = "Reaction Time Test";
 "test_visual_reaction" = "Test your visual reaction speed";
+
+// Sequence Memory Test
+"sequence_memory_test" = "Sequence Memory Test";
+"remember_pattern" = "Remember the pattern";
+"watch_sequence" = "Watch the sequence";
+"repeat_sequence" = "Repeat the sequence";
+"sequence_will_get_longer" = "The sequence will get longer each time";
+"level" = "Level";
+"your_turn" = "Your turn";
+"correct" = "Correct!";
+"wrong" = "Wrong!";
+"game_over" = "Game Over";
+"final_level" = "Final Level: %d";
+"start_sequence" = "Start Sequence";
+"about_sequence_test" = "About the Test";
+"sequence_test_description" = "This test measures your short-term memory by challenging you to remember and repeat increasingly longer sequences. The average person can remember a sequence of 7 items.";
 "round_count" = "Round Count";
 "best_score" = "Best Score";
 "start_test" = "Start Test";
