@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var gameDataManager: GameDataManager
-    @EnvironmentObject var languageManager: LanguageManager
     
     // 使用更紧凑的网格布局
     private let columns = [

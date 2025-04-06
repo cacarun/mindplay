@@ -19,7 +19,6 @@ enum GameState {
 struct ReactionTimeGameView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var gameDataManager: GameDataManager
-    @EnvironmentObject var languageManager: LanguageManager
     
     // 添加参数以接收自定义回合数
     let totalRounds: Int
@@ -281,5 +280,4 @@ struct ReactionTimeGameView: View {
 #Preview {
     ReactionTimeGameView(totalRounds: 3)
         .environmentObject(GameDataManager())
-        .environmentObject(LanguageManager())
 }

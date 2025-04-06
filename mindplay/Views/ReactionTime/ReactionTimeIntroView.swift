@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ReactionTimeIntroView: View {
     @EnvironmentObject var gameDataManager: GameDataManager
-    @EnvironmentObject var languageManager: LanguageManager
     @State private var isShowingGame = false
     @State private var roundCount = 3 // 默认回合数为3次
     
@@ -141,7 +140,6 @@ struct ReactionTimeIntroView: View {
         .navigationBarTitle("", displayMode: .inline)
         .fullScreenCover(isPresented: $isShowingGame) {
             ReactionTimeGameView(totalRounds: roundCount)
-                .environmentObject(languageManager)
         }
     }
     
