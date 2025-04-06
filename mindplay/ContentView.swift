@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    // Create a shared instance of GameDataManager
+    @StateObject private var gameDataManager = GameDataManager()
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
