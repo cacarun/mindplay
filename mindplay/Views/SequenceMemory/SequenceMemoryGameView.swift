@@ -32,8 +32,8 @@ struct SequenceMemoryGameView: View {
     
     // 游戏配置
     private let buttonCount = 9 // 九宮格
-    private let buttonColor = Color(red: 0.0, green: 0.3, blue: 0.7) // 统一的按钮颜色（深蓝色）
-    private let highlightColor = Color.white // 高亮时的颜色（白色）
+    private let buttonColor = Color(red: 0.3, green: 0.8, blue: 0.6) // 统一的按钮颜色（清新的薄荷叶绿）
+    private let highlightColor = Color(red: 1.0, green: 0.8, blue: 0.0) // 高亮时的颜色（明亮的黄色）
     private let sequenceDisplayTime: Double = 0.7
     private let pauseBetweenButtons: Double = 0.3
     private let newRoundDelay: Double = 1.2 // 新一轮开始前的延迟时间
