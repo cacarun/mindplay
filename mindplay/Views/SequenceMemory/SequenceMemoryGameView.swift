@@ -32,8 +32,8 @@ struct SequenceMemoryGameView: View {
     
     // 游戏配置
     private let buttonCount = 9 // 九宮格
-    private let buttonColor = Color(red: 0.3, green: 0.5, blue: 0.8) // 统一的按钮颜色
-    private let highlightColor = Color(red: 0.0, green: 0.3, blue: 0.7) // 高亮时的颜色（更深的蓝色）
+    private let buttonColor = Color(red: 0.0, green: 0.3, blue: 0.7) // 统一的按钮颜色（深蓝色）
+    private let highlightColor = Color.white // 高亮时的颜色（白色）
     private let sequenceDisplayTime: Double = 0.7
     private let pauseBetweenButtons: Double = 0.3
     private let newRoundDelay: Double = 1.2 // 新一轮开始前的延迟时间
@@ -89,18 +89,18 @@ struct SequenceMemoryGameView: View {
                 // 游戏按钮网格 - 九宮格布局
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
                     ForEach(0..<buttonCount, id: \.self) { index in
-                        Button(action: {
-                            if gameState == .repeating {
-                                buttonPressed(index)
-                            }
-                        }) {
+                        // 使用ZStack替代Button，避免禁用状态下的颜色变化
+                        ZStack {
                             RoundedRectangle(cornerRadius: 12)
                                 .fill(highlightedButton == index ? highlightColor : buttonColor)
                                 .aspectRatio(1.0, contentMode: .fit) // 保持正方形
                                 .shadow(radius: highlightedButton == index ? 8 : 2)
                         }
-                        .buttonStyle(PlainButtonStyle())
-                        .disabled(gameState != .repeating)
+                        .onTapGesture {
+                            if gameState == .repeating {
+                                buttonPressed(index)
+                            }
+                        }
                     }
                 }
                 .padding(.horizontal)
