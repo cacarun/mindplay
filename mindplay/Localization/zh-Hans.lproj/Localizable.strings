@@ -23,6 +23,7 @@
 "sequence_will_get_longer" = "序列将变得越来越长";
 "level" = "等级";
 "your_turn" = "轮到你了";
+"grid_size" = "宫格大小";
 "correct" = "正确！";
 "wrong" = "错误！";
 "game_over" = "游戏结束";

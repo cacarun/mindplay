@@ -23,6 +23,7 @@
 "sequence_will_get_longer" = "The sequence will get longer each time";
 "level" = "Level";
 "your_turn" = "Your turn";
+"grid_size" = "Grid Size";
 "correct" = "Correct!";
 "wrong" = "Wrong!";
 "game_over" = "Game Over";

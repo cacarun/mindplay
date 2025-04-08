@@ -86,6 +86,7 @@ struct LocalizedStringKey {
     static let sequenceWillGetLonger = "sequence_will_get_longer"
     static let level = "level"
     static let yourTurn = "your_turn"
+    static let gridSize = "grid_size"
     static let correct = "correct"
     static let wrong = "wrong"
     static let gameOver = "game_over"

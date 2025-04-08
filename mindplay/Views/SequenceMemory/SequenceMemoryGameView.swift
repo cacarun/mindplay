@@ -31,7 +31,7 @@ struct SequenceMemoryGameView: View {
     @State private var highlightedButton: Int? = nil
     
     // 游戏配置
-    private let buttonCount = 9 // 九宮格
+    var gridSize: Int // 宫格大小，可以是4(2x2)、9(3x3)或16(4x4)
     private let buttonColor = Color(red: 0.3, green: 0.8, blue: 0.6) // 统一的按钮颜色（清新的薄荷叶绿）
     private let highlightColor = Color(red: 1.0, green: 0.8, blue: 0.0) // 高亮时的颜色（明亮的黄色）
     private let sequenceDisplayTime: Double = 0.7
@@ -86,9 +86,9 @@ struct SequenceMemoryGameView: View {
                 
                 Spacer()
                 
-                // 游戏按钮网格 - 九宮格布局
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
-                    ForEach(0..<buttonCount, id: \.self) { index in
+                // 游戏按钮网格 - 可变宫格布局
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: Int(sqrt(Double(gridSize)))), spacing: 15) {
+                    ForEach(0..<gridSize, id: \.self) { index in
                         // 使用ZStack替代Button，避免禁用状态下的颜色变化
                         ZStack {
                             RoundedRectangle(cornerRadius: 12)
@@ -195,7 +195,7 @@ struct SequenceMemoryGameView: View {
     
     private func startNextLevel() {
         // 添加一个新的随机按钮到序列中
-        sequence.append(Int.random(in: 0..<buttonCount))
+        sequence.append(Int.random(in: 0..<gridSize))
         userSequence = []
         currentIndex = 0
         
@@ -284,6 +284,6 @@ struct SequenceMemoryGameView: View {
 }
 
 #Preview {
-    SequenceMemoryGameView()
+    SequenceMemoryGameView(gridSize: 9)
         .environmentObject(GameDataManager())
 }
