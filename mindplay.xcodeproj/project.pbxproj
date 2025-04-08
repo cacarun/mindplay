@@ -22,6 +22,7 @@
 		8BDB07CD2DA2C0EE0036C18B /* SequenceMemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07CB2DA2C0EE0036C18B /* SequenceMemoryGameView.swift */; };
 		8BDB07D32DA2CABE0036C18B /* SoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07D22DA2CABE0036C18B /* SoundService.swift */; };
 		8BDB07D62DA2CACD0036C18B /* tile_tap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8BDB07D52DA2CACD0036C18B /* tile_tap.mp3 */; };
+		8BDB07DC2DA576130036C18B /* SequenceMemoryResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07DB2DA576130036C18B /* SequenceMemoryResultView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		8BDB07CB2DA2C0EE0036C18B /* SequenceMemoryGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceMemoryGameView.swift; sourceTree = "<group>"; };
 		8BDB07D22DA2CABE0036C18B /* SoundService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundService.swift; sourceTree = "<group>"; };
 		8BDB07D52DA2CACD0036C18B /* tile_tap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tile_tap.mp3; sourceTree = "<group>"; };
+		8BDB07DB2DA576130036C18B /* SequenceMemoryResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceMemoryResultView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 		8BDB07C92DA2C0EE0036C18B /* SequenceMemory */ = {
 			isa = PBXGroup;
 			children = (
+				8BDB07DB2DA576130036C18B /* SequenceMemoryResultView.swift */,
 				8BDB07CA2DA2C0EE0036C18B /* SequenceMemoryIntroView.swift */,
 				8BDB07CB2DA2C0EE0036C18B /* SequenceMemoryGameView.swift */,
 			);
@@ -247,6 +250,7 @@
 				8BDB07C62DA2B9800036C18B /* Localizable.swift in Sources */,
 				8BDB07A02DA21FD30036C18B /* mindplayApp.swift in Sources */,
 				8BDB07D32DA2CABE0036C18B /* SoundService.swift in Sources */,
+				8BDB07DC2DA576130036C18B /* SequenceMemoryResultView.swift in Sources */,
 				8BDB07CC2DA2C0EE0036C18B /* SequenceMemoryIntroView.swift in Sources */,
 				8BDB07CD2DA2C0EE0036C18B /* SequenceMemoryGameView.swift in Sources */,
 			);

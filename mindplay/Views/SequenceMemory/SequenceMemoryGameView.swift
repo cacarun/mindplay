@@ -143,6 +143,14 @@ struct SequenceMemoryGameView: View {
         .onAppear {
             prepareGame()
         }
+        .fullScreenCover(isPresented: Binding<Bool>(
+            get: { gameState == .gameOver },
+            set: { if !$0 { prepareGame() } }
+        )) {
+            SequenceMemoryResultView(level: currentLevel - 1) {
+                dismiss()
+            }
+        }
     }
     
     // MARK: - Computed Properties
@@ -265,10 +273,11 @@ struct SequenceMemoryGameView: View {
             
             // 短暂延迟后显示游戏结束
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                gameState = .gameOver
-                
                 // 保存最高分
                 gameDataManager.saveResult(gameType: .sequenceMemory, score: Double(currentLevel - 1))
+                
+                // 显示结果页面
+                gameState = .gameOver
             }
         }
     }

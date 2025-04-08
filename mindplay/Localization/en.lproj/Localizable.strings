@@ -74,3 +74,24 @@
 "result_factors" = "Factors that can affect your reaction time include age, fatigue, caffeine intake, and practice. Professional athletes often have reaction times below 200ms.";
 "back_to_menu" = "Back to Menu";
 "play_again" = "Play Again";
+
+// Sequence Memory Results
+"sequence_results" = "Sequence Memory Results";
+"level_reached" = "Level Reached";
+"memory" = "Memory";
+"cells" = "Cells";
+"performance" = "Performance";
+"needs_practice" = "Needs Practice";
+"fair_memory" = "Fair Memory";
+"good_memory" = "Good Memory";
+"great_memory" = "Great Memory";
+"exceptional_memory" = "Exceptional Memory";
+"needs_practice_desc" = "With practice, you can improve your memory capacity and recall.";
+"fair_memory_desc" = "Your short-term memory is developing. Keep challenging yourself to improve.";
+"good_memory_desc" = "You have average short-term memory capacity. You can recall a good number of items.";
+"great_memory_desc" = "Your short-term memory is above average! You can recall and process multiple items efficiently.";
+"exceptional_memory_desc" = "Impressive! You have exceptional short-term memory capacity and sequence recall ability.";
+"distribution" = "Score Distribution";
+"rating" = "Rating";
+"results" = "Results";
+"memory_explanation" = "Short-term memory is critical for many daily tasks. Your performance in this test shows how many sequential items you can remember and recall accurately.";

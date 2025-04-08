@@ -74,3 +74,24 @@
 "result_factors" = "影响反应时间的因素包括年龄、疲劳、咖啡因摄入和练习。专业运动员的反应时间通常低于200毫秒。";
 "back_to_menu" = "返回菜单";
 "play_again" = "再玩一次";
+
+// 序列记忆结果
+"sequence_results" = "序列记忆结果";
+"level_reached" = "达到等级";
+"memory" = "记忆";
+"cells" = "单元格";
+"performance" = "表现";
+"needs_practice" = "需要练习";
+"fair_memory" = "一般记忆力";
+"good_memory" = "良好记忆力";
+"great_memory" = "优秀记忆力";
+"exceptional_memory" = "卓越记忆力";
+"needs_practice_desc" = "通过练习，你可以提高记忆容量和回忆能力。";
+"fair_memory_desc" = "你的短期记忆正在发展中。继续挑战自己以提高能力。";
+"good_memory_desc" = "你的短期记忆容量处于平均水平。你能够回忆相当数量的项目。";
+"great_memory_desc" = "你的短期记忆力高于平均水平！你能够高效地记忆和处理多个项目。";
+"exceptional_memory_desc" = "令人印象深刻！你拥有卓越的短期记忆容量和序列回忆能力。";
+"distribution" = "分数分布";
+"rating" = "评级";
+"results" = "结果";
+"memory_explanation" = "短期记忆对日常任务至关重要。你在这个测试中的表现显示了你能准确记忆和回忆的顺序项目数量。";
