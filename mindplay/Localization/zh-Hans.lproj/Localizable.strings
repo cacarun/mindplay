@@ -34,16 +34,16 @@
 
 // 目标训练测试
 "aim_trainer_test" = "目标训练";
-"hit_targets" = "尽快点击30个目标";
+"hit_targets" = "尽快点击目标";
 "click_to_begin" = "点击上方目标开始";
 "targets_remaining" = "剩余目标：%d";
 "target_hit" = "命中目标！";
 "total_time" = "总时间";
 "avg_time_per_target" = "平均每个目标时间";
 "about_aim_test" = "关于目标训练";
-"aim_test_description" = "这个测试衡量你的手眼协调能力和反应速度。尽可能快速准确地点击目标。当你点击完30个目标后，将会显示你的得分和每个目标的平均时间。这个测试最好使用鼠标或平板电脑屏幕进行。";
+"aim_test_description" = "这个测试衡量你的手眼协调能力和反应速度。尽可能快速准确地点击目标。当你点击完所有目标后，将会显示你的得分和每个目标的平均时间。这个测试最好使用鼠标或平板电脑屏幕进行。";
 "tap_target" = "点击出现的目标，越快越好";
-"complete_targets" = "完成30个目标后游戏结束";
+"complete_targets" = "完成%d个目标后游戏结束";
 "fastest_click" = "最快点击";
 "slowest_click" = "最慢点击";
 "total_targets" = "目标总数";

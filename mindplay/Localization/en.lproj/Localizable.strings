@@ -48,16 +48,16 @@
 
 // Aim Trainer Test
 "aim_trainer_test" = "Aim Trainer";
-"hit_targets" = "Hit 30 targets as quickly as you can";
+"hit_targets" = "Hit targets as quickly as you can";
 "click_to_begin" = "Click the target above to begin";
 "targets_remaining" = "Targets Remaining: %d";
 "target_hit" = "Target Hit!";
 "total_time" = "Total Time";
 "avg_time_per_target" = "Average Time Per Target";
 "about_aim_test" = "About Aim Trainer";
-"aim_test_description" = "This test measures your hand-eye coordination and reflexes. Click the targets as quickly and accurately as you can. Once you've clicked 30 targets, your score and average time per target will be displayed. This test is best taken with a mouse or tablet screen.";
+"aim_test_description" = "This test measures your hand-eye coordination and reflexes. Click the targets as quickly and accurately as you can. Once you've clicked all targets, your score and average time per target will be displayed.";
 "tap_target" = "Click the targets as quickly as possible";
-"complete_targets" = "Game ends after completing 30 targets";
+"complete_targets" = "Game ends after completing %d targets";
 "fastest_click" = "Fastest Click";
 "slowest_click" = "Slowest Click";
 "total_targets" = "Total Targets";

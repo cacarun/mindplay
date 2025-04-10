@@ -12,12 +12,15 @@ struct AimTrainerGameView: View {
     @Environment(\.displayScale) private var displayScale
     @Environment(\.dismiss) private var dismiss
     
+    // 添加参数以接收自定义目标数量
+    let totalTargets: Int
+    
     // 游戏状态
     @State private var isGameStarted = false
     @State private var isGameFinished = false
     @State private var targetPosition = CGPoint(x: 0.5, y: 0.5)
     @State private var targetSize: CGFloat = 60
-    @State private var targetsRemaining = 30
+    @State private var targetsRemaining: Int = 0
     @State private var targetsHit = 0
     @State private var navigateToResults = false
     
@@ -34,6 +37,11 @@ struct AimTrainerGameView: View {
     
     // 动画持续时间
     private let targetAppearDuration: Double = 0.2
+    
+    // 添加默认构造函数
+    init(totalTargets: Int = 30) {
+        self.totalTargets = totalTargets
+    }
     
     var body: some View {
         VStack {
@@ -99,7 +107,7 @@ struct AimTrainerGameView: View {
         .background(Color(.systemGroupedBackground).ignoresSafeArea())
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(isPresented: $navigateToResults) {
+        .fullScreenCover(isPresented: $navigateToResults) {
             AimTrainerResultView(
                 onDismiss: { dismiss() },
                 onRestart: {
@@ -107,7 +115,7 @@ struct AimTrainerGameView: View {
                     isGameStarted = false
                     isGameFinished = false
                     targetPosition = CGPoint(x: 0.5, y: 0.5)
-                    targetsRemaining = 30
+                    targetsRemaining = totalTargets
                     targetsHit = 0
                     startTime = nil
                     hitTimes = []
@@ -128,7 +136,7 @@ struct AimTrainerGameView: View {
         isGameStarted = true
         startTime = Date()
         targetsHit = 0
-        targetsRemaining = 30
+        targetsRemaining = totalTargets
         hitTimes = []
         
         // 第一个目标位置随机生成

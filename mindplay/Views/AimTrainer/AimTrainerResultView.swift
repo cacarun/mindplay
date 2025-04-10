@@ -249,7 +249,8 @@ struct AimTrainerResultView: View {
                         
                         // 再玩一次
                         Button {
-                            // 调用重新开始游戏的回调
+                            // 关闭结果页面并调用重新开始游戏的回调
+                            dismiss()
                             onRestart()
                         } label: {
                             Text(LocalizedStringKey.playAgain.localized)
