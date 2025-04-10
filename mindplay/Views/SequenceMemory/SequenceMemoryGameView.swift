@@ -147,7 +147,7 @@ struct SequenceMemoryGameView: View {
             get: { gameState == .gameOver },
             set: { if !$0 { prepareGame() } }
         )) {
-            SequenceMemoryResultView(level: currentLevel - 1) {
+            SequenceMemoryResultView(level: currentLevel - 1, gridSize: gridSize) {
                 dismiss()
             }
         }
@@ -162,7 +162,7 @@ struct SequenceMemoryGameView: View {
         case .preparing:
             return Text(LocalizedStringKey.getReady.localized)
         case .watching:
-            // 在观看序列时不再显示“观看序列”提示
+            // 在观看序列时不再显示"观看序列"提示
             return Text("") // 空文本，保持高度不变
         case .repeating:
             return Text(LocalizedStringKey.yourTurn.localized)

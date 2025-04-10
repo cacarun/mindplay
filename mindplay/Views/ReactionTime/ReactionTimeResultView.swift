@@ -13,6 +13,8 @@ struct ReactionTimeResultView: View {
     let reactionTimes: [Double]
     let onDismiss: () -> Void
     
+    @State private var startNewGame = false
+    
     private var averageTime: Double {
         reactionTimes.reduce(0, +) / Double(reactionTimes.count)
     }
@@ -146,9 +148,7 @@ struct ReactionTimeResultView: View {
                         }
                         
                         Button(action: {
-                            // Dismiss this view and start a new game
-                            onDismiss()
-                            // The navigation back to the intro view is handled by the onDismiss closure
+                            startNewGame = true
                         }) {
                             Text("Play Again")
                                 .font(.headline)
@@ -170,6 +170,9 @@ struct ReactionTimeResultView: View {
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.gray)
             })
+            .navigationDestination(isPresented: $startNewGame) {
+                ReactionTimeGameView()
+            }
         }
     }
     

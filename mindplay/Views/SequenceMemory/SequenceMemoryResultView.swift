@@ -12,6 +12,15 @@ struct SequenceMemoryResultView: View {
     
     let level: Int
     let onDismiss: () -> Void
+    let gridSize: Int
+    
+    @State private var startNewGame = false
+    
+    init(level: Int, gridSize: Int = 9, onDismiss: @escaping () -> Void) {
+        self.level = level
+        self.gridSize = gridSize
+        self.onDismiss = onDismiss
+    }
     
     var body: some View {
         NavigationStack {
@@ -280,8 +289,8 @@ struct SequenceMemoryResultView: View {
                         }
                         
                         Button(action: {
-                            // Dismiss this view and start a new game
-                            onDismiss()
+                            // 开始新游戏
+                            startNewGame = true
                         }) {
                             Text(LocalizedStringKey.playAgain.localized)
                                 .font(.headline)
@@ -305,6 +314,9 @@ struct SequenceMemoryResultView: View {
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.gray)
             })
+            .navigationDestination(isPresented: $startNewGame) {
+                SequenceMemoryGameView(gridSize: gridSize)
+            }
         }
     }
     
@@ -432,7 +444,8 @@ struct SequenceMemoryResultView: View {
 }
 
 #Preview {
-    SequenceMemoryResultView(level: 9) {
+    SequenceMemoryResultView(level: 9, gridSize: 9) {
         // Dismiss action
     }
+    .environmentObject(GameDataManager())
 }

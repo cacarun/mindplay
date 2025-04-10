@@ -10,6 +10,7 @@ import SwiftUI
 struct AimTrainerGameView: View {
     @EnvironmentObject var gameDataManager: GameDataManager
     @Environment(\.displayScale) private var displayScale
+    @Environment(\.dismiss) private var dismiss
     
     // 游戏状态
     @State private var isGameStarted = false
@@ -100,6 +101,7 @@ struct AimTrainerGameView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(isPresented: $navigateToResults) {
             AimTrainerResultView(
+                onDismiss: { dismiss() },
                 totalTimeElapsed: totalTimeElapsed,
                 hitTimes: hitTimes
             )
