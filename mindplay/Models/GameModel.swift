@@ -12,6 +12,7 @@ enum GameType: String, CaseIterable, Identifiable {
     case reactionTime = "Reaction Time"
     case sequenceMemory = "Sequence Memory"
     case aimTrainer = "Aim Trainer"
+    case numberMemory = "Number Memory"
     // Future games will be added here
     
     var id: String { self.rawValue }
@@ -25,6 +26,8 @@ enum GameType: String, CaseIterable, Identifiable {
             return LocalizedStringKey.sequenceMemoryTest.localized
         case .aimTrainer:
             return LocalizedStringKey.aimTrainerTest.localized
+        case .numberMemory:
+            return LocalizedStringKey.numberMemoryTest.localized
         }
     }
     
@@ -36,6 +39,8 @@ enum GameType: String, CaseIterable, Identifiable {
             return "Remember an increasingly long pattern of button presses."
         case .aimTrainer:
             return "Click the targets as quickly and accurately as you can."
+        case .numberMemory:
+            return "Remember the longest number you can."
         }
     }
     
@@ -47,6 +52,8 @@ enum GameType: String, CaseIterable, Identifiable {
             return "brain.head.profile"
         case .aimTrainer:
             return "target"
+        case .numberMemory:
+            return "number"
         }
     }
 }
@@ -92,6 +99,9 @@ class GameDataManager: ObservableObject {
         case .sequenceMemory, .aimTrainer:
             // For sequence memory and aim trainer, lower is better (faster time)
             return filteredResults.min(by: { $0.score < $1.score })?.score
+        case .numberMemory:
+            // For number memory, higher is better
+            return filteredResults.max(by: { $0.score < $1.score })?.score
         }
     }
     

@@ -32,6 +32,25 @@
 "about_sequence_test" = "关于测试";
 "sequence_test_description" = "这个测试通过让你记忆并重复越来越长的序列来测量你的短期记忆力。平均人能记住7个项目的序列。";
 
+// 数字记忆测试
+"number_memory_test" = "数字记忆";
+"remember_longest_number" = "记住你能记住的最长数字";
+"number_length" = "起始长度";
+"start_number_test" = "开始测试";
+"memorize_number" = "记住这个数字";
+"enter_number" = "输入你看到的数字";
+"time_remaining" = "剩余时间：%d";
+"submit_answer" = "提交";
+"level_reached" = "达到等级";
+"digitsRemembered" = "记住的数字位数";
+"about_number_test" = "关于测试";
+"number_test_description" = "普通人通常只能可靠地记住7位数字，但使用记忆技巧可以做得更好。下面提供了一些有用的链接。";
+"next_level" = "下一级";
+"timeUp" = "时间到！";
+"correct_number" = "正确数字";
+"your_number" = "你的答案";
+"number_explanation" = "数字记忆是认知能力的关键组成部分。你的得分反映了你一次能在短期记忆中保持多少位数字。";
+
 // 目标训练测试
 "aim_trainer_test" = "目标训练";
 "hit_targets" = "尽快点击目标";

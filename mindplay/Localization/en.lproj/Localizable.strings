@@ -46,6 +46,25 @@
 "about_sequence_test" = "About the Test";
 "sequence_test_description" = "This test measures your short-term memory by challenging you to remember and repeat increasingly longer sequences. The average person can remember a sequence of 7 items.";
 
+// Number Memory Test
+"number_memory_test" = "Number Memory";
+"remember_longest_number" = "Remember the longest number you can";
+"number_length" = "Start Length";
+"start_number_test" = "Start Test";
+"memorize_number" = "Memorize this number";
+"enter_number" = "Enter the number you saw";
+"time_remaining" = "Time remaining: %d";
+"submit_answer" = "Submit";
+"level_reached" = "Level Reached";
+"digitsRemembered" = "Digits Remembered";
+"about_number_test" = "About the Test";
+"number_test_description" = "The average person can only remember 7 digit numbers reliably, but it's possible to do much better using mnemonic techniques. Some helpful links are provided below.";
+"next_level" = "Next Level";
+"timeUp" = "Time's Up!";
+"correct_number" = "Correct Number";
+"your_number" = "Your Answer";
+"number_explanation" = "Number memory is a key component of cognitive ability. Your score reflects how many digits you can hold in your short-term memory at once.";
+
 // Aim Trainer Test
 "aim_trainer_test" = "Aim Trainer";
 "hit_targets" = "Hit targets as quickly as you can";

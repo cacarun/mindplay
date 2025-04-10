@@ -110,6 +110,25 @@ struct LocalizedStringKey {
     static let aboutSequenceTest = "about_sequence_test"
     static let sequenceTestDescription = "sequence_test_description"
     
+    // 数字记忆测试
+    static let numberMemoryTest = "number_memory_test"
+    static let rememberLongestNumber = "remember_longest_number"
+    static let numberLength = "number_length"
+    static let startNumberTest = "start_number_test"
+    static let memorizeNumber = "memorize_number"
+    static let enterNumber = "enter_number"
+    static let timeRemaining = "time_remaining"
+    static let submitAnswer = "submit_answer"
+    static let levelReached = "level_reached"
+    static let digitsRemembered = "digits_remembered"
+    static let aboutNumberTest = "about_number_test"
+    static let numberTestDescription = "number_test_description"
+    static let nextLevel = "next_level"
+    static let timeUp = "time_up"
+    static let correctNumber = "correct_number"
+    static let yourNumber = "your_number"
+    static let numberExplanation = "number_explanation"
+    
     // 目标训练测试
     static let aimTrainerTest = "aim_trainer_test"
     static let hitTargets = "hit_targets"
@@ -164,7 +183,6 @@ struct LocalizedStringKey {
     
     // 序列记忆结果页面
     static let sequenceResults = "sequence_results"
-    static let levelReached = "level_reached"
     static let memory = "memory"
     static let cells = "cells"
     static let performance = "performance"

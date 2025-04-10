@@ -26,6 +26,9 @@
 		8BDB07E12DA807EC0036C18B /* AimTrainerResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07DE2DA807EC0036C18B /* AimTrainerResultView.swift */; };
 		8BDB07E22DA807EC0036C18B /* AimTrainerGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07DF2DA807EC0036C18B /* AimTrainerGameView.swift */; };
 		8BDB07E32DA807EC0036C18B /* AimTrainerIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07E02DA807EC0036C18B /* AimTrainerIntroView.swift */; };
+		8BDB07E82DA81C010036C18B /* NumberMemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07E52DA81C010036C18B /* NumberMemoryGameView.swift */; };
+		8BDB07E92DA81C010036C18B /* NumberMemoryIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07E62DA81C010036C18B /* NumberMemoryIntroView.swift */; };
+		8BDB07EA2DA81C010036C18B /* NumberMemoryResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07E72DA81C010036C18B /* NumberMemoryResultView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,9 @@
 		8BDB07DE2DA807EC0036C18B /* AimTrainerResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AimTrainerResultView.swift; sourceTree = "<group>"; };
 		8BDB07DF2DA807EC0036C18B /* AimTrainerGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AimTrainerGameView.swift; sourceTree = "<group>"; };
 		8BDB07E02DA807EC0036C18B /* AimTrainerIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AimTrainerIntroView.swift; sourceTree = "<group>"; };
+		8BDB07E52DA81C010036C18B /* NumberMemoryGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberMemoryGameView.swift; sourceTree = "<group>"; };
+		8BDB07E62DA81C010036C18B /* NumberMemoryIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberMemoryIntroView.swift; sourceTree = "<group>"; };
+		8BDB07E72DA81C010036C18B /* NumberMemoryResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberMemoryResultView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,7 @@
 		8BDB07B32DA233360036C18B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8BDB07E42DA81C010036C18B /* NumberMemory */,
 				8BDB07DD2DA807EC0036C18B /* AimTrainer */,
 				8BDB07C92DA2C0EE0036C18B /* SequenceMemory */,
 				8BDB07B42DA233360036C18B /* HomeView.swift */,
@@ -185,6 +192,16 @@
 			path = AimTrainer;
 			sourceTree = "<group>";
 		};
+		8BDB07E42DA81C010036C18B /* NumberMemory */ = {
+			isa = PBXGroup;
+			children = (
+				8BDB07E52DA81C010036C18B /* NumberMemoryGameView.swift */,
+				8BDB07E62DA81C010036C18B /* NumberMemoryIntroView.swift */,
+				8BDB07E72DA81C010036C18B /* NumberMemoryResultView.swift */,
+			);
+			path = NumberMemory;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -260,8 +277,10 @@
 			files = (
 				8BDB07BB2DA233360036C18B /* HomeView.swift in Sources */,
 				8BDB07BE2DA233370036C18B /* ReactionTimeResultView.swift in Sources */,
+				8BDB07E92DA81C010036C18B /* NumberMemoryIntroView.swift in Sources */,
 				8BDB07E32DA807EC0036C18B /* AimTrainerIntroView.swift in Sources */,
 				8BDB07E22DA807EC0036C18B /* AimTrainerGameView.swift in Sources */,
+				8BDB07EA2DA81C010036C18B /* NumberMemoryResultView.swift in Sources */,
 				8BDB07A22DA21FD30036C18B /* ContentView.swift in Sources */,
 				8BDB07E12DA807EC0036C18B /* AimTrainerResultView.swift in Sources */,
 				8BDB07BD2DA233360036C18B /* ReactionTimeIntroView.swift in Sources */,
@@ -270,6 +289,7 @@
 				8BDB07C62DA2B9800036C18B /* Localizable.swift in Sources */,
 				8BDB07A02DA21FD30036C18B /* mindplayApp.swift in Sources */,
 				8BDB07D32DA2CABE0036C18B /* SoundService.swift in Sources */,
+				8BDB07E82DA81C010036C18B /* NumberMemoryGameView.swift in Sources */,
 				8BDB07DC2DA576130036C18B /* SequenceMemoryResultView.swift in Sources */,
 				8BDB07CC2DA2C0EE0036C18B /* SequenceMemoryIntroView.swift in Sources */,
 				8BDB07CD2DA2C0EE0036C18B /* SequenceMemoryGameView.swift in Sources */,
