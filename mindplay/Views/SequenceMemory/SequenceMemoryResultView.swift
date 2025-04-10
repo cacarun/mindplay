@@ -14,12 +14,15 @@ struct SequenceMemoryResultView: View {
     let onDismiss: () -> Void
     let gridSize: Int
     
+    let onRestart: (Int) -> Void
+    
     @State private var startNewGame = false
     
-    init(level: Int, gridSize: Int = 9, onDismiss: @escaping () -> Void) {
+    init(level: Int, gridSize: Int = 9, onDismiss: @escaping () -> Void, onRestart: @escaping (Int) -> Void) {
         self.level = level
         self.gridSize = gridSize
         self.onDismiss = onDismiss
+        self.onRestart = onRestart
     }
     
     var body: some View {
@@ -289,8 +292,8 @@ struct SequenceMemoryResultView: View {
                         }
                         
                         Button(action: {
-                            // 开始新游戏
-                            startNewGame = true
+                            // 调用重新开始游戏的回调
+                            onRestart(gridSize)
                         }) {
                             Text(LocalizedStringKey.playAgain.localized)
                                 .font(.headline)
@@ -314,9 +317,6 @@ struct SequenceMemoryResultView: View {
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.gray)
             })
-            .navigationDestination(isPresented: $startNewGame) {
-                SequenceMemoryGameView(gridSize: gridSize)
-            }
         }
     }
     
@@ -446,6 +446,8 @@ struct SequenceMemoryResultView: View {
 #Preview {
     SequenceMemoryResultView(level: 9, gridSize: 9) {
         // Dismiss action
+    } onRestart: { _ in
+        // Restart action
     }
     .environmentObject(GameDataManager())
 }

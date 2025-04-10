@@ -102,6 +102,16 @@ struct AimTrainerGameView: View {
         .navigationDestination(isPresented: $navigateToResults) {
             AimTrainerResultView(
                 onDismiss: { dismiss() },
+                onRestart: {
+                    // 重置游戏状态并开始新游戏
+                    isGameStarted = false
+                    isGameFinished = false
+                    targetPosition = CGPoint(x: 0.5, y: 0.5)
+                    targetsRemaining = 30
+                    targetsHit = 0
+                    startTime = nil
+                    hitTimes = []
+                },
                 totalTimeElapsed: totalTimeElapsed,
                 hitTimes: hitTimes
             )

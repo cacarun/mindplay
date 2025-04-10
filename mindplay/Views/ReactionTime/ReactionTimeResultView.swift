@@ -14,12 +14,15 @@ struct ReactionTimeResultView: View {
     let onDismiss: () -> Void
     let totalRounds: Int
     
+    let onRestart: (Int) -> Void
+    
     @State private var startNewGame = false
     
-    init(reactionTimes: [Double], totalRounds: Int = 3, onDismiss: @escaping () -> Void) {
+    init(reactionTimes: [Double], totalRounds: Int = 3, onDismiss: @escaping () -> Void, onRestart: @escaping (Int) -> Void) {
         self.reactionTimes = reactionTimes
         self.totalRounds = totalRounds
         self.onDismiss = onDismiss
+        self.onRestart = onRestart
     }
     
     private var averageTime: Double {
@@ -155,7 +158,7 @@ struct ReactionTimeResultView: View {
                         }
                         
                         Button(action: {
-                            startNewGame = true
+                            onRestart(totalRounds)
                         }) {
                             Text("Play Again")
                                 .font(.headline)
@@ -177,9 +180,6 @@ struct ReactionTimeResultView: View {
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.gray)
             })
-            .navigationDestination(isPresented: $startNewGame) {
-                ReactionTimeGameView(totalRounds: totalRounds)
-            }
         }
     }
     
@@ -204,7 +204,8 @@ struct ReactionTimeResultView: View {
     ReactionTimeResultView(
         reactionTimes: [234, 256, 198, 287, 212],
         totalRounds: 5,
-        onDismiss: {}
+        onDismiss: {},
+        onRestart: { _ in }
     )
     .environmentObject(GameDataManager())
 }

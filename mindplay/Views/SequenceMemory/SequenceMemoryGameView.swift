@@ -147,9 +147,16 @@ struct SequenceMemoryGameView: View {
             get: { gameState == .gameOver },
             set: { if !$0 { prepareGame() } }
         )) {
-            SequenceMemoryResultView(level: currentLevel - 1, gridSize: gridSize) {
-                dismiss()
-            }
+            SequenceMemoryResultView(
+                level: currentLevel - 1, 
+                gridSize: gridSize,
+                onDismiss: { dismiss() },
+                onRestart: { size in
+                    // 关闭结果页面并重新开始游戏
+                    gameState = .intro
+                    prepareGame()
+                }
+            )
         }
     }
     

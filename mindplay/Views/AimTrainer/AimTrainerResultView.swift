@@ -13,11 +13,21 @@ struct AimTrainerResultView: View {
     @Environment(\.dismiss) private var dismiss
     let onDismiss: () -> Void
     
+    // 添加重新开始游戏的回调函数
+    let onRestart: () -> Void
+    
     // 新增变量用于控制导航到新游戏
     @State private var startNewGame = false
     
     let totalTimeElapsed: TimeInterval
     let hitTimes: [TimeInterval]
+    
+    init(onDismiss: @escaping () -> Void, onRestart: @escaping () -> Void, totalTimeElapsed: TimeInterval, hitTimes: [TimeInterval]) {
+        self.onDismiss = onDismiss
+        self.onRestart = onRestart
+        self.totalTimeElapsed = totalTimeElapsed
+        self.hitTimes = hitTimes
+    }
     
     // 派生数据
     private var averageTimePerTarget: Double {
@@ -239,8 +249,8 @@ struct AimTrainerResultView: View {
                         
                         // 再玩一次
                         Button {
-                            // 开始新游戏
-                            startNewGame = true
+                            // 调用重新开始游戏的回调
+                            onRestart()
                         } label: {
                             Text(LocalizedStringKey.playAgain.localized)
                                 .font(.headline)
@@ -266,9 +276,6 @@ struct AimTrainerResultView: View {
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.gray)
             })
-            .navigationDestination(isPresented: $startNewGame) {
-                AimTrainerGameView()
-            }
         }
     }
 }
@@ -302,6 +309,7 @@ struct HistogramBin: Identifiable {
 #Preview {
     AimTrainerResultView(
         onDismiss: {},
+        onRestart: {},
         totalTimeElapsed: 25.7,
         hitTimes: [1.0, 1.85, 2.6, 3.5, 4.3, 5.1, 5.8, 6.7, 7.5, 8.3]
     )

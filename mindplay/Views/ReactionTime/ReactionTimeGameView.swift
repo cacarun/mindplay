@@ -76,9 +76,18 @@ struct ReactionTimeGameView: View {
             set: { if !$0 { gameState = .waiting } }
         )) {
             ReactionTimeResultView(
-                reactionTimes: roundTimes, 
-                totalRounds: totalRounds, 
-                onDismiss: { self.dismiss() }
+                reactionTimes: roundTimes,
+                totalRounds: totalRounds,
+                onDismiss: { self.dismiss() },
+                onRestart: { rounds in
+                    // 关闭结果页面并以指定回合数重新开始游戏
+                    gameState = .waiting
+                    roundTimes = []
+                    currentRound = 1
+                    isFirstRound = true
+                    // 如果回合数不同，更新totalRounds（虽然这种情况在当前实现中不会发生）
+                    // totalRounds = rounds // 由于totalRounds是let常量，我们不能修改它
+                }
             )
         }
     }
