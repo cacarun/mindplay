@@ -12,7 +12,6 @@ enum GameState {
     case ready        // Ready to start, showing red screen
     case go           // Screen has turned green, waiting for tap
     case tooEarly     // User tapped too early
-    case result       // Showing result for this round
     case finished     // All rounds completed
 }
 
@@ -59,8 +58,6 @@ struct ReactionTimeGameView: View {
                     goContent
                 case .tooEarly:
                     tooEarlyContent
-                case .result:
-                    resultContent
                 case .finished:
                     // This is handled by a sheet presentation
                     EmptyView()
@@ -95,7 +92,7 @@ struct ReactionTimeGameView: View {
     // Background color based on game state
     private var backgroundColor: Color {
         switch gameState {
-        case .waiting, .result:
+        case .waiting:
             return Color(.systemBackground)
         case .ready:
             return Color.red
@@ -123,7 +120,7 @@ struct ReactionTimeGameView: View {
             Button(action: {
                 startRound()
             }) {
-                Text(LocalizedStringKey.tapToStartRound.localized(with: currentRound, totalRounds))
+                Text(LocalizedStringKey.tapToStartRound.localized(with: totalRounds))
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding()
@@ -188,52 +185,6 @@ struct ReactionTimeGameView: View {
         .padding()
     }
     
-    private var resultContent: some View {
-        VStack(spacing: 24) {
-            if let reactionTime = reactionTime {
-                Text(String(format: "%.0f ms", reactionTime))
-                    .font(.system(size: 64, weight: .bold))
-                    .foregroundColor(.blue)
-                
-                Text(LocalizedStringKey.yourReactionTime.localized)
-                    .font(.title3)
-            }
-            
-            Text(LocalizedStringKey.roundOf.localized(with: currentRound, totalRounds))
-                .font(.headline)
-                .foregroundColor(.secondary)
-            
-            Button(action: {
-                if currentRound < totalRounds {
-                    currentRound += 1
-                    // 非第一轮直接开始下一轮测试
-                    isFirstRound = false // 设置为非第一轮
-                    // 直接开始下一轮
-                    startRound()
-                } else {
-                    gameState = .finished
-                    // Save the average score
-                    let averageTime = roundTimes.reduce(0, +) / Double(roundTimes.count)
-                    gameDataManager.saveResult(gameType: .reactionTime, score: averageTime)
-                }
-            }) {
-                Text(currentRound < totalRounds ? LocalizedStringKey.nextRound.localized : LocalizedStringKey.seeResults.localized)
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .cornerRadius(12)
-            }
-            .padding(.horizontal)
-        }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(16)
-        .shadow(radius: 5)
-        .padding()
-    }
-    
     // MARK: - Game Logic
     
     private func startGame() {
@@ -276,10 +227,24 @@ struct ReactionTimeGameView: View {
                 let timeInterval = endTime.timeIntervalSince(startTime) * 1000 // Convert to milliseconds
                 reactionTime = timeInterval
                 roundTimes.append(timeInterval)
-                gameState = .result
+                
+                // 检查是否还有剩余回合
+                if currentRound < totalRounds {
+                    currentRound += 1
+                    // 短暂延迟后自动开始下一回合，不显示结果页面
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        startRound()
+                    }
+                } else {
+                    // 所有回合完成，显示最终结果
+                    gameState = .finished
+                    // Save the average score
+                    let averageTime = roundTimes.reduce(0, +) / Double(roundTimes.count)
+                    gameDataManager.saveResult(gameType: .reactionTime, score: averageTime)
+                }
             }
             
-        case .tooEarly, .result:
+        case .tooEarly:
             // These states have their own buttons for navigation
             break
             

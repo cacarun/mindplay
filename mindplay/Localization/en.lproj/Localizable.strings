@@ -71,7 +71,7 @@
 // Game Interface
 "get_ready" = "Get Ready";
 "tap_when_green" = "Tap the screen when it turns green";
-"tap_to_start_round" = "Tap to Start Round %d of %d";
+"tap_to_start_round" = "Tap to Start %d Rounds";
 "wait" = "Wait...";
 "tap_now" = "TAP NOW!";
 "too_early" = "Too Early!";

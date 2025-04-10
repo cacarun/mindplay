@@ -72,7 +72,7 @@
 // 游戏界面
 "get_ready" = "准备好";
 "tap_when_green" = "当屏幕变绿时点击屏幕";
-"tap_to_start_round" = "点击开始第 %d 轮（共 %d 轮）";
+"tap_to_start_round" = "点击开始 %d 轮游戏";
 "wait" = "等待...";
 "tap_now" = "立即点击！";
 "too_early" = "太早了！";
