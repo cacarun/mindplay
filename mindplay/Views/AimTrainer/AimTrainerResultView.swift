@@ -49,13 +49,13 @@ struct AimTrainerResultView: View {
     // 性能评级描述
     private var performanceDescription: String {
         if averageTimePerTarget < 600 {
-            return "你的手眼协调能力非常出色，反应迅速，精确度高。"
+            return LocalizedStringKey.excellentAim.localized
         } else if averageTimePerTarget < 800 {
-            return "你的反应速度和精确度良好，高于大多数人。"
+            return LocalizedStringKey.goodAim.localized
         } else if averageTimePerTarget < 1000 {
-            return "你的反应速度和准确性处于平均水平。"
+            return LocalizedStringKey.averageAim.localized
         } else {
-            return "你的反应时间稍慢，可以通过练习来提高手眼协调能力。"
+            return LocalizedStringKey.belowAverageAim.localized
         }
     }
     
@@ -120,7 +120,7 @@ struct AimTrainerResultView: View {
                             
                             if let fastest = clickIntervals.min() {
                                 StatisticRow(
-                                    title: "最快点击",
+                                    title: LocalizedStringKey.fastestClick.localized,
                                     value: String(format: "%.1f ms", fastest)
                                 )
                             }
@@ -130,13 +130,13 @@ struct AimTrainerResultView: View {
                         // 右列
                         VStack(alignment: .leading, spacing: 10) {
                             StatisticRow(
-                                title: "目标总数",
+                                title: LocalizedStringKey.totalTargets.localized,
                                 value: "\(hitTimes.count)"
                             )
                             
                             if let slowest = clickIntervals.max() {
                                 StatisticRow(
-                                    title: "最慢点击",
+                                    title: LocalizedStringKey.slowestClick.localized,
                                     value: String(format: "%.1f ms", slowest)
                                 )
                             }
@@ -203,11 +203,11 @@ struct AimTrainerResultView: View {
                     Divider()
                         .padding(.vertical, 5)
                     
-                    Text("这项测试衡量的是你的视觉处理速度、手眼协调能力和运动精确度。平均反应时间约为800毫秒，但会因多种因素而异。")
+                    Text(LocalizedStringKey.aimExplanation1.localized)
                         .foregroundColor(.secondary)
                         .padding(.bottom, 5)
                     
-                    Text("这种能力对于需要快速准确动作的活动（如体育、游戏和某些工作任务）非常重要。通过定期练习，你可以显著提高这些能力。")
+                    Text(LocalizedStringKey.aimExplanation2.localized)
                         .foregroundColor(.secondary)
                 }
                 .padding()

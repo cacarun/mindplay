@@ -56,6 +56,17 @@
 "avg_time_per_target" = "Average Time Per Target";
 "about_aim_test" = "About Aim Trainer";
 "aim_test_description" = "This test measures your hand-eye coordination and reflexes. Click the targets as quickly and accurately as you can. Once you've clicked 30 targets, your score and average time per target will be displayed. This test is best taken with a mouse or tablet screen.";
+"tap_target" = "Click the targets as quickly as possible";
+"complete_targets" = "Game ends after completing 30 targets";
+"fastest_click" = "Fastest Click";
+"slowest_click" = "Slowest Click";
+"total_targets" = "Total Targets";
+"aim_explanation1" = "This test measures your visual processing speed, hand-eye coordination, and motor precision. The average reaction time is about 800ms, but can vary due to many factors.";
+"aim_explanation2" = "This ability is important for activities requiring quick and accurate movements (such as sports, gaming, and certain work tasks). With regular practice, you can significantly improve these skills.";
+"excellent_aim" = "Your hand-eye coordination is excellent, with quick reactions and high precision.";
+"good_aim" = "Your reaction speed and precision are good, better than most people.";
+"average_aim" = "Your reaction speed and accuracy are at an average level.";
+"below_average_aim" = "Your reaction time is slightly slower, but you can improve hand-eye coordination with practice.";
 
 // Game Interface
 "get_ready" = "Get Ready";

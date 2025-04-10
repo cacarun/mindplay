@@ -101,12 +101,12 @@ struct AimTrainerIntroView: View {
                     
                     GameInstructionRow(
                         iconName: "hand.tap.fill",
-                        text: "点击出现的目标，越快越好"
+                        text: LocalizedStringKey.tapTarget.localized
                     )
                     
                     GameInstructionRow(
                         iconName: "repeat",
-                        text: "完成30个目标后游戏结束"
+                        text: LocalizedStringKey.completeTargets.localized
                     )
                     
                     Divider()

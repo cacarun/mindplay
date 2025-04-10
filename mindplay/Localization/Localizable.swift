@@ -120,6 +120,17 @@ struct LocalizedStringKey {
     static let avgTimePerTarget = "avg_time_per_target"
     static let aboutAimTest = "about_aim_test"
     static let aimTestDescription = "aim_test_description"
+    static let tapTarget = "tap_target"
+    static let completeTargets = "complete_targets"
+    static let fastestClick = "fastest_click"
+    static let slowestClick = "slowest_click"
+    static let totalTargets = "total_targets"
+    static let aimExplanation1 = "aim_explanation1"
+    static let aimExplanation2 = "aim_explanation2"
+    static let excellentAim = "excellent_aim"
+    static let goodAim = "good_aim"
+    static let averageAim = "average_aim"
+    static let belowAverageAim = "below_average_aim"
     
     // 游戏界面
     static let getReady = "get_ready"
