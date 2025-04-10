@@ -75,7 +75,11 @@ struct ReactionTimeGameView: View {
             get: { gameState == .finished },
             set: { if !$0 { gameState = .waiting } }
         )) {
-            ReactionTimeResultView(reactionTimes: roundTimes, onDismiss: { self.dismiss() })
+            ReactionTimeResultView(
+                reactionTimes: roundTimes, 
+                totalRounds: totalRounds, 
+                onDismiss: { self.dismiss() }
+            )
         }
     }
     

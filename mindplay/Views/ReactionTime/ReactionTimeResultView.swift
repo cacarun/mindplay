@@ -12,8 +12,15 @@ struct ReactionTimeResultView: View {
     @EnvironmentObject var gameDataManager: GameDataManager
     let reactionTimes: [Double]
     let onDismiss: () -> Void
+    let totalRounds: Int
     
     @State private var startNewGame = false
+    
+    init(reactionTimes: [Double], totalRounds: Int = 3, onDismiss: @escaping () -> Void) {
+        self.reactionTimes = reactionTimes
+        self.totalRounds = totalRounds
+        self.onDismiss = onDismiss
+    }
     
     private var averageTime: Double {
         reactionTimes.reduce(0, +) / Double(reactionTimes.count)
@@ -171,7 +178,7 @@ struct ReactionTimeResultView: View {
                     .foregroundColor(.gray)
             })
             .navigationDestination(isPresented: $startNewGame) {
-                ReactionTimeGameView()
+                ReactionTimeGameView(totalRounds: totalRounds)
             }
         }
     }
@@ -196,6 +203,7 @@ struct ReactionTimeResultView: View {
 #Preview {
     ReactionTimeResultView(
         reactionTimes: [234, 256, 198, 287, 212],
+        totalRounds: 5,
         onDismiss: {}
     )
     .environmentObject(GameDataManager())
