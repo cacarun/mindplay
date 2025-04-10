@@ -83,15 +83,8 @@ struct GameCardView: View {
             return AnyView(ReactionTimeIntroView())
         case .sequenceMemory:
             return AnyView(SequenceMemoryIntroView())
-        }
-    }
-    
-    private func formatScore(_ score: Double) -> String {
-        switch gameType {
-        case .reactionTime:
-            return String(format: "%.0f ms", score)
-        case .sequenceMemory:
-            return String(format: "%.0f", score)
+        case .aimTrainer:
+            return AnyView(AimTrainerIntroView())
         }
     }
 }

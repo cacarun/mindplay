@@ -14,6 +14,20 @@
 // Reaction Time Test
 "reaction_time_test" = "Reaction Time Test";
 "test_visual_reaction" = "Test your visual reaction speed";
+"round_count" = "Round Count";
+"best_score" = "Best Score";
+"start_test" = "Start Test";
+"how_to_play" = "How to Play";
+"wait_for_green" = "Wait for the screen to turn green";
+"tap_when_changes" = "Tap the screen as quickly as you can when it changes";
+"reaction_measured" = "Your reaction time will be measured in milliseconds";
+"complete_rounds" = "Complete %d rounds for an average score";
+"about_the_test" = "About the Test";
+"about_test_description" = "This test measures your visual reaction time - how quickly you respond to a visual stimulus. The average reaction time is around 250 milliseconds, but can vary based on many factors including age, fatigue, and practice.";
+"excellent" = "Excellent";
+"good" = "Good";
+"average" = "Average";
+"below_average" = "Below Average";
 
 // Sequence Memory Test
 "sequence_memory_test" = "Sequence Memory Test";
@@ -31,20 +45,17 @@
 "start_sequence" = "Start Sequence";
 "about_sequence_test" = "About the Test";
 "sequence_test_description" = "This test measures your short-term memory by challenging you to remember and repeat increasingly longer sequences. The average person can remember a sequence of 7 items.";
-"round_count" = "Round Count";
-"best_score" = "Best Score";
-"start_test" = "Start Test";
-"how_to_play" = "How to Play";
-"wait_for_green" = "Wait for the screen to turn green";
-"tap_when_changes" = "Tap the screen as quickly as you can when it changes";
-"reaction_measured" = "Your reaction time will be measured in milliseconds";
-"complete_rounds" = "Complete %d rounds for an average score";
-"about_the_test" = "About the Test";
-"about_test_description" = "This test measures your visual reaction time - how quickly you respond to a visual stimulus. The average reaction time is around 250 milliseconds, but can vary based on many factors including age, fatigue, and practice.";
-"excellent" = "Excellent";
-"good" = "Good";
-"average" = "Average";
-"below_average" = "Below Average";
+
+// Aim Trainer Test
+"aim_trainer_test" = "Aim Trainer";
+"hit_targets" = "Hit 30 targets as quickly as you can";
+"click_to_begin" = "Click the target above to begin";
+"targets_remaining" = "Targets Remaining: %d";
+"target_hit" = "Target Hit!";
+"total_time" = "Total Time";
+"avg_time_per_target" = "Average Time Per Target";
+"about_aim_test" = "About Aim Trainer";
+"aim_test_description" = "This test measures your hand-eye coordination and reflexes. Click the targets as quickly and accurately as you can. Once you've clicked 30 targets, your score and average time per target will be displayed. This test is best taken with a mouse or tablet screen.";
 
 // Game Interface
 "get_ready" = "Get Ready";

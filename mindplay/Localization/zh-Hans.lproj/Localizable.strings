@@ -31,6 +31,18 @@
 "start_sequence" = "开始序列";
 "about_sequence_test" = "关于测试";
 "sequence_test_description" = "这个测试通过让你记忆并重复越来越长的序列来测量你的短期记忆力。平均人能记住7个项目的序列。";
+
+// 目标训练测试
+"aim_trainer_test" = "目标训练";
+"hit_targets" = "尽快点击30个目标";
+"click_to_begin" = "点击上方目标开始";
+"targets_remaining" = "剩余目标：%d";
+"target_hit" = "命中目标！";
+"total_time" = "总时间";
+"avg_time_per_target" = "平均每个目标时间";
+"about_aim_test" = "关于目标训练";
+"aim_test_description" = "这个测试衡量你的手眼协调能力和反应速度。尽可能快速准确地点击目标。当你点击完30个目标后，将会显示你的得分和每个目标的平均时间。这个测试最好使用鼠标或平板电脑屏幕进行。";
+
 "round_count" = "回合次数";
 "best_score" = "最佳成绩";
 "start_test" = "开始测试";
