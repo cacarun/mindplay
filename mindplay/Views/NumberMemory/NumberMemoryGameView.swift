@@ -50,16 +50,6 @@ struct NumberMemoryGameView: View {
             VStack(spacing: 30) {
                 // 顶部状态区域
                 VStack(spacing: 10) {
-                    if gameState != .ready && gameState != .finished {
-                        Text("Level \(currentLevel)")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                        
-                        Text("\(digitLength) Digits")
-                            .font(.subheadline)
-                            .foregroundColor(.white.opacity(0.8))
-                    }
-                    
                     if gameState == .showing || gameState == .answering {
                         Text(LocalizedStringKey.timeRemaining.localized(with: timeRemaining))
                             .font(.headline)
@@ -263,16 +253,6 @@ struct NumberMemoryGameView: View {
                         .foregroundColor(.white)
                     
                     Text(userAnswer)
-                        .font(.headline)
-                        .foregroundColor(.white)
-                }
-                
-                HStack {
-                    Text(LocalizedStringKey.levelReached.localized + ":")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                    
-                    Text("\(currentLevel)")
                         .font(.headline)
                         .foregroundColor(.white)
                 }
