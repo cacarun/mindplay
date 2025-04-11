@@ -33,7 +33,7 @@ struct NumberMemoryGameView: View {
     @State private var timeRemaining = 0
     
     // 计时器
-    @State private var timer: Timer.TimerPublisher?
+    @State private var timer: Publishers.Autoconnect<Timer.TimerPublisher>?
     @State private var timerCancellable: Cancellable?
     
     init(startLength: Int = 7) {
@@ -176,11 +176,6 @@ struct NumberMemoryGameView: View {
                 .padding(.horizontal)
                 .multilineTextAlignment(.center)
                 .lineLimit(10)
-            
-            Text(String(format: LocalizedStringKey.timeRemaining.localized as String, timeRemaining))
-                .font(.headline)
-                .foregroundColor(.white)
-                .padding(.top, 10)
         }
     }
     
@@ -327,50 +322,46 @@ struct NumberMemoryGameView: View {
     
     // 开始显示数字
     private func startShowingNumber() {
+        // 取消可能存在的旧计时器
+        timerCancellable?.cancel()
+        
         // 计算显示时间：每一位数字1秒，最少5秒
         let displayTime = max(5, digitLength)
         timeRemaining = displayTime
         
         // 创建并启动计时器
-        timer = Timer.publish(every: 1, on: .main, in: .common)
-        timerCancellable = timer?.connect()
-        
-        // 计时器计数
-        var count = 0
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            timeRemaining -= 1
-            count += 1
-            
-            if count >= displayTime {
-                timer.invalidate()
-                timerCancellable?.cancel()
-                gameState = .answering
-                userAnswer = ""
-                startAnswerTimer()
+        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        timerCancellable = timer?.sink { _ in
+            if timeRemaining > 0 {
+                timeRemaining -= 1
+                if timeRemaining == 0 {
+                    timerCancellable?.cancel()
+                    gameState = .answering
+                    userAnswer = ""
+                    startAnswerTimer()
+                }
             }
         }
     }
     
     // 开始答题计时器
     private func startAnswerTimer() {
+        // 取消可能存在的旧计时器
+        timerCancellable?.cancel()
+        
         // 答题时间固定为30秒
         timeRemaining = 30
         
         // 创建并启动计时器
-        timer = Timer.publish(every: 1, on: .main, in: .common)
-        timerCancellable = timer?.connect()
-        
-        // 计时器计数
-        var count = 0
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            timeRemaining -= 1
-            count += 1
-            
-            if count >= 30 {
-                timer.invalidate()
-                timerCancellable?.cancel()
-                // 时间到，判断为错误
-                gameState = .incorrect
+        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        timerCancellable = timer?.sink { _ in
+            if timeRemaining > 0 {
+                timeRemaining -= 1
+                if timeRemaining == 0 {
+                    timerCancellable?.cancel()
+                    // 时间到，判断为错误
+                    gameState = .incorrect
+                }
             }
         }
     }
