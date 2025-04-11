@@ -50,6 +50,7 @@
 "correct_number" = "正确数字";
 "your_number" = "你的答案";
 "number_explanation" = "数字记忆是认知能力的关键组成部分。你的得分反映了你一次能在短期记忆中保持多少位数字。";
+"number_game_rule" = "每一位数字显示1秒，最少5秒，答题时间30秒";
 
 // 目标训练测试
 "aim_trainer_test" = "目标训练";

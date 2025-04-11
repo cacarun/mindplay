@@ -128,6 +128,7 @@ struct LocalizedStringKey {
     static let correctNumber = "correct_number"
     static let yourNumber = "your_number"
     static let numberExplanation = "number_explanation"
+    static let numberGameRule = "number_game_rule"
     
     // 目标训练测试
     static let aimTrainerTest = "aim_trainer_test"

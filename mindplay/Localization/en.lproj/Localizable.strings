@@ -64,6 +64,7 @@
 "correct_number" = "Correct Number";
 "your_number" = "Your Answer";
 "number_explanation" = "Number memory is a key component of cognitive ability. Your score reflects how many digits you can hold in your short-term memory at once.";
+"number_game_rule" = "Each digit is shown for 1 second (minimum 5 seconds total). You have 30 seconds to answer.";
 
 // Aim Trainer Test
 "aim_trainer_test" = "Aim Trainer";

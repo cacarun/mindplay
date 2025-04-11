@@ -10,10 +10,10 @@ import SwiftUI
 struct NumberMemoryIntroView: View {
     @EnvironmentObject var gameDataManager: GameDataManager
     @State private var isShowingGame = false
-    @State private var startLength = 7 // 默认起始长度为7
+    @State private var startLength = 5 // 默认起始长度为5
     
     // 可选的起始数字长度
-    private let lengthOptions = [5, 7, 9, 12]
+    private let lengthOptions = [1, 3, 5, 7, 9, 12]
     
     var body: some View {
         ScrollView {
@@ -101,7 +101,7 @@ struct NumberMemoryIntroView: View {
                     
                     instructionItem(number: "1", text: LocalizedStringKey.memorizeNumber.localized)
                     instructionItem(number: "2", text: LocalizedStringKey.enterNumber.localized)
-                    instructionItem(number: "3", text: LocalizedStringKey.timeRemaining.localized(with: 5))
+                    instructionItem(number: "3", text: LocalizedStringKey.numberGameRule.localized)
                 }
                 .padding()
                 .background(Color(.systemBackground))
