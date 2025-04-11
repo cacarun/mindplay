@@ -47,16 +47,16 @@ struct NumberMemoryGameView: View {
             backgroundColor
                 .ignoresSafeArea()
             
-            VStack(spacing: 30) {
+            VStack {
+                Spacer()
+                
                 // 顶部状态区域
-                VStack(spacing: 10) {
-                    if gameState == .showing || gameState == .answering {
-                        Text(LocalizedStringKey.timeRemaining.localized(with: timeRemaining))
-                            .font(.headline)
-                            .foregroundColor(.white)
-                    }
+                if gameState == .showing || gameState == .answering {
+                    Text(LocalizedStringKey.timeRemaining.localized(with: timeRemaining))
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding(.bottom, 20)
                 }
-                .padding()
                 
                 // 游戏主要区域
                 switch gameState {
@@ -77,6 +77,7 @@ struct NumberMemoryGameView: View {
                 Spacer()
             }
             .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .onAppear {
             generateNumber()
@@ -150,6 +151,7 @@ struct NumberMemoryGameView: View {
         .cornerRadius(16)
         .shadow(radius: 5)
         .padding()
+        .frame(maxWidth: 400)
     }
     
     // 数字显示视图
@@ -167,6 +169,8 @@ struct NumberMemoryGameView: View {
                 .multilineTextAlignment(.center)
                 .lineLimit(10)
         }
+        .frame(maxWidth: .infinity, alignment: .center)
+        .padding()
     }
     
     // 答案输入视图
@@ -185,6 +189,7 @@ struct NumberMemoryGameView: View {
                 .cornerRadius(12)
                 .keyboardType(.numberPad)
                 .multilineTextAlignment(.center)
+                .frame(maxWidth: 350)
             
             Button(action: {
                 checkAnswer()
@@ -193,12 +198,14 @@ struct NumberMemoryGameView: View {
                     .font(.headline)
                     .foregroundColor(.indigo)
                     .padding()
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: 200)
                     .background(Color.white)
                     .cornerRadius(12)
             }
             .padding(.top, 10)
         }
+        .frame(maxWidth: .infinity, alignment: .center)
+        .padding()
     }
     
     // 答案正确视图
@@ -220,12 +227,14 @@ struct NumberMemoryGameView: View {
                     .font(.headline)
                     .foregroundColor(.green)
                     .padding()
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: 200)
                     .background(Color.white)
                     .cornerRadius(12)
             }
             .padding(.top, 10)
         }
+        .frame(maxWidth: .infinity, alignment: .center)
+        .padding()
     }
     
     // 答案错误视图
@@ -260,6 +269,7 @@ struct NumberMemoryGameView: View {
             .padding()
             .background(Color.white.opacity(0.1))
             .cornerRadius(12)
+            .frame(maxWidth: 350)
             
             Button(action: {
                 finishGame()
@@ -268,12 +278,14 @@ struct NumberMemoryGameView: View {
                     .font(.headline)
                     .foregroundColor(.red)
                     .padding()
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: 200)
                     .background(Color.white)
                     .cornerRadius(12)
             }
             .padding(.top, 10)
         }
+        .frame(maxWidth: .infinity, alignment: .center)
+        .padding()
     }
     
     // MARK: - 游戏逻辑
