@@ -42,11 +42,11 @@
 "time_remaining" = "剩余时间：%d";
 "submit_answer" = "提交";
 "level_reached" = "达到等级";
-"digitsRemembered" = "记住的数字位数";
+"digits_remembered" = "记住的数字位数";
 "about_number_test" = "关于测试";
 "number_test_description" = "普通人通常只能可靠地记住7位数字，但使用记忆技巧可以做得更好。下面提供了一些有用的链接。";
 "next_level" = "下一级";
-"timeUp" = "时间到！";
+"time_up" = "时间到！";
 "correct_number" = "正确数字";
 "your_number" = "你的答案";
 "number_explanation" = "数字记忆是认知能力的关键组成部分。你的得分反映了你一次能在短期记忆中保持多少位数字。";
@@ -138,3 +138,10 @@
 "rating" = "评级";
 "results" = "结果";
 "memory_explanation" = "短期记忆对日常任务至关重要。你在这个测试中的表现显示了你能准确记忆和回忆的顺序项目数量。";
+
+// 数字记忆结果
+"excellent_number_memory" = "你的数字记忆能力非常出色，远高于平均水平。";
+"good_number_memory" = "你的数字记忆能力良好，优于大多数人。";
+"average_number_memory" = "你的数字记忆能力处于平均水平。";
+"below_average_number_memory" = "你的数字记忆能力低于平均水平，但通过练习可以提高。";
+"your_result" = "你的结果";

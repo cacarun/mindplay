@@ -33,13 +33,13 @@ struct NumberMemoryResultView: View {
     // 性能说明
     private var performanceDescription: String {
         if digitsRemembered > 11 {
-            return "Your number memory is excellent, significantly above average."
+            return LocalizedStringKey.excellentNumberMemory.localized
         } else if digitsRemembered >= 9 {
-            return "Your number memory is good, better than most people."
+            return LocalizedStringKey.goodNumberMemory.localized
         } else if digitsRemembered >= 7 {
-            return "Your number memory is average, on par with most people."
+            return LocalizedStringKey.averageNumberMemory.localized
         } else {
-            return "Your number memory is below average, but can be improved with practice."
+            return LocalizedStringKey.belowAverageNumberMemory.localized
         }
     }
     
@@ -84,11 +84,6 @@ struct NumberMemoryResultView: View {
                             .font(.title2)
                             .fontWeight(.bold)
                         
-                        HStack {
-                            statCard(title: LocalizedStringKey.digitsRemembered.localized, value: "\(digitsRemembered)")
-                            statCard(title: LocalizedStringKey.levelReached.localized, value: "\(level)")
-                        }
-                        
                         // Chart of distribution
                         VStack(alignment: .leading, spacing: 8) {
                             Text(LocalizedStringKey.distribution.localized)
@@ -114,7 +109,7 @@ struct NumberMemoryResultView: View {
                             
                             // 标记用户所在区间
                             let userCategory = getUserCategory(digits: digitsRemembered)
-                            Text("Your result: \(userCategory)")
+                            Text(LocalizedStringKey.yourResult.localized + ": " + userCategory)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                                 .padding(.top, 5)

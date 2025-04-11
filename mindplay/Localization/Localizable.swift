@@ -200,4 +200,11 @@ struct LocalizedStringKey {
     static let rating = "rating"
     static let results = "results"
     static let memoryExplanation = "memory_explanation"
+    
+    // 数字记忆结果页面
+    static let excellentNumberMemory = "excellent_number_memory"
+    static let goodNumberMemory = "good_number_memory"
+    static let averageNumberMemory = "average_number_memory"
+    static let belowAverageNumberMemory = "below_average_number_memory"
+    static let yourResult = "your_result"
 }

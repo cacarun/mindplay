@@ -56,11 +56,11 @@
 "time_remaining" = "Time remaining: %d";
 "submit_answer" = "Submit";
 "level_reached" = "Level Reached";
-"digitsRemembered" = "Digits Remembered";
+"digits_remembered" = "Digits Remembered";
 "about_number_test" = "About the Test";
 "number_test_description" = "The average person can only remember 7 digit numbers reliably, but it's possible to do much better using mnemonic techniques. Some helpful links are provided below.";
 "next_level" = "Next Level";
-"timeUp" = "Time's Up!";
+"time_up" = "Time's Up!";
 "correct_number" = "Correct Number";
 "your_number" = "Your Answer";
 "number_explanation" = "Number memory is a key component of cognitive ability. Your score reflects how many digits you can hold in your short-term memory at once.";
@@ -137,3 +137,10 @@
 "rating" = "Rating";
 "results" = "Results";
 "memory_explanation" = "Short-term memory is critical for many daily tasks. Your performance in this test shows how many sequential items you can remember and recall accurately.";
+
+// Number Memory Results
+"excellent_number_memory" = "Your number memory is excellent, significantly above average.";
+"good_number_memory" = "Your number memory is good, better than most people.";
+"average_number_memory" = "Your number memory is average, on par with most people.";
+"below_average_number_memory" = "Your number memory is below average, but can be improved with practice.";
+"your_result" = "Your result";
