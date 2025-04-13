@@ -87,6 +87,8 @@ struct GameCardView: View {
             return AnyView(AimTrainerIntroView())
         case .numberMemory:
             return AnyView(NumberMemoryIntroView())
+        case .verbalMemory:
+            return AnyView(VerbalMemoryIntroView())
         }
     }
 }

@@ -146,3 +146,22 @@
 "average_number_memory" = "你的数字记忆能力处于平均水平。";
 "below_average_number_memory" = "你的数字记忆能力低于平均水平，但通过练习可以提高。";
 "your_result" = "你的结果";
+
+// 词汇记忆测试
+"verbal_memory_test" = "词汇记忆测试";
+"keep_words_in_memory" = "尽可能多地记住短期记忆中的单词";
+"word_seen" = "见过";
+"word_new" = "新词";
+"remaining_lives" = "生命值";
+"current_score" = "分数";
+"about_verbal_test" = "关于测试";
+"verbal_test_description" = "这个测试衡量你一次能在短期记忆中保持多少单词。需要记住的单词数量会不断增加，直到你无法将它们记在脑海中为止。";
+"three_strikes" = "你有3次失误机会，直到游戏结束。你的得分是你坚持的回合数。";
+"word_explanation" = "词汇记忆是记住单词和其他涉及语言的抽象概念的能力。这是日常决策和解决问题中使用的重要认知能力。";
+
+// 词汇记忆结果
+"excellent_verbal_memory" = "你的词汇记忆力非常出色！你能记住的单词数量超过90%的人。";
+"good_verbal_memory" = "你的词汇记忆力良好，优于大多数人。";
+"average_verbal_memory" = "你的词汇记忆力处于平均水平。";
+"below_average_verbal_memory" = "你的词汇记忆力低于平均水平，但通过练习可以提高。";
+"words_remembered" = "记住的单词数";

@@ -208,4 +208,23 @@ struct LocalizedStringKey {
     static let averageNumberMemory = "average_number_memory"
     static let belowAverageNumberMemory = "below_average_number_memory"
     static let yourResult = "your_result"
+    
+    // 词汇记忆测试
+    static let verbalMemoryTest = "verbal_memory_test"
+    static let keepWordsInMemory = "keep_words_in_memory"
+    static let wordSeen = "word_seen"
+    static let wordNew = "word_new"
+    static let remainingLives = "remaining_lives"
+    static let currentScore = "current_score"
+    static let aboutVerbalTest = "about_verbal_test"
+    static let verbalTestDescription = "verbal_test_description"
+    static let threeStrikes = "three_strikes"
+    static let wordExplanation = "word_explanation"
+    
+    // 词汇记忆结果
+    static let excellentVerbalMemory = "excellent_verbal_memory"
+    static let goodVerbalMemory = "good_verbal_memory"
+    static let averageVerbalMemory = "average_verbal_memory"
+    static let belowAverageVerbalMemory = "below_average_verbal_memory"
+    static let wordsRemembered = "words_remembered"
 }

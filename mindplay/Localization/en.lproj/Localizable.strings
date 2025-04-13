@@ -145,3 +145,22 @@
 "average_number_memory" = "Your number memory is average, on par with most people.";
 "below_average_number_memory" = "Your number memory is below average, but can be improved with practice.";
 "your_result" = "Your result";
+
+// Verbal Memory Test
+"verbal_memory_test" = "Verbal Memory Test";
+"keep_words_in_memory" = "Keep as many words in short term memory as possible";
+"word_seen" = "SEEN";
+"word_new" = "NEW";
+"remaining_lives" = "Lives";
+"current_score" = "Score";
+"about_verbal_test" = "About the test";
+"verbal_test_description" = "This test measures how many words you can keep in short term memory at once. The number of words you need to remember grows continually, until you can't keep them in your head anymore.";
+"three_strikes" = "You have 3 strikes until game over. Your score is how many turns you lasted.";
+"word_explanation" = "Verbal memory is the ability to remember words and other abstractions involving language. This is an important cognitive ability used in everyday decision making and problem solving.";
+
+// Verbal Memory Results
+"excellent_verbal_memory" = "Your verbal memory is excellent! You can remember more words than 90% of people.";
+"good_verbal_memory" = "Your verbal memory is good, better than most people.";
+"average_verbal_memory" = "Your verbal memory is average, on par with most people.";
+"below_average_verbal_memory" = "Your verbal memory is below average, but can be improved with practice.";
+"words_remembered" = "Words Remembered";
