@@ -230,7 +230,7 @@ struct SequenceMemoryGameView: View {
         highlightedButton = sequence[currentIndex]
         
         // 播放音效
-        soundService.playSound(named: "tile_tap")
+        soundService.playSound(named: "boop")
         
         // 延迟后取消高亮并显示下一个按钮
         DispatchQueue.main.asyncAfter(deadline: .now() + sequenceDisplayTime) {
@@ -248,7 +248,7 @@ struct SequenceMemoryGameView: View {
         highlightedButton = index
         
         // 播放音效
-        soundService.playSound(named: "tile_tap")
+        soundService.playSound(named: "boop")
         
         // 添加到用户序列
         userSequence.append(index)

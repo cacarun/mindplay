@@ -357,7 +357,7 @@ struct ChimpTestGameView: View {
             nextNumber += 1
             
             // 播放正确点击音效
-            soundService.playSound(named: "tile_tap")
+            soundService.playSound(named: "boop")
             
             // 检查是否完成本轮
             if nextNumber > currentLevel {
