@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 enum ChimpTestGameState {
     case ready      // 准备开始
@@ -40,80 +41,98 @@ struct ChimpTestGameView: View {
     // 数字显示定时器
     @State private var timer: Timer?
     
+    // 音效服务
+    private let soundService = SoundService.shared
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 Color.purple
                     .ignoresSafeArea()
                 
-                VStack {
-                    Spacer()
+                VStack(spacing: 20) {
+                    // 状态区域 - 始终保持固定
+                    VStack {
+                        statusView
+                            .padding(.top, 10)
+                        
+                        // 将倒计时集成到状态区域
+                        if gameState == .memorizing {
+                            Text("\(memorizingTimeRemaining)")
+                                .font(.system(size: 30, weight: .bold))
+                                .foregroundColor(.white)
+                                .padding(.vertical, 8)
+                                .padding(.horizontal, 16)
+                                .background(Color.black.opacity(0.4))
+                                .cornerRadius(10)
+                                .transition(.scale)
+                        } else {
+                            // 占位视图保持高度一致
+                            Color.clear
+                                .frame(height: 46)
+                        }
+                    }
                     
-                    // 状态区域
-                    statusView
-                    
-                    // 游戏面板
-                    if gameState != .ready && gameState != .finished {
-                        VStack(spacing: 20) {
-                            // 记忆阶段倒计时 - 移到外部
-                            if gameState == .memorizing {
-                                Text("\(memorizingTimeRemaining)")
-                                    .font(.system(size: 60, weight: .bold))
-                                    .foregroundColor(.white)
-                                    .padding(20)
-                                    .background(Color.black.opacity(0.6))
-                                    .cornerRadius(12)
-                                    .padding(.bottom, 10)
-                            }
-                            
+                    // 游戏区域 - 固定位置和大小
+                    ZStack {
+                        if gameState != .ready && gameState != .finished {
                             gameBoard
-                                .padding()
+                        } else if gameState == .ready {
+                            readyView
+                        } else {
+                            // 占位视图保持大小一致
+                            Color.clear
+                                .frame(width: boardSize, height: boardSize)
                         }
-                    } else if gameState == .ready {
-                        readyView
                     }
-                    
-                    // 控制按钮
-                    if gameState == .success {
-                        Button(action: startNextLevel) {
-                            Text(LocalizedStringKey.nextLevel.localized)
-                                .font(.headline)
-                                .foregroundColor(.purple)
-                                .padding()
-                                .frame(width: 200)
-                                .background(Color.white)
-                                .cornerRadius(12)
-                        }
-                        .padding(.top, 30)
-                    } else if gameState == .failure {
-                        Button(action: resetLevel) {
-                            Text(LocalizedStringKey.tryAgain.localized)
-                                .font(.headline)
-                                .foregroundColor(.purple)
-                                .padding()
-                                .frame(width: 200)
-                                .background(Color.white)
-                                .cornerRadius(12)
-                        }
-                        .padding(.top, 30)
-                    } else if gameState == .ready {
-                        Button(action: startGame) {
-                            Text(LocalizedStringKey.startTest.localized)
-                                .font(.headline)
-                                .foregroundColor(.purple)
-                                .padding()
-                                .frame(width: 200)
-                                .background(Color.white)
-                                .cornerRadius(12)
-                        }
-                        .padding(.top, 30)
-                    }
+                    .frame(width: boardSize, height: boardSize)
                     
                     Spacer()
+                    
+                    // 控制按钮区域 - 固定高度
+                    VStack {
+                        if gameState == .success {
+                            Button(action: startNextLevel) {
+                                Text(LocalizedStringKey.nextLevel.localized)
+                                    .font(.headline)
+                                    .foregroundColor(.purple)
+                                    .padding()
+                                    .frame(width: 200)
+                                    .background(Color.white)
+                                    .cornerRadius(12)
+                            }
+                        } else if gameState == .failure {
+                            Button(action: resetLevel) {
+                                Text(LocalizedStringKey.tryAgain.localized)
+                                    .font(.headline)
+                                    .foregroundColor(.purple)
+                                    .padding()
+                                    .frame(width: 200)
+                                    .background(Color.white)
+                                    .cornerRadius(12)
+                            }
+                        } else if gameState == .ready {
+                            Button(action: startGame) {
+                                Text(LocalizedStringKey.startTest.localized)
+                                    .font(.headline)
+                                    .foregroundColor(.purple)
+                                    .padding()
+                                    .frame(width: 200)
+                                    .background(Color.white)
+                                    .cornerRadius(12)
+                            }
+                        } else {
+                            // 占位视图保持高度一致
+                            Color.clear
+                                .frame(height: 44)
+                        }
+                    }
+                    .frame(height: 60)
+                    .padding(.bottom, 20)
                 }
                 .padding()
                 .onAppear {
-                    boardSize = min(geometry.size.width, geometry.size.height) - 60
+                    boardSize = min(geometry.size.width, geometry.size.height) - 100
                 }
             }
             .onDisappear {
@@ -336,6 +355,9 @@ struct ChimpTestGameView: View {
             // 正确点击
             squares[squares.firstIndex(where: { $0.id == square.id })!].isRevealed = true
             nextNumber += 1
+            
+            // 播放正确点击音效
+            soundService.playSound(named: "tile_tap")
             
             // 检查是否完成本轮
             if nextNumber > currentLevel {
