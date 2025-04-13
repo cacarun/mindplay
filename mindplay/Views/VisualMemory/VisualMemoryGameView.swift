@@ -296,6 +296,9 @@ struct VisualMemoryGameView: View {
         // 开始记忆阶段
         gameState = .memorizing
         
+        // 播放翻转显示音效
+        soundService.playSound(named: "reveal")
+        
         // 翻转目标方块以显示
         withAnimation(.easeInOut(duration: 0.5)) {
             for index in targetTiles {
@@ -347,6 +350,9 @@ struct VisualMemoryGameView: View {
             } else {
                 timer?.invalidate()
                 
+                // 播放翻转回原始状态音效
+                soundService.playSound(named: "go")
+                
                 // 翻转回所有方块，隐藏目标
                 withAnimation(.easeInOut(duration: 0.5)) {
                     for index in 0..<tiles.count {
@@ -371,13 +377,13 @@ struct VisualMemoryGameView: View {
         tiles[index].isSelected = true
         selectedTiles.append(index)
         
+        // 播放翻转显示音效
+        soundService.playSound(named: "reveal")
+        
         // 翻转方块以显示状态
         withAnimation(.easeInOut(duration: 0.3)) {
             tiles[index].isFlipped = true
         }
-        
-        // 播放音效
-        soundService.playSound(named: "tile_tap")
         
         // 检查是否正确
         if tile.isTarget {
