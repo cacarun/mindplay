@@ -12,7 +12,7 @@
 "train_your_brain" = "Train your brain with cognitive games";
 
 // Reaction Time Test
-"reaction_time_test" = "Reaction Time Test";
+"reaction_time_test" = "Reaction Time";
 "test_visual_reaction" = "Test your visual reaction speed";
 "round_count" = "Round Count";
 "best_score" = "Best Score";
@@ -30,7 +30,7 @@
 "below_average" = "Below Average";
 
 // Sequence Memory Test
-"sequence_memory_test" = "Sequence Memory Test";
+"sequence_memory_test" = "Sequence Memory";
 "remember_pattern" = "Remember the pattern";
 "watch_sequence" = "Watch the sequence";
 "repeat_sequence" = "Repeat the sequence";
@@ -147,7 +147,7 @@
 "your_result" = "Your result";
 
 // Verbal Memory Test
-"verbal_memory_test" = "Verbal Memory Test";
+"verbal_memory_test" = "Verbal Memory";
 "keep_words_in_memory" = "Keep as many words in short term memory as possible";
 "word_seen" = "SEEN";
 "word_new" = "NEW";
@@ -188,7 +188,7 @@
 "max_level" = "Max Level";
 
 // Visual Memory Test
-"visual_memory_test" = "Visual Memory Test";
+"visual_memory_test" = "Visual Memory";
 "memorize_squares" = "Remember an increasingly large board of squares";
 "about_visual_test" = "About the Visual Memory Test";
 "visual_test_description" = "Every level, a number of tiles will flash white. Memorize them, and pick them again after the tiles are reset! Levels get progressively more difficult, to challenge your skills. If you miss 3 tiles on a level, you lose one life. You have three lives. Make it as far as you can!";

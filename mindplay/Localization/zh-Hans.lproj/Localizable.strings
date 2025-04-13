@@ -12,11 +12,11 @@
 "train_your_brain" = "训练你的大脑，提升认知能力";
 
 // 反应时间测试
-"reaction_time_test" = "反应时间测试";
+"reaction_time_test" = "反应时间";
 "test_visual_reaction" = "测试你的视觉反应速度";
 
 // 序列记忆测试
-"sequence_memory_test" = "序列记忆测试";
+"sequence_memory_test" = "序列记忆";
 "remember_pattern" = "记住模式";
 "watch_sequence" = "观看序列";
 "repeat_sequence" = "重复序列";
@@ -148,7 +148,7 @@
 "your_result" = "你的结果";
 
 // 词汇记忆测试
-"verbal_memory_test" = "词汇记忆测试";
+"verbal_memory_test" = "词汇记忆";
 "keep_words_in_memory" = "尽可能多地记住短期记忆中的单词";
 "word_seen" = "见过";
 "word_new" = "新词";
@@ -188,7 +188,7 @@
 "max_level" = "最高等级";
 
 // 视觉记忆测试
-"visual_memory_test" = "视觉记忆测试";
+"visual_memory_test" = "视觉记忆";
 "memorize_squares" = "记住越来越多的方块位置";
 "about_visual_test" = "关于视觉记忆测试";
 "visual_test_description" = "每一关，一些方块会闪烁变白。记住它们，然后在方块重置后再次选择它们！关卡会逐渐变得更加困难，以挑战你的能力。如果你在一个关卡中错过3个方块，你将失去一条生命。你有三条生命。看看你能走多远！";

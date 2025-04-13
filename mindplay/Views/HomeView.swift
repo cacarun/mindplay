@@ -65,8 +65,9 @@ struct GameCardView: View {
                 Text(gameType.localizedName)
                     .font(.headline)
                     .multilineTextAlignment(.center)
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    .frame(height: 20)
             }
             .frame(minWidth: 120, minHeight: 120)
             .padding(12)
