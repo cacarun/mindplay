@@ -248,4 +248,23 @@ struct LocalizedStringKey {
     static let averageChimpMemory = "average_chimp_memory"
     static let belowAverageChimpMemory = "below_average_chimp_memory"
     static let maxLevel = "max_level"
+    
+    // 视觉记忆测试
+    static let visualMemoryTest = "visual_memory_test"
+    static let memorizeSquares = "memorize_squares"
+    static let aboutVisualTest = "about_visual_test"
+    static let visualTestDescription = "visual_test_description"
+    static let tilesFlashWhite = "tiles_flash_white"
+    static let memorizeAndPick = "memorize_and_pick"
+    static let levelProgressivelyHarder = "level_progressively_harder"
+    static let missThreeTilesLoseLife = "miss_three_tiles_lose_life"
+    static let threeLifeRemaining = "three_life_remaining"
+    static let makeItFar = "make_it_far"
+    
+    // 视觉记忆结果
+    static let excellentVisualMemory = "excellent_visual_memory"
+    static let goodVisualMemory = "good_visual_memory"
+    static let averageVisualMemory = "average_visual_memory"
+    static let belowAverageVisualMemory = "below_average_visual_memory"
+    static let squaresRemembered = "squares_remembered"
 }

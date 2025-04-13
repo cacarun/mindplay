@@ -186,3 +186,22 @@
 "average_chimp_memory" = "Good. Your working memory is around average for humans.";
 "below_average_chimp_memory" = "Your working memory could use some practice. Chimpanzees would likely outperform you on this task.";
 "max_level" = "Max Level";
+
+// Visual Memory Test
+"visual_memory_test" = "Visual Memory Test";
+"memorize_squares" = "Remember an increasingly large board of squares";
+"about_visual_test" = "About the Visual Memory Test";
+"visual_test_description" = "Every level, a number of tiles will flash white. Memorize them, and pick them again after the tiles are reset! Levels get progressively more difficult, to challenge your skills. If you miss 3 tiles on a level, you lose one life. You have three lives. Make it as far as you can!";
+"tiles_flash_white" = "Tiles will flash white";
+"memorize_and_pick" = "Memorize them, then pick them again after they reset";
+"level_progressively_harder" = "Levels get progressively more difficult";
+"miss_three_tiles_lose_life" = "If you miss 3 tiles on a level, you lose one life";
+"three_life_remaining" = "You have three lives";
+"make_it_far" = "Make it as far as you can!";
+
+// Visual Memory Results
+"excellent_visual_memory" = "Excellent! Your visual memory is exceptional. You can remember complex spatial patterns with high accuracy.";
+"good_visual_memory" = "Great job! Your visual memory is above average. You can remember more spatial information than most people.";
+"average_visual_memory" = "Good. Your visual memory is around average. You can remember a typical amount of spatial information.";
+"below_average_visual_memory" = "Your visual memory could use some practice. With regular training, you can improve your spatial recall abilities.";
+"squares_remembered" = "Squares Remembered";

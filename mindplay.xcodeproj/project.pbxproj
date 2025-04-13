@@ -37,6 +37,9 @@
 		8BDB08032DABEA570036C18B /* boop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8BDB08002DABEA570036C18B /* boop.mp3 */; };
 		8BDB08042DABEA570036C18B /* go.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8BDB08012DABEA570036C18B /* go.mp3 */; };
 		8BDB08052DABEA570036C18B /* reveal.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8BDB08022DABEA570036C18B /* reveal.mp3 */; };
+		8BDB080A2DABECEF0036C18B /* VisualMemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB08072DABECEE0036C18B /* VisualMemoryGameView.swift */; };
+		8BDB080B2DABECEF0036C18B /* VisualMemoryResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB08082DABECEE0036C18B /* VisualMemoryResultView.swift */; };
+		8BDB080C2DABECEF0036C18B /* VisualMemoryIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB08092DABECEE0036C18B /* VisualMemoryIntroView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +75,9 @@
 		8BDB08002DABEA570036C18B /* boop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = boop.mp3; sourceTree = "<group>"; };
 		8BDB08012DABEA570036C18B /* go.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = go.mp3; sourceTree = "<group>"; };
 		8BDB08022DABEA570036C18B /* reveal.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = reveal.mp3; sourceTree = "<group>"; };
+		8BDB08072DABECEE0036C18B /* VisualMemoryGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMemoryGameView.swift; sourceTree = "<group>"; };
+		8BDB08082DABECEE0036C18B /* VisualMemoryResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMemoryResultView.swift; sourceTree = "<group>"; };
+		8BDB08092DABECEE0036C18B /* VisualMemoryIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMemoryIntroView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +134,7 @@
 		8BDB07B32DA233360036C18B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8BDB08062DABECEE0036C18B /* VisualMemory */,
 				8BDB07F92DAB72A10036C18B /* ChimpTest */,
 				8BDB07F22DAA699E0036C18B /* VerbalMemory */,
 				8BDB07E42DA81C010036C18B /* NumberMemory */,
@@ -242,6 +249,16 @@
 			path = ChimpTest;
 			sourceTree = "<group>";
 		};
+		8BDB08062DABECEE0036C18B /* VisualMemory */ = {
+			isa = PBXGroup;
+			children = (
+				8BDB08072DABECEE0036C18B /* VisualMemoryGameView.swift */,
+				8BDB08082DABECEE0036C18B /* VisualMemoryResultView.swift */,
+				8BDB08092DABECEE0036C18B /* VisualMemoryIntroView.swift */,
+			);
+			path = VisualMemory;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -323,6 +340,7 @@
 				8BDB07FE2DAB72A10036C18B /* ChimpTestResultView.swift in Sources */,
 				8BDB07E92DA81C010036C18B /* NumberMemoryIntroView.swift in Sources */,
 				8BDB07E32DA807EC0036C18B /* AimTrainerIntroView.swift in Sources */,
+				8BDB080B2DABECEF0036C18B /* VisualMemoryResultView.swift in Sources */,
 				8BDB07F82DAA699E0036C18B /* VerbalMemoryResultView.swift in Sources */,
 				8BDB07E22DA807EC0036C18B /* AimTrainerGameView.swift in Sources */,
 				8BDB07EA2DA81C010036C18B /* NumberMemoryResultView.swift in Sources */,
@@ -331,8 +349,10 @@
 				8BDB07BD2DA233360036C18B /* ReactionTimeIntroView.swift in Sources */,
 				8BDB07F62DAA699E0036C18B /* VerbalMemoryGameView.swift in Sources */,
 				8BDB07BC2DA233360036C18B /* ReactionTimeGameView.swift in Sources */,
+				8BDB080A2DABECEF0036C18B /* VisualMemoryGameView.swift in Sources */,
 				8BDB07BF2DA233370036C18B /* GameModel.swift in Sources */,
 				8BDB07FD2DAB72A10036C18B /* ChimpTestIntroView.swift in Sources */,
+				8BDB080C2DABECEF0036C18B /* VisualMemoryIntroView.swift in Sources */,
 				8BDB07C62DA2B9800036C18B /* Localizable.swift in Sources */,
 				8BDB07A02DA21FD30036C18B /* mindplayApp.swift in Sources */,
 				8BDB07F72DAA699E0036C18B /* VerbalMemoryIntroView.swift in Sources */,

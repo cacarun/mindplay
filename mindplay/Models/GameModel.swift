@@ -15,6 +15,7 @@ enum GameType: String, CaseIterable, Identifiable {
     case numberMemory = "Number Memory"
     case verbalMemory = "Verbal Memory"
     case chimpTest = "Chimp Test"
+    case visualMemory = "Visual Memory"
     // Future games will be added here
     
     var id: String { self.rawValue }
@@ -34,6 +35,8 @@ enum GameType: String, CaseIterable, Identifiable {
             return LocalizedStringKey.verbalMemoryTest.localized
         case .chimpTest:
             return LocalizedStringKey.chimpTest.localized
+        case .visualMemory:
+            return LocalizedStringKey.visualMemoryTest.localized
         }
     }
     
@@ -51,6 +54,8 @@ enum GameType: String, CaseIterable, Identifiable {
             return "Remember and recall words or phrases."
         case .chimpTest:
             return "Test your memory and cognitive abilities."
+        case .visualMemory:
+            return "Remember an increasingly large board of squares."
         }
     }
     
@@ -68,6 +73,8 @@ enum GameType: String, CaseIterable, Identifiable {
             return "text.book.closed.fill"
         case .chimpTest:
             return "brain.head.profile"
+        case .visualMemory:
+            return "eye.fill"
         }
     }
 }
@@ -121,6 +128,9 @@ class GameDataManager: ObservableObject {
             return filteredResults.max(by: { $0.score < $1.score })?.score
         case .chimpTest:
             // For chimp test, higher is better
+            return filteredResults.max(by: { $0.score < $1.score })?.score
+        case .visualMemory:
+            // For visual memory, higher is better
             return filteredResults.max(by: { $0.score < $1.score })?.score
         }
     }

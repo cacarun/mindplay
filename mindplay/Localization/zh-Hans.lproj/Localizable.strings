@@ -186,3 +186,22 @@
 "average_chimp_memory" = "不错。你的工作记忆力处于人类的平均水平。";
 "below_average_chimp_memory" = "你的工作记忆力需要练习。黑猩猩在这项任务上可能会超过你。";
 "max_level" = "最高等级";
+
+// 视觉记忆测试
+"visual_memory_test" = "视觉记忆测试";
+"memorize_squares" = "记住越来越多的方块位置";
+"about_visual_test" = "关于视觉记忆测试";
+"visual_test_description" = "每一关，一些方块会闪烁变白。记住它们，然后在方块重置后再次选择它们！关卡会逐渐变得更加困难，以挑战你的能力。如果你在一个关卡中错过3个方块，你将失去一条生命。你有三条生命。看看你能走多远！";
+"tiles_flash_white" = "方块会闪烁变白";
+"memorize_and_pick" = "记住它们，然后在方块重置后再次选择它们";
+"level_progressively_harder" = "关卡会逐渐变得更加困难";
+"miss_three_tiles_lose_life" = "如果你在一个关卡中错过3个方块，你将失去一条生命";
+"three_life_remaining" = "你有三条生命";
+"make_it_far" = "看看你能走多远！";
+
+// 视觉记忆结果
+"excellent_visual_memory" = "太棒了！你的视觉记忆力非常出色。你能够以高精度记住复杂的空间模式。";
+"good_visual_memory" = "干得好！你的视觉记忆力高于平均水平。你能记住比大多数人更多的空间信息。";
+"average_visual_memory" = "不错。你的视觉记忆力处于平均水平。你能记住典型数量的空间信息。";
+"below_average_visual_memory" = "你的视觉记忆力需要练习。通过定期训练，你可以提高你的空间记忆能力。";
+"squares_remembered" = "记住的方块数";

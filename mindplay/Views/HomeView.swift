@@ -91,6 +91,8 @@ struct GameCardView: View {
             return AnyView(VerbalMemoryIntroView())
         case .chimpTest:
             return AnyView(ChimpTestIntroView())
+        case .visualMemory:
+            return AnyView(VisualMemoryIntroView())
         }
     }
 }
