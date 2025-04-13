@@ -164,3 +164,25 @@
 "average_verbal_memory" = "Your verbal memory is average, on par with most people.";
 "below_average_verbal_memory" = "Your verbal memory is below average, but can be improved with practice.";
 "words_remembered" = "Words Remembered";
+
+// Chimp Test
+"chimp_test" = "Chimp Test";
+"smarter_than_chimp" = "Are you smarter than a chimpanzee?";
+"click_squares_in_order" = "Click the squares in order according to their numbers";
+"test_get_harder" = "The test will get progressively harder";
+"about_chimp_test" = "About the Chimp Test";
+"chimp_test_description" = "This is a test of working memory, made famous by a study that found that chimpanzees consistently outperform humans on this task.";
+"chimp_outperform_humans" = "In the study, the chimps consistently outperformed humans, and some chimps were able to remember 9 digits over 90% of the time.";
+"chimp_test_rules" = "This test gets increasingly difficult every turn, starting at 4 digits, and adding one every turn. If you pass a level, the number increases. If you fail, you get a strike. Three strikes and the test is over.";
+"level_reached" = "Level Reached";
+"strikes_remaining" = "Strikes";
+"memorize_numbers" = "Memorize the numbers";
+"numbers_disappear" = "Numbers will disappear";
+"click_in_order" = "Click in order: 1, 2, 3...";
+
+// Chimp Test Results
+"excellent_chimp_memory" = "Excellent! You have exceptional working memory, better than most humans and on par with trained chimpanzees.";
+"good_chimp_memory" = "Great job! Your working memory is better than most people.";
+"average_chimp_memory" = "Good. Your working memory is around average for humans.";
+"below_average_chimp_memory" = "Your working memory could use some practice. Chimpanzees would likely outperform you on this task.";
+"max_level" = "Max Level";

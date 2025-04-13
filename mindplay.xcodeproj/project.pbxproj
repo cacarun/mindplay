@@ -32,6 +32,9 @@
 		8BDB07F62DAA699E0036C18B /* VerbalMemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07F32DAA699E0036C18B /* VerbalMemoryGameView.swift */; };
 		8BDB07F72DAA699E0036C18B /* VerbalMemoryIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07F42DAA699E0036C18B /* VerbalMemoryIntroView.swift */; };
 		8BDB07F82DAA699E0036C18B /* VerbalMemoryResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07F52DAA699E0036C18B /* VerbalMemoryResultView.swift */; };
+		8BDB07FD2DAB72A10036C18B /* ChimpTestIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07FA2DAB72A10036C18B /* ChimpTestIntroView.swift */; };
+		8BDB07FE2DAB72A10036C18B /* ChimpTestResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07FB2DAB72A10036C18B /* ChimpTestResultView.swift */; };
+		8BDB07FF2DAB72A10036C18B /* ChimpTestGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB07FC2DAB72A10036C18B /* ChimpTestGameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		8BDB07F32DAA699E0036C18B /* VerbalMemoryGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerbalMemoryGameView.swift; sourceTree = "<group>"; };
 		8BDB07F42DAA699E0036C18B /* VerbalMemoryIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerbalMemoryIntroView.swift; sourceTree = "<group>"; };
 		8BDB07F52DAA699E0036C18B /* VerbalMemoryResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerbalMemoryResultView.swift; sourceTree = "<group>"; };
+		8BDB07FA2DAB72A10036C18B /* ChimpTestIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChimpTestIntroView.swift; sourceTree = "<group>"; };
+		8BDB07FB2DAB72A10036C18B /* ChimpTestResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChimpTestResultView.swift; sourceTree = "<group>"; };
+		8BDB07FC2DAB72A10036C18B /* ChimpTestGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChimpTestGameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +124,7 @@
 		8BDB07B32DA233360036C18B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8BDB07F92DAB72A10036C18B /* ChimpTest */,
 				8BDB07F22DAA699E0036C18B /* VerbalMemory */,
 				8BDB07E42DA81C010036C18B /* NumberMemory */,
 				8BDB07DD2DA807EC0036C18B /* AimTrainer */,
@@ -219,6 +226,16 @@
 			path = VerbalMemory;
 			sourceTree = "<group>";
 		};
+		8BDB07F92DAB72A10036C18B /* ChimpTest */ = {
+			isa = PBXGroup;
+			children = (
+				8BDB07FA2DAB72A10036C18B /* ChimpTestIntroView.swift */,
+				8BDB07FB2DAB72A10036C18B /* ChimpTestResultView.swift */,
+				8BDB07FC2DAB72A10036C18B /* ChimpTestGameView.swift */,
+			);
+			path = ChimpTest;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -292,8 +309,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BDB07FF2DAB72A10036C18B /* ChimpTestGameView.swift in Sources */,
 				8BDB07BB2DA233360036C18B /* HomeView.swift in Sources */,
 				8BDB07BE2DA233370036C18B /* ReactionTimeResultView.swift in Sources */,
+				8BDB07FE2DAB72A10036C18B /* ChimpTestResultView.swift in Sources */,
 				8BDB07E92DA81C010036C18B /* NumberMemoryIntroView.swift in Sources */,
 				8BDB07E32DA807EC0036C18B /* AimTrainerIntroView.swift in Sources */,
 				8BDB07F82DAA699E0036C18B /* VerbalMemoryResultView.swift in Sources */,
@@ -305,6 +324,7 @@
 				8BDB07F62DAA699E0036C18B /* VerbalMemoryGameView.swift in Sources */,
 				8BDB07BC2DA233360036C18B /* ReactionTimeGameView.swift in Sources */,
 				8BDB07BF2DA233370036C18B /* GameModel.swift in Sources */,
+				8BDB07FD2DAB72A10036C18B /* ChimpTestIntroView.swift in Sources */,
 				8BDB07C62DA2B9800036C18B /* Localizable.swift in Sources */,
 				8BDB07A02DA21FD30036C18B /* mindplayApp.swift in Sources */,
 				8BDB07F72DAA699E0036C18B /* VerbalMemoryIntroView.swift in Sources */,

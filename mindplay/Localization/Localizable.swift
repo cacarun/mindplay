@@ -227,4 +227,25 @@ struct LocalizedStringKey {
     static let averageVerbalMemory = "average_verbal_memory"
     static let belowAverageVerbalMemory = "below_average_verbal_memory"
     static let wordsRemembered = "words_remembered"
+    
+    // 猩猩测试
+    static let chimpTest = "chimp_test"
+    static let smarterThanChimp = "smarter_than_chimp"
+    static let clickSquaresInOrder = "click_squares_in_order"
+    static let testGetHarder = "test_get_harder"
+    static let aboutChimpTest = "about_chimp_test"
+    static let chimpTestDescription = "chimp_test_description"
+    static let chimpOutperformHumans = "chimp_outperform_humans"
+    static let chimpTestRules = "chimp_test_rules"
+    static let strikesRemaining = "strikes_remaining"
+    static let memorizeNumbers = "memorize_numbers"
+    static let numbersDisappear = "numbers_disappear"
+    static let clickInOrder = "click_in_order"
+    
+    // 猩猩测试结果
+    static let excellentChimpMemory = "excellent_chimp_memory"
+    static let goodChimpMemory = "good_chimp_memory"
+    static let averageChimpMemory = "average_chimp_memory"
+    static let belowAverageChimpMemory = "below_average_chimp_memory"
+    static let maxLevel = "max_level"
 }

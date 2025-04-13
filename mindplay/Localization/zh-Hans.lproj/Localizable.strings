@@ -165,3 +165,24 @@
 "average_verbal_memory" = "你的词汇记忆力处于平均水平。";
 "below_average_verbal_memory" = "你的词汇记忆力低于平均水平，但通过练习可以提高。";
 "words_remembered" = "记住的单词数";
+
+// 猩猩测试
+"chimp_test" = "猩猩测试";
+"smarter_than_chimp" = "你比猩猩聪明吗？";
+"click_squares_in_order" = "按照数字顺序点击方块";
+"test_get_harder" = "测试会逐渐变得更难";
+"about_chimp_test" = "关于猩猩测试";
+"chimp_test_description" = "这是一项工作记忆测试，因一项发现黑猩猩在这项任务上始终优于人类的研究而闻名。";
+"chimp_outperform_humans" = "在研究中，猩猩始终优于人类，一些猩猩能够90%以上的时间记住9个数字。";
+"chimp_test_rules" = "这个测试每一轮都会变得更加困难，从4个数字开始，每一轮增加一个。如果你通过了一个级别，数字会增加。如果你失败了，你会得到一次失误。三次失误后测试结束。";
+"strikes_remaining" = "剩余机会";
+"memorize_numbers" = "记住这些数字";
+"numbers_disappear" = "数字将会消失";
+"click_in_order" = "按顺序点击：1, 2, 3...";
+
+// 猩猩测试结果
+"excellent_chimp_memory" = "太棒了！你有着卓越的工作记忆力，比大多数人类都强，堪比训练有素的黑猩猩。";
+"good_chimp_memory" = "干得好！你的工作记忆力比大多数人要好。";
+"average_chimp_memory" = "不错。你的工作记忆力处于人类的平均水平。";
+"below_average_chimp_memory" = "你的工作记忆力需要练习。黑猩猩在这项任务上可能会超过你。";
+"max_level" = "最高等级";
