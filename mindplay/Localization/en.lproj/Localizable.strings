@@ -206,3 +206,35 @@
 "average_visual_memory" = "Good. Your visual memory is around average. You can remember a typical amount of spatial information.";
 "below_average_visual_memory" = "Your visual memory could use some practice. With regular training, you can improve your spatial recall abilities.";
 "squares_remembered" = "Squares Remembered";
+
+// Schulte Table Test
+"schulte_table_test" = "Schulte Table";
+"enhance_attention" = "Enhance your attention and peripheral vision";
+"find_numbers" = "Find and click numbers in ascending order (1-25) as quickly as possible";
+"use_peripheral_vision" = "Try to use your peripheral vision instead of scanning each number!";
+"table_size" = "Table Size";
+"total_time" = "Total Time";
+"about_schulte_test" = "About Schulte Table";
+"schulte_test_description" = "The Schulte Table test is a widely used tool for developing and improving peripheral vision and attention. It trains your ability to perceive information without directly focusing on it, which is valuable for speed reading and overall attention enhancement.";
+"children_standards" = "Children (6 years old)";
+"adult_standards" = "Adults";
+"brilliant" = "Brilliant";
+"optimal" = "Optimal";
+"mediocre" = "Mediocre";
+"beginner_level" = "Beginner Level";
+"average_proficiency" = "Average Proficiency";
+"advanced_level" = "Advanced Level";
+"elite_performance" = "Elite Performance";
+"seconds_or_less" = "%d seconds or less";
+"up_to_seconds" = "Up to %d seconds";
+"your_time" = "Your Time";
+"seconds_short" = "%d s";
+"average_time" = "Average Time";
+"fastest_time" = "Fastest Time";
+"finding_number" = "Find: %d";
+
+// Schulte Table Results
+"excellent_schulte_performance" = "Elite performance! Your speed and visual processing skills are exceptional.";
+"good_schulte_performance" = "Advanced level! Your peripheral vision and attention skills are very good.";
+"average_schulte_performance" = "Average proficiency. You have solid attention skills.";
+"below_average_schulte_performance" = "Beginner level. With regular practice, you can significantly improve your performance.";

@@ -206,3 +206,35 @@
 "average_visual_memory" = "不错。你的视觉记忆力处于平均水平。你能记住典型数量的空间信息。";
 "below_average_visual_memory" = "你的视觉记忆力需要练习。通过定期训练，你可以提高你的空间记忆能力。";
 "squares_remembered" = "记住的方块数";
+
+// 舒尔特表测试
+"schulte_table_test" = "舒尔特表";
+"enhance_attention" = "增强你的注意力和周边视觉";
+"find_numbers" = "尽快按照升序点击数字（1-25）";
+"use_peripheral_vision" = "尝试使用周边视觉而不是逐个扫描每个数字！";
+"table_size" = "表格大小";
+"total_time" = "总时间";
+"about_schulte_test" = "关于舒尔特表";
+"schulte_test_description" = "舒尔特表测试是一种广泛用于发展和提高周边视觉和注意力的工具。它训练你在不直接关注信息的情况下感知信息的能力，这对速读和整体注意力提升很有价值。";
+"children_standards" = "儿童（6岁）";
+"adult_standards" = "成人";
+"brilliant" = "出色";
+"optimal" = "良好";
+"mediocre" = "一般";
+"beginner_level" = "初学者水平";
+"average_proficiency" = "平均水平";
+"advanced_level" = "高级水平";
+"elite_performance" = "精英表现";
+"seconds_or_less" = "%d秒或更少";
+"up_to_seconds" = "最多%d秒";
+"your_time" = "你的时间";
+"seconds_short" = "%d秒";
+"average_time" = "平均时间";
+"fastest_time" = "最快时间";
+"finding_number" = "查找：%d";
+
+// 舒尔特表结果
+"excellent_schulte_performance" = "精英水平！你的速度和视觉处理能力非常出色。";
+"good_schulte_performance" = "高级水平！你的周边视觉和注意力技能非常好。";
+"average_schulte_performance" = "平均水平。你有扎实的注意力技能。";
+"below_average_schulte_performance" = "初学者水平。通过定期练习，你可以显著提高你的表现。";

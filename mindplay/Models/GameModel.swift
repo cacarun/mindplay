@@ -16,6 +16,7 @@ enum GameType: String, CaseIterable, Identifiable {
     case verbalMemory = "Verbal Memory"
     case chimpTest = "Chimp Test"
     case visualMemory = "Visual Memory"
+    case schulteTable = "Schulte Table"
     // Future games will be added here
     
     var id: String { self.rawValue }
@@ -37,6 +38,8 @@ enum GameType: String, CaseIterable, Identifiable {
             return LocalizedStringKey.chimpTest.localized
         case .visualMemory:
             return LocalizedStringKey.visualMemoryTest.localized
+        case .schulteTable:
+            return LocalizedStringKey.schulteTableTest.localized
         }
     }
     
@@ -56,6 +59,8 @@ enum GameType: String, CaseIterable, Identifiable {
             return "Test your memory and cognitive abilities."
         case .visualMemory:
             return "Remember an increasingly large board of squares."
+        case .schulteTable:
+            return "Enhance your attention and peripheral vision."
         }
     }
     
@@ -75,6 +80,8 @@ enum GameType: String, CaseIterable, Identifiable {
             return "brain.head.profile"
         case .visualMemory:
             return "eye.fill"
+        case .schulteTable:
+            return "grid"
         }
     }
 }
@@ -132,6 +139,9 @@ class GameDataManager: ObservableObject {
         case .visualMemory:
             // For visual memory, higher is better
             return filteredResults.max(by: { $0.score < $1.score })?.score
+        case .schulteTable:
+            // For schulte table, lower is better (faster time)
+            return filteredResults.min(by: { $0.score < $1.score })?.score
         }
     }
     

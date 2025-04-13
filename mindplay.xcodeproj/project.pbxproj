@@ -40,6 +40,9 @@
 		8BDB080A2DABECEF0036C18B /* VisualMemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB08072DABECEE0036C18B /* VisualMemoryGameView.swift */; };
 		8BDB080B2DABECEF0036C18B /* VisualMemoryResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB08082DABECEE0036C18B /* VisualMemoryResultView.swift */; };
 		8BDB080C2DABECEF0036C18B /* VisualMemoryIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB08092DABECEE0036C18B /* VisualMemoryIntroView.swift */; };
+		8BDB08112DABFD5B0036C18B /* SchulteTableGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB080E2DABFD5B0036C18B /* SchulteTableGameView.swift */; };
+		8BDB08122DABFD5B0036C18B /* SchulteTableResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB080F2DABFD5B0036C18B /* SchulteTableResultView.swift */; };
+		8BDB08132DABFD5B0036C18B /* SchulteTableIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB08102DABFD5B0036C18B /* SchulteTableIntroView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +81,9 @@
 		8BDB08072DABECEE0036C18B /* VisualMemoryGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMemoryGameView.swift; sourceTree = "<group>"; };
 		8BDB08082DABECEE0036C18B /* VisualMemoryResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMemoryResultView.swift; sourceTree = "<group>"; };
 		8BDB08092DABECEE0036C18B /* VisualMemoryIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMemoryIntroView.swift; sourceTree = "<group>"; };
+		8BDB080E2DABFD5B0036C18B /* SchulteTableGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchulteTableGameView.swift; sourceTree = "<group>"; };
+		8BDB080F2DABFD5B0036C18B /* SchulteTableResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchulteTableResultView.swift; sourceTree = "<group>"; };
+		8BDB08102DABFD5B0036C18B /* SchulteTableIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchulteTableIntroView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +140,7 @@
 		8BDB07B32DA233360036C18B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8BDB080D2DABFD5B0036C18B /* SchulteTable */,
 				8BDB08062DABECEE0036C18B /* VisualMemory */,
 				8BDB07F92DAB72A10036C18B /* ChimpTest */,
 				8BDB07F22DAA699E0036C18B /* VerbalMemory */,
@@ -259,6 +266,16 @@
 			path = VisualMemory;
 			sourceTree = "<group>";
 		};
+		8BDB080D2DABFD5B0036C18B /* SchulteTable */ = {
+			isa = PBXGroup;
+			children = (
+				8BDB080E2DABFD5B0036C18B /* SchulteTableGameView.swift */,
+				8BDB080F2DABFD5B0036C18B /* SchulteTableResultView.swift */,
+				8BDB08102DABFD5B0036C18B /* SchulteTableIntroView.swift */,
+			);
+			path = SchulteTable;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -339,6 +356,7 @@
 				8BDB07BE2DA233370036C18B /* ReactionTimeResultView.swift in Sources */,
 				8BDB07FE2DAB72A10036C18B /* ChimpTestResultView.swift in Sources */,
 				8BDB07E92DA81C010036C18B /* NumberMemoryIntroView.swift in Sources */,
+				8BDB08122DABFD5B0036C18B /* SchulteTableResultView.swift in Sources */,
 				8BDB07E32DA807EC0036C18B /* AimTrainerIntroView.swift in Sources */,
 				8BDB080B2DABECEF0036C18B /* VisualMemoryResultView.swift in Sources */,
 				8BDB07F82DAA699E0036C18B /* VerbalMemoryResultView.swift in Sources */,
@@ -348,6 +366,7 @@
 				8BDB07E12DA807EC0036C18B /* AimTrainerResultView.swift in Sources */,
 				8BDB07BD2DA233360036C18B /* ReactionTimeIntroView.swift in Sources */,
 				8BDB07F62DAA699E0036C18B /* VerbalMemoryGameView.swift in Sources */,
+				8BDB08132DABFD5B0036C18B /* SchulteTableIntroView.swift in Sources */,
 				8BDB07BC2DA233360036C18B /* ReactionTimeGameView.swift in Sources */,
 				8BDB080A2DABECEF0036C18B /* VisualMemoryGameView.swift in Sources */,
 				8BDB07BF2DA233370036C18B /* GameModel.swift in Sources */,
@@ -360,6 +379,7 @@
 				8BDB07E82DA81C010036C18B /* NumberMemoryGameView.swift in Sources */,
 				8BDB07DC2DA576130036C18B /* SequenceMemoryResultView.swift in Sources */,
 				8BDB07CC2DA2C0EE0036C18B /* SequenceMemoryIntroView.swift in Sources */,
+				8BDB08112DABFD5B0036C18B /* SchulteTableGameView.swift in Sources */,
 				8BDB07CD2DA2C0EE0036C18B /* SequenceMemoryGameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
