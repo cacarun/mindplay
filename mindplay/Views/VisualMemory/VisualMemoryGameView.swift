@@ -40,7 +40,6 @@ struct VisualMemoryGameView: View {
     private let tileSpacing: CGFloat = 10.0
     
     // 动画与计时器
-    @State private var memorizingTimeRemaining: Int = 3
     @State private var timer: Timer?
     
     // 音效服务
@@ -58,21 +57,9 @@ struct VisualMemoryGameView: View {
                         statusView
                             .padding(.top, 10)
                         
-                        // 记忆阶段倒计时
-                        if gameState == .memorizing {
-                            Text("\(memorizingTimeRemaining)")
-                                .font(.system(size: 30, weight: .bold))
-                                .foregroundColor(.white)
-                                .padding(.vertical, 8)
-                                .padding(.horizontal, 16)
-                                .background(Color.black.opacity(0.4))
-                                .cornerRadius(10)
-                                .transition(.scale)
-                        } else {
-                            // 占位视图保持高度一致
-                            Color.clear
-                                .frame(height: 46)
-                        }
+                        // 预留空间保持布局一致
+                        Color.clear
+                            .frame(height: 30)
                     }
                     
                     // 游戏区域
@@ -296,17 +283,21 @@ struct VisualMemoryGameView: View {
         // 开始记忆阶段
         gameState = .memorizing
         
-        // 播放翻转显示音效
-        soundService.playSound(named: "reveal")
-        
-        // 翻转目标方块以显示
-        withAnimation(.easeInOut(duration: 0.5)) {
-            for index in targetTiles {
-                tiles[index].isFlipped = true
+        // 短暂延迟后再显示方块，让用户做好准备
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // 播放翻转显示音效
+            soundService.playSound(named: "reveal")
+            
+            // 翻转目标方块以显示
+            withAnimation(.easeInOut(duration: 0.5)) {
+                for index in self.targetTiles {
+                    self.tiles[index].isFlipped = true
+                }
             }
+            
+            // 启动计时器，延长显示时间
+            self.startMemorizingTimer()
         }
-        
-        startMemorizingTimer()
     }
     
     // 设置网格和目标方块
@@ -339,32 +330,27 @@ struct VisualMemoryGameView: View {
         return Array(positions.prefix(count))
     }
     
-    // 开始记忆计时器
+    // 开始记忆计时器 - 不再使用倒计时，改为固定延迟
     private func startMemorizingTimer() {
-        memorizingTimeRemaining = 3
-        
+        // 取消之前的计时器
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            if memorizingTimeRemaining > 0 {
-                memorizingTimeRemaining -= 1
-            } else {
-                timer?.invalidate()
-                
-                // 播放翻转回原始状态音效
-                soundService.playSound(named: "go")
-                
-                // 翻转回所有方块，隐藏目标
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    for index in 0..<tiles.count {
-                        tiles[index].isFlipped = false
-                    }
+        
+        // 延长显示时间到3秒，让用户有足够时间记忆
+        timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [self] _ in
+            // 播放翻转回原始状态音效
+            soundService.playSound(named: "go")
+            
+            // 翻转回所有方块，隐藏目标
+            withAnimation(.easeInOut(duration: 0.5)) {
+                for index in 0..<self.tiles.count {
+                    self.tiles[index].isFlipped = false
                 }
-                
-                // 短暂延迟后开始游戏，让动画完成
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                    // 记忆时间结束，开始游戏
-                    gameState = .playing
-                }
+            }
+            
+            // 短暂延迟后开始游戏，让动画完成
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                // 记忆时间结束，开始游戏
+                self.gameState = .playing
             }
         }
     }
