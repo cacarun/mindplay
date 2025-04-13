@@ -198,6 +198,7 @@
 "miss_three_tiles_lose_life" = "If you miss 3 tiles on a level, you lose one life";
 "three_life_remaining" = "You have three lives";
 "make_it_far" = "Make it as far as you can!";
+"starting_grid_size" = "Starting Grid Size";
 
 // Visual Memory Results
 "excellent_visual_memory" = "Excellent! Your visual memory is exceptional. You can remember complex spatial patterns with high accuracy.";

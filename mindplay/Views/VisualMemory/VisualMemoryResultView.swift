@@ -258,9 +258,8 @@ struct VisualMemoryResultView: View {
 
 #Preview {
     VisualMemoryResultView(
-        level: 9,
+        level: 8,
         onDismiss: {},
         onRestart: { _ in }
     )
-    .environmentObject(GameDataManager())
 } 

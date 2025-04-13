@@ -21,7 +21,7 @@ struct VisualMemoryGameView: View {
     @EnvironmentObject var gameDataManager: GameDataManager
     
     // 游戏参数
-    let gridSize: Int
+    let initialGridSize: Int // 初始网格大小
     
     // 游戏状态
     @State private var gameState: VisualMemoryGameState = .ready
@@ -29,6 +29,7 @@ struct VisualMemoryGameView: View {
     @State private var lives = 3
     @State private var mistakes = 0 // 当前级别的错误次数
     @State private var isShowingResult = false
+    @State private var currentGridSize: Int // 当前网格大小（随等级变化）
     
     // 方块状态
     @State private var tiles: [MemoryTile] = []
@@ -44,6 +45,29 @@ struct VisualMemoryGameView: View {
     
     // 音效服务
     private let soundService = SoundService.shared
+    
+    // 初始化方法
+    init(gridSize: Int) {
+        self.initialGridSize = gridSize
+        // 使用_currentGridSize初始化状态属性
+        _currentGridSize = State(initialValue: gridSize)
+    }
+    
+    // 计算当前等级对应的网格大小
+    private func gridSizeForLevel(_ level: Int) -> Int {
+        // 按照用户进度动态调整网格大小
+        if level <= 2 {
+            return 3 // 等级1-2使用3×3
+        } else if level <= 5 {
+            return 4 // 等级3-5使用4×4
+        } else if level <= 9 {
+            return 5 // 等级6-9使用5×5
+        } else if level <= 14 {
+            return 6 // 等级10-14使用6×6
+        } else {
+            return 7 // 等级15+使用7×7
+        }
+    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -196,10 +220,10 @@ struct VisualMemoryGameView: View {
             
             // 网格布局
             VStack(spacing: tileSpacing) {
-                ForEach(0..<gridSize, id: \.self) { row in
+                ForEach(0..<currentGridSize, id: \.self) { row in
                     HStack(spacing: tileSpacing) {
-                        ForEach(0..<gridSize, id: \.self) { column in
-                            let index = row * gridSize + column
+                        ForEach(0..<currentGridSize, id: \.self) { column in
+                            let index = row * currentGridSize + column
                             
                             if index < tiles.count {
                                 memoryTileView(tile: tiles[index], index: index)
@@ -252,8 +276,8 @@ struct VisualMemoryGameView: View {
     
     // 计算方块大小
     private var tileSize: CGFloat {
-        let availableSpace = boardSize - (tileSpacing * CGFloat(gridSize - 1))
-        return availableSpace / CGFloat(gridSize)
+        let availableSpace = boardSize - (tileSpacing * CGFloat(currentGridSize - 1))
+        return availableSpace / CGFloat(currentGridSize)
     }
     
     // MARK: - 游戏逻辑
@@ -268,6 +292,7 @@ struct VisualMemoryGameView: View {
     private func resetGame() {
         currentLevel = 1
         lives = 3
+        currentGridSize = initialGridSize
         gameState = .ready
     }
     
@@ -276,6 +301,9 @@ struct VisualMemoryGameView: View {
         // 重置错误计数和已选择的方块
         mistakes = 0
         selectedTiles = []
+        
+        // 更新当前等级的网格大小
+        currentGridSize = gridSizeForLevel(currentLevel)
         
         // 创建网格
         setupGrid()
@@ -307,12 +335,12 @@ struct VisualMemoryGameView: View {
         targetTiles = []
         
         // 创建所有方块
-        for i in 0..<(gridSize * gridSize) {
+        for i in 0..<(currentGridSize * currentGridSize) {
             tiles.append(MemoryTile(id: i))
         }
         
         // 确定当前级别的目标方块数量
-        let targetCount = min(currentLevel + 2, gridSize * gridSize - 1)
+        let targetCount = min(currentLevel + 2, currentGridSize * currentGridSize - 1)
         
         // 随机选择目标方块
         targetTiles = generateRandomTargets(count: targetCount)
@@ -325,7 +353,7 @@ struct VisualMemoryGameView: View {
     
     // 生成随机目标方块索引
     private func generateRandomTargets(count: Int) -> [Int] {
-        var positions = Array(0..<(gridSize * gridSize))
+        var positions = Array(0..<(currentGridSize * currentGridSize))
         positions.shuffle()
         return Array(positions.prefix(count))
     }

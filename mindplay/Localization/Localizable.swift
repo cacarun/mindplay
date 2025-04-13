@@ -260,6 +260,7 @@ struct LocalizedStringKey {
     static let missThreeTilesLoseLife = "miss_three_tiles_lose_life"
     static let threeLifeRemaining = "three_life_remaining"
     static let makeItFar = "make_it_far"
+    static let startingGridSize = "starting_grid_size"
     
     // 视觉记忆结果
     static let excellentVisualMemory = "excellent_visual_memory"

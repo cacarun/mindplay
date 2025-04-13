@@ -10,7 +10,7 @@ import SwiftUI
 struct VisualMemoryIntroView: View {
     @EnvironmentObject var gameDataManager: GameDataManager
     @State private var isShowingGame = false
-    @State private var gridSize = 3 // 默认网格大小为3x3
+    @State private var selectedGridSize = 3 // 默认网格大小为3x3
     
     // 可选的网格大小范围
     private let gridOptions = [3, 4, 5]
@@ -31,22 +31,22 @@ struct VisualMemoryIntroView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 8)
                 
-                // 自定义网格大小
+                // 自定义起始网格大小
                 VStack(alignment: .leading, spacing: 12) {
-                    Text(LocalizedStringKey.gridSize.localized)
+                    Text(LocalizedStringKey.startingGridSize.localized)
                         .font(.headline)
                         .foregroundColor(.primary)
                     
                     HStack(spacing: 10) {
                         ForEach(gridOptions, id: \.self) { size in
                             Button(action: {
-                                gridSize = size
+                                selectedGridSize = size
                             }) {
                                 Text("\(size)×\(size)")
                                     .font(.headline)
                                     .frame(minWidth: 44, minHeight: 44)
-                                    .background(gridSize == size ? Color.blue : Color.gray.opacity(0.2))
-                                    .foregroundColor(gridSize == size ? .white : .primary)
+                                    .background(selectedGridSize == size ? Color.blue : Color.gray.opacity(0.2))
+                                    .foregroundColor(selectedGridSize == size ? .white : .primary)
                                     .cornerRadius(8)
                             }
                         }
@@ -137,7 +137,7 @@ struct VisualMemoryIntroView: View {
         .background(Color(.systemGroupedBackground).ignoresSafeArea())
         .navigationBarTitle("", displayMode: .inline)
         .fullScreenCover(isPresented: $isShowingGame) {
-            VisualMemoryGameView(gridSize: gridSize)
+            VisualMemoryGameView(gridSize: selectedGridSize)
         }
     }
     
