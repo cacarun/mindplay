@@ -206,6 +206,8 @@
 "average_visual_memory" = "Good. Your visual memory is around average. You can remember a typical amount of spatial information.";
 "below_average_visual_memory" = "Your visual memory could use some practice. With regular training, you can improve your spatial recall abilities.";
 "squares_remembered" = "Squares Remembered";
+"visual_memory_explanation1" = "Visual memory is our ability to recall what we have seen. It plays a key role in everyday tasks, from remembering where we put our keys to navigating familiar routes.";
+"visual_memory_explanation2" = "Spatial memory is closely tied to our hippocampus, and regular practice can help maintain and improve this cognitive ability.";
 
 // Schulte Table Test
 "schulte_table_test" = "Schulte Table";

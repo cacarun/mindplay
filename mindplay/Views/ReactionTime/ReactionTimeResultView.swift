@@ -37,15 +37,15 @@ struct ReactionTimeResultView: View {
         let avg = averageTime
         switch avg {
         case ..<200:
-            return "Excellent! You're in the top 10% of people."
+            return LocalizedStringKey.percentileExcellent.localized
         case 200..<250:
-            return "Great! You're in the top 30% of people."
+            return LocalizedStringKey.percentileGood.localized
         case 250..<300:
-            return "Good. You're around average."
+            return LocalizedStringKey.percentileAverage.localized
         case 300..<350:
-            return "You're in the lower 40% of people."
+            return LocalizedStringKey.percentileBelowAverage.localized
         default:
-            return "You're in the lower 30% of people."
+            return LocalizedStringKey.percentileBelowAverage.localized
         }
     }
     
@@ -55,7 +55,7 @@ struct ReactionTimeResultView: View {
                 VStack(spacing: 24) {
                     // Header with main result
                     VStack(spacing: 8) {
-                        Text("Your Average Reaction Time")
+                        Text(LocalizedStringKey.yourAverageReactionTime.localized)
                             .font(.headline)
                             .foregroundColor(.secondary)
                         
@@ -77,18 +77,18 @@ struct ReactionTimeResultView: View {
                     
                     // Statistics
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Statistics")
+                        Text(LocalizedStringKey.statistics.localized)
                             .font(.title2)
                             .fontWeight(.bold)
                         
                         HStack {
-                            statCard(title: "Best Time", value: String(format: "%.0f ms", bestTime))
-                            statCard(title: "Attempts", value: "\(reactionTimes.count)")
+                            statCard(title: LocalizedStringKey.bestTime.localized, value: String(format: "%.0f ms", bestTime))
+                            statCard(title: LocalizedStringKey.attempts.localized, value: "\(reactionTimes.count)")
                         }
                         
                         // Chart of reaction times
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Your Attempts")
+                            Text(LocalizedStringKey.yourAttempts.localized)
                                 .font(.headline)
                             
                             Chart {
@@ -106,7 +106,7 @@ struct ReactionTimeResultView: View {
                                 .lineStyle(StrokeStyle(lineWidth: 2, dash: [5, 5]))
                                 .foregroundStyle(.red)
                                 .annotation(position: .top, alignment: .trailing) {
-                                    Text("Average")
+                                    Text(LocalizedStringKey.average.localized)
                                         .font(.caption)
                                         .foregroundColor(.red)
                                 }
@@ -126,14 +126,14 @@ struct ReactionTimeResultView: View {
                     
                     // Interpretation
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("What Does This Mean?")
+                        Text(LocalizedStringKey.whatThisMeans.localized)
                             .font(.title2)
                             .fontWeight(.bold)
                         
-                        Text("Reaction time is how quickly you respond to a stimulus. The average adult has a visual reaction time of 250 milliseconds.")
+                        Text(LocalizedStringKey.resultExplanation.localized)
                             .font(.body)
                         
-                        Text("Factors that can affect your reaction time include age, fatigue, caffeine intake, and practice. Professional athletes often have reaction times below 200ms.")
+                        Text(LocalizedStringKey.resultFactors.localized)
                             .font(.body)
                             .padding(.top, 4)
                     }
@@ -148,7 +148,7 @@ struct ReactionTimeResultView: View {
                         Button(action: {
                             onDismiss()
                         }) {
-                            Text("Back to Menu")
+                            Text(LocalizedStringKey.backToMenu.localized)
                                 .font(.headline)
                                 .foregroundColor(.blue)
                                 .padding()
@@ -160,7 +160,7 @@ struct ReactionTimeResultView: View {
                         Button(action: {
                             onRestart(totalRounds)
                         }) {
-                            Text("Play Again")
+                            Text(LocalizedStringKey.playAgain.localized)
                                 .font(.headline)
                                 .foregroundColor(.white)
                                 .padding()
@@ -173,7 +173,7 @@ struct ReactionTimeResultView: View {
                 .padding()
             }
             .background(Color(.systemGroupedBackground).ignoresSafeArea())
-            .navigationBarTitle("Results", displayMode: .inline)
+            .navigationBarTitle(LocalizedStringKey.results.localized, displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 onDismiss()
             }) {

@@ -206,6 +206,8 @@
 "average_visual_memory" = "不错。你的视觉记忆力处于平均水平。你能记住典型数量的空间信息。";
 "below_average_visual_memory" = "你的视觉记忆力需要练习。通过定期训练，你可以提高你的空间记忆能力。";
 "squares_remembered" = "记住的方块数";
+"visual_memory_explanation1" = "视觉记忆是我们回忆所见事物的能力。它在日常任务中起着关键作用，从记住我们放钥匙的地方到导航熟悉的路线。";
+"visual_memory_explanation2" = "空间记忆与我们的海马体密切相关，定期练习可以帮助维持和提高这种认知能力。";
 
 // 舒尔特表测试
 "schulte_table_test" = "舒尔特表";

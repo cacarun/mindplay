@@ -268,6 +268,8 @@ struct LocalizedStringKey {
     static let averageVisualMemory = "average_visual_memory"
     static let belowAverageVisualMemory = "below_average_visual_memory"
     static let squaresRemembered = "squares_remembered"
+    static let visualMemoryExplanation1 = "visual_memory_explanation1"
+    static let visualMemoryExplanation2 = "visual_memory_explanation2"
     
     // 舒尔特表测试
     static let schulteTableTest = "schulte_table_test"

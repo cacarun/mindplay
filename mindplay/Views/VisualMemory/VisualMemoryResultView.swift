@@ -187,11 +187,11 @@ struct VisualMemoryResultView: View {
                         Text(performanceDescription)
                             .font(.body)
                         
-                        Text("Visual memory is our ability to recall what we have seen. It plays a key role in everyday tasks, from remembering where we put our keys to navigating familiar routes.")
+                        Text(LocalizedStringKey.visualMemoryExplanation1.localized)
                             .font(.body)
                             .padding(.top, 4)
                         
-                        Text("Spatial memory is closely tied to our hippocampus, and regular practice can help maintain and improve this cognitive ability.")
+                        Text(LocalizedStringKey.visualMemoryExplanation2.localized)
                             .font(.body)
                             .padding(.top, 4)
                     }
@@ -245,13 +245,13 @@ struct VisualMemoryResultView: View {
     // 获取用户所在分布区间
     private func getUserCategory(level: Int) -> String {
         if level <= 5 {
-            return "Below Average"
+            return LocalizedStringKey.belowAverage.localized
         } else if level <= 8 {
-            return "Average"
+            return LocalizedStringKey.average.localized
         } else if level <= 12 {
-            return "Good"
+            return LocalizedStringKey.good.localized
         } else {
-            return "Excellent"
+            return LocalizedStringKey.excellent.localized
         }
     }
 }
