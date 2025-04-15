@@ -199,6 +199,7 @@
 "three_life_remaining" = "You have three lives";
 "make_it_far" = "Make it as far as you can!";
 "starting_grid_size" = "Starting Grid Size";
+"performance_level" = "Performance Level";
 
 // Visual Memory Results
 "excellent_visual_memory" = "Excellent! Your visual memory is exceptional. You can remember complex spatial patterns with high accuracy.";

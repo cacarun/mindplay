@@ -115,11 +115,21 @@ struct VisualMemoryIntroView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                     
-                    Text(LocalizedStringKey.visualTestDescription.localized)
+                    Text(LocalizedStringKey.visualMemoryExplanation1.localized)
+                        .font(.body)
+                        .foregroundColor(.secondary)
+                        .padding(.bottom, 4)
+                        
+                    Text(LocalizedStringKey.visualMemoryExplanation2.localized)
                         .font(.body)
                         .foregroundColor(.secondary)
                     
                     VStack(alignment: .leading, spacing: 8) {
+                        Text(LocalizedStringKey.performanceLevel.localized)
+                            .font(.headline)
+                            .padding(.top, 12)
+                            .padding(.bottom, 4)
+                            
                         scoreRangeRow(range: "> 12", description: LocalizedStringKey.excellent.localized)
                         scoreRangeRow(range: "9-12", description: LocalizedStringKey.good.localized)
                         scoreRangeRow(range: "6-8", description: LocalizedStringKey.average.localized)
