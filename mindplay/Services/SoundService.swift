@@ -15,13 +15,14 @@ class SoundService {
     
     private init() {}
     
-    func playSound(named fileName: String, withExtension fileExtension: String = "mp3") {
+    func playSound(named fileName: String, withExtension fileExtension: String = "mp3", volume: Float = 1.0) {
         guard let url = Bundle.main.url(forResource: fileName, withExtension: fileExtension) else {
             print("Could not find sound file: \(fileName).\(fileExtension)")
             return
         }
         
         if let audioPlayer = audioPlayers[url] {
+            audioPlayer.volume = volume
             audioPlayer.currentTime = 0
             audioPlayer.play()
             return
@@ -29,6 +30,7 @@ class SoundService {
         
         do {
             let audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer.volume = volume
             audioPlayer.prepareToPlay()
             audioPlayers[url] = audioPlayer
             audioPlayer.play()

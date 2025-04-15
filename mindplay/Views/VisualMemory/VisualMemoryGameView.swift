@@ -72,7 +72,7 @@ struct VisualMemoryGameView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                Color.blue
+                Color(hex: "#4387cb") // 更新背景色
                     .ignoresSafeArea()
                 
                 VStack(spacing: 20) {
@@ -253,7 +253,7 @@ struct VisualMemoryGameView: View {
             }
         }
         .padding()
-        .background(Color.blue.opacity(0.3))
+        .background(Color(hex: "#3974bb").opacity(0.5)) // 更新准备视图背景色
         .cornerRadius(16)
     }
     
@@ -307,6 +307,7 @@ struct VisualMemoryGameView: View {
                 anchor: .center,
                 perspective: 0.3
             )
+            .modifier(ShakeEffect(animatableData: tiles[index].shakeFactor))
         }
         .disabled(gameState != .playing || tile.isSelected)
     }
@@ -316,9 +317,9 @@ struct VisualMemoryGameView: View {
         if gameState == .memorizing && tile.isTarget {
             return .white // 记忆阶段，目标方块显示为白色
         } else if tile.isSelected {
-            return tile.isTarget ? .green : .red // 已选择正确为绿色，错误为红色
+            return tile.isTarget ? .white : Color(hex: "#214365") // 修改为白色(点对)和深蓝色(点错)
         } else {
-            return Color.gray.opacity(0.8) // 默认颜色
+            return Color(hex: "#3974bb") // 默认颜色修改为指定的蓝色
         }
     }
     
@@ -439,19 +440,26 @@ struct VisualMemoryGameView: View {
         tiles[index].isSelected = true
         selectedTiles.append(index)
         
-        // 播放翻转显示音效
-        soundService.playSound(named: "reveal")
-        
-        // 翻转方块以显示状态
-        withAnimation(.easeInOut(duration: 0.3)) {
-            tiles[index].isFlipped = true
-        }
-        
         // 检查是否正确
         if tile.isTarget {
             // 正确点击目标方块
+            // 播放正确音效
+            soundService.playSound(named: "boop", volume: 1.0)
+            
+            // 翻转方块以显示状态
+            withAnimation(.easeInOut(duration: 0.3)) {
+                tiles[index].isFlipped = true
+            }
         } else {
             // 错误点击非目标方块
+            // 播放错误音效 - 使用boop但音量降低
+            soundService.playSound(named: "boop", volume: 0.3)
+            
+            // 添加抖动效果而不是翻转
+            withAnimation(.easeInOut(duration: 0.3)) {
+                tiles[index].shakeFactor += 1
+            }
+            
             mistakes += 1
             
             // 如果在一个级别中错误达到3次，失去一条命
@@ -510,6 +518,49 @@ struct MemoryTile: Identifiable {
     var isTarget = false
     var isSelected = false
     var isFlipped = false // 添加翻转状态
+    var shakeFactor: CGFloat = 0 // 添加抖动因子
+}
+
+// 添加Color扩展，支持十六进制颜色值
+extension Color {
+    init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int: UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (1, 1, 1, 0)
+        }
+
+        self.init(
+            .sRGB,
+            red: Double(r) / 255,
+            green: Double(g) / 255,
+            blue:  Double(b) / 255,
+            opacity: Double(a) / 255
+        )
+    }
+}
+
+// 添加抖动效果修饰符
+struct ShakeEffect: GeometryEffect {
+    var animatableData: CGFloat
+    
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        guard animatableData > 0 else { return ProjectionTransform(.identity) }
+        
+        let intensity: CGFloat = 6
+        let translation = intensity * sin(animatableData * .pi * 8)
+        
+        return ProjectionTransform(CGAffineTransform(translationX: translation, y: 0))
+    }
 }
 
 #Preview {
