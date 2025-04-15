@@ -76,22 +76,30 @@ struct VisualMemoryGameView: View {
                     .ignoresSafeArea()
                 
                 VStack(spacing: 20) {
-                    // 状态区域
+                    // 状态区域 - 在所有状态下都显示
                     VStack {
-                        statusView
-                            .padding(.top, 10)
-                        
-                        // 预留空间保持布局一致
-                        Color.clear
-                            .frame(height: 30)
+                        if gameState != .ready {
+                            statusView
+                                .padding(.top, 10)
+                                .transition(.opacity)
+                        } else {
+                            // 占位视图，保持布局一致性
+                            Color.clear
+                                .frame(height: 60)
+                        }
                     }
                     
-                    // 游戏区域
+                    Spacer(minLength: 20)
+                    
+                    // 游戏区域 - 中心区域
                     ZStack {
-                        if gameState != .ready && gameState != .gameOver {
-                            gameBoard
-                        } else if gameState == .ready {
+                        if gameState == .ready {
                             readyView
+                                .frame(width: boardSize, height: boardSize)
+                                .transition(.opacity)
+                        } else if gameState != .gameOver {
+                            gameBoard
+                                .transition(.opacity)
                         } else {
                             // 占位视图保持大小一致
                             Color.clear
@@ -100,9 +108,9 @@ struct VisualMemoryGameView: View {
                     }
                     .frame(width: boardSize, height: boardSize)
                     
-                    Spacer()
+                    Spacer(minLength: 20)
                     
-                    // 控制按钮区域
+                    // 控制按钮区域 - 在所有状态下保持相同高度
                     VStack {
                         if gameState == .ready {
                             Button(action: startGame) {
@@ -114,6 +122,7 @@ struct VisualMemoryGameView: View {
                                     .background(Color.white)
                                     .cornerRadius(12)
                             }
+                            .transition(.opacity)
                         } else if gameState == .levelComplete {
                             Button(action: nextLevel) {
                                 Text(LocalizedStringKey.nextLevel.localized)
@@ -124,6 +133,7 @@ struct VisualMemoryGameView: View {
                                     .background(Color.white)
                                     .cornerRadius(12)
                             }
+                            .transition(.opacity)
                         } else {
                             // 占位视图保持高度一致
                             Color.clear
@@ -135,8 +145,9 @@ struct VisualMemoryGameView: View {
                 }
                 .padding()
                 .onAppear {
-                    boardSize = min(geometry.size.width, geometry.size.height) - 100
+                    boardSize = min(geometry.size.width, geometry.size.height) - 120
                 }
+                .animation(.easeInOut(duration: 0.3), value: gameState)
             }
             .onDisappear {
                 timer?.invalidate()
@@ -190,23 +201,60 @@ struct VisualMemoryGameView: View {
     // 游戏准备视图
     private var readyView: some View {
         VStack(spacing: 20) {
-            Text(LocalizedStringKey.visualMemoryTest.localized)
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
+            // 游戏标题和说明
+            VStack(spacing: 16) {
+                Text(LocalizedStringKey.visualMemoryTest.localized)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                
+                Text(LocalizedStringKey.memorizeSquares.localized)
+                    .font(.headline)
+                    .foregroundColor(.white.opacity(0.8))
+                    .multilineTextAlignment(.center)
+                
+                Text(LocalizedStringKey.tilesFlashWhite.localized)
+                    .font(.body)
+                    .foregroundColor(.white.opacity(0.8))
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.horizontal)
             
-            Text(LocalizedStringKey.memorizeSquares.localized)
-                .font(.headline)
-                .foregroundColor(.white.opacity(0.8))
-                .multilineTextAlignment(.center)
+            Spacer(minLength: 20)
             
-            Text(LocalizedStringKey.tilesFlashWhite.localized)
-                .font(.body)
-                .foregroundColor(.white.opacity(0.8))
-                .multilineTextAlignment(.center)
-                .padding()
+            // 等级和生命值
+            HStack(spacing: 40) {
+                // 等级
+                VStack {
+                    Text(LocalizedStringKey.level.localized)
+                        .font(.headline)
+                        .foregroundColor(.white.opacity(0.8))
+                    
+                    Text("\(currentLevel)")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                }
+                
+                // 生命值
+                VStack {
+                    Text(LocalizedStringKey.remainingLives.localized)
+                        .font(.headline)
+                        .foregroundColor(.white.opacity(0.8))
+                    
+                    HStack(spacing: 5) {
+                        ForEach(0..<3) { index in
+                            Image(systemName: "heart.fill")
+                                .foregroundColor(.red)
+                                .font(.title2)
+                        }
+                    }
+                }
+            }
         }
         .padding()
+        .background(Color.blue.opacity(0.3))
+        .cornerRadius(16)
     }
     
     // 游戏板视图
