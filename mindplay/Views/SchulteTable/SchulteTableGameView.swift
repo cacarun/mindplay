@@ -47,10 +47,17 @@ struct SchulteTableGameView: View {
                         Spacer()
                         
                         VStack {
-                            Text(LocalizedStringKey.findingNumber.localized(with: currentNumber))
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
+                            if currentNumber <= totalNumbers {
+                                Text(LocalizedStringKey.findingNumber.localized(with: currentNumber))
+                                    .font(.title)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            } else {
+                                Text("完成!")
+                                    .font(.title)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
                             
                             if gameState == .playing {
                                 Text(String(format: "%.1f s", elapsedTime))
@@ -121,7 +128,7 @@ struct SchulteTableGameView: View {
                 .fontWeight(.bold)
                 .foregroundColor(.white)
             
-            Text(LocalizedStringKey.findNumbers.localized)
+            Text(String.localizedStringWithFormat(LocalizedStringKey.findNumbers.localized as String, "1", String(tableSize * tableSize)))
                 .font(.headline)
                 .foregroundColor(.white.opacity(0.8))
                 .multilineTextAlignment(.center)
@@ -236,8 +243,8 @@ struct SchulteTableGameView: View {
         timer?.invalidate()
         gameState = .finished
         
-        // 保存成绩
-        gameDataManager.saveResult(gameType: .schulteTable, score: elapsedTime)
+        // 保存成绩，添加表格大小信息
+        gameDataManager.saveResult(gameType: .schulteTable, score: elapsedTime, extraData: "\(tableSize)x\(tableSize)")
         
         // 显示结果页面
         isShowingResult = true

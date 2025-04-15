@@ -62,18 +62,22 @@ struct SchulteTableIntroView: View {
                 // 最佳成绩和开始按钮
                 HStack(spacing: 15) {
                     // 最佳成绩
-                    if let bestScore = gameDataManager.getBestScore(for: .schulteTable) {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(LocalizedStringKey.bestScore.localized)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(LocalizedStringKey.bestScore.localized)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        
+                        if let bestScore = gameDataManager.getBestScore(for: .schulteTable, with: "\(tableSize)x\(tableSize)") {
                             Text(String(format: "%.1f s", bestScore))
                                 .font(.headline)
                                 .foregroundColor(.blue)
+                        } else {
+                            Text("-")
+                                .font(.headline)
+                                .foregroundColor(.blue)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     
                     // 开始测试按钮
                     Button(action: {
@@ -99,7 +103,7 @@ struct SchulteTableIntroView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                     
-                    instructionItem(number: "1", text: LocalizedStringKey.findNumbers.localized)
+                    instructionItem(number: "1", text: String.localizedStringWithFormat(LocalizedStringKey.findNumbers.localized as String, "1", String(tableSize * tableSize)))
                     instructionItem(number: "2", text: LocalizedStringKey.usePeripheralVision.localized)
                 }
                 .padding()
@@ -118,24 +122,28 @@ struct SchulteTableIntroView: View {
                         .foregroundColor(.secondary)
                     
                     VStack(alignment: .leading, spacing: 10) {
-                        // 儿童标准
-                        Text(LocalizedStringKey.childrenStandards.localized)
+                        // 通用标准（偏向儿童）
+                        Text("评估标准")
                             .font(.headline)
                             .padding(.top, 8)
                         
-                        scoreRangeRow(level: LocalizedStringKey.brilliant.localized, value: String.localizedStringWithFormat(LocalizedStringKey.secondsOrLess.localized as String, 60))
-                        scoreRangeRow(level: LocalizedStringKey.optimal.localized, value: String.localizedStringWithFormat(LocalizedStringKey.upToSeconds.localized as String, 70))
-                        scoreRangeRow(level: LocalizedStringKey.mediocre.localized, value: String.localizedStringWithFormat(LocalizedStringKey.upToSeconds.localized as String, 80))
-                        
-                        // 成人标准
-                        Text(LocalizedStringKey.adultStandards.localized)
-                            .font(.headline)
-                            .padding(.top, 12)
-                        
-                        scoreRangeRow(level: LocalizedStringKey.beginnerLevel.localized, value: "40-60 s")
-                        scoreRangeRow(level: LocalizedStringKey.averageProficiency.localized, value: "25-40 s")
-                        scoreRangeRow(level: LocalizedStringKey.advancedLevel.localized, value: "15-25 s")
-                        scoreRangeRow(level: LocalizedStringKey.elitePerformance.localized, value: "< 15 s")
+                        // 根据表格大小调整标准
+                        if tableSize == 3 {
+                            scoreRangeRow(level: LocalizedStringKey.elitePerformance.localized, value: "< 10 s")
+                            scoreRangeRow(level: LocalizedStringKey.advancedLevel.localized, value: "10-15 s")
+                            scoreRangeRow(level: LocalizedStringKey.averageProficiency.localized, value: "15-25 s")
+                            scoreRangeRow(level: LocalizedStringKey.beginnerLevel.localized, value: "> 25 s")
+                        } else if tableSize == 4 {
+                            scoreRangeRow(level: LocalizedStringKey.elitePerformance.localized, value: "< 15 s")
+                            scoreRangeRow(level: LocalizedStringKey.advancedLevel.localized, value: "15-25 s")
+                            scoreRangeRow(level: LocalizedStringKey.averageProficiency.localized, value: "25-40 s")
+                            scoreRangeRow(level: LocalizedStringKey.beginnerLevel.localized, value: "> 40 s")
+                        } else { // 5x5
+                            scoreRangeRow(level: LocalizedStringKey.elitePerformance.localized, value: "< 25 s")
+                            scoreRangeRow(level: LocalizedStringKey.advancedLevel.localized, value: "25-40 s")
+                            scoreRangeRow(level: LocalizedStringKey.averageProficiency.localized, value: "40-60 s")
+                            scoreRangeRow(level: LocalizedStringKey.beginnerLevel.localized, value: "> 60 s")
+                        }
                     }
                     .padding(.top, 8)
                 }

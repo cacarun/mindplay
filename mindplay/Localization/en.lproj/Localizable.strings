@@ -212,7 +212,7 @@
 // Schulte Table Test
 "schulte_table_test" = "Schulte Table";
 "enhance_attention" = "Enhance your attention and peripheral vision";
-"find_numbers" = "Find and click numbers in ascending order (1-25) as quickly as possible";
+"find_numbers" = "Find and click numbers in ascending order (%@-%@) as quickly as possible";
 "use_peripheral_vision" = "Try to use your peripheral vision instead of scanning each number!";
 "table_size" = "Table Size";
 "total_time" = "Total Time";

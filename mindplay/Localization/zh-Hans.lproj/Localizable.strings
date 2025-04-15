@@ -212,7 +212,7 @@
 // 舒尔特表测试
 "schulte_table_test" = "舒尔特表";
 "enhance_attention" = "增强你的注意力和周边视觉";
-"find_numbers" = "尽快按照升序点击数字（1-25）";
+"find_numbers" = "尽快按照升序点击数字（%@-%@）";
 "use_peripheral_vision" = "尝试使用周边视觉而不是逐个扫描每个数字！";
 "table_size" = "表格大小";
 "total_time" = "总时间";

@@ -88,16 +88,17 @@ enum GameType: String, CaseIterable, Identifiable {
 
 // Model for storing game results
 struct GameResult: Identifiable, Codable {
-    let id: UUID
+    var id = UUID()
     let gameType: String
     let score: Double
     let date: Date
+    var extraData: String? // 添加额外数据字段，可选
     
-    init(gameType: GameType, score: Double) {
-        self.id = UUID()
+    init(gameType: GameType, score: Double, extraData: String? = nil) {
         self.gameType = gameType.rawValue
         self.score = score
         self.date = Date()
+        self.extraData = extraData
     }
 }
 
@@ -111,14 +112,17 @@ class GameDataManager: ObservableObject {
         loadResults()
     }
     
-    func saveResult(gameType: GameType, score: Double) {
-        let result = GameResult(gameType: gameType, score: score)
+    func saveResult(gameType: GameType, score: Double, extraData: String? = nil) {
+        let result = GameResult(gameType: gameType, score: score, extraData: extraData)
         gameResults.append(result)
         saveResults()
     }
     
-    func getBestScore(for gameType: GameType) -> Double? {
-        let filteredResults = gameResults.filter { $0.gameType == gameType.rawValue }
+    func getBestScore(for gameType: GameType, with extraData: String? = nil) -> Double? {
+        let filteredResults = gameResults.filter { 
+            $0.gameType == gameType.rawValue && 
+            (extraData == nil || $0.extraData == extraData) 
+        }
         
         switch gameType {
         case .reactionTime:

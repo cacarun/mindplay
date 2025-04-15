@@ -19,47 +19,114 @@ struct SchulteTableResultView: View {
     
     // 性能评级文本
     private var percentileText: String {
-        if completionTime < 15 {
-            return LocalizedStringKey.elitePerformance.localized
-        } else if completionTime < 25 {
-            return LocalizedStringKey.advancedLevel.localized
-        } else if completionTime < 40 {
-            return LocalizedStringKey.averageProficiency.localized
-        } else {
-            return LocalizedStringKey.beginnerLevel.localized
+        if tableSize == 3 {
+            if completionTime < 10 {
+                return LocalizedStringKey.elitePerformance.localized
+            } else if completionTime < 15 {
+                return LocalizedStringKey.advancedLevel.localized
+            } else if completionTime < 25 {
+                return LocalizedStringKey.averageProficiency.localized
+            } else {
+                return LocalizedStringKey.beginnerLevel.localized
+            }
+        } else if tableSize == 4 {
+            if completionTime < 15 {
+                return LocalizedStringKey.elitePerformance.localized
+            } else if completionTime < 25 {
+                return LocalizedStringKey.advancedLevel.localized
+            } else if completionTime < 40 {
+                return LocalizedStringKey.averageProficiency.localized
+            } else {
+                return LocalizedStringKey.beginnerLevel.localized
+            }
+        } else { // 5x5
+            if completionTime < 25 {
+                return LocalizedStringKey.elitePerformance.localized
+            } else if completionTime < 40 {
+                return LocalizedStringKey.advancedLevel.localized
+            } else if completionTime < 60 {
+                return LocalizedStringKey.averageProficiency.localized
+            } else {
+                return LocalizedStringKey.beginnerLevel.localized
+            }
         }
     }
     
     // 性能说明
     private var performanceDescription: String {
-        if completionTime < 15 {
-            return LocalizedStringKey.excellentSchultePerformance.localized
-        } else if completionTime < 25 {
-            return LocalizedStringKey.goodSchultePerformance.localized
-        } else if completionTime < 40 {
-            return LocalizedStringKey.averageSchultePerformance.localized
-        } else {
-            return LocalizedStringKey.belowAverageSchultePerformance.localized
+        if tableSize == 3 {
+            if completionTime < 10 {
+                return LocalizedStringKey.excellentSchultePerformance.localized
+            } else if completionTime < 15 {
+                return LocalizedStringKey.goodSchultePerformance.localized
+            } else if completionTime < 25 {
+                return LocalizedStringKey.averageSchultePerformance.localized
+            } else {
+                return LocalizedStringKey.belowAverageSchultePerformance.localized
+            }
+        } else if tableSize == 4 {
+            if completionTime < 15 {
+                return LocalizedStringKey.excellentSchultePerformance.localized
+            } else if completionTime < 25 {
+                return LocalizedStringKey.goodSchultePerformance.localized
+            } else if completionTime < 40 {
+                return LocalizedStringKey.averageSchultePerformance.localized
+            } else {
+                return LocalizedStringKey.belowAverageSchultePerformance.localized
+            }
+        } else { // 5x5
+            if completionTime < 25 {
+                return LocalizedStringKey.excellentSchultePerformance.localized
+            } else if completionTime < 40 {
+                return LocalizedStringKey.goodSchultePerformance.localized
+            } else if completionTime < 60 {
+                return LocalizedStringKey.averageSchultePerformance.localized
+            } else {
+                return LocalizedStringKey.belowAverageSchultePerformance.localized
+            }
         }
     }
     
     // 基于表现的颜色
     private var performanceColor: Color {
-        if completionTime < 15 {
-            return .green
-        } else if completionTime < 25 {
-            return .blue
-        } else if completionTime < 40 {
-            return .orange
-        } else {
-            return .red.opacity(0.8)
+        if tableSize == 3 {
+            if completionTime < 10 {
+                return .green
+            } else if completionTime < 15 {
+                return .blue
+            } else if completionTime < 25 {
+                return .orange
+            } else {
+                return .red.opacity(0.8)
+            }
+        } else if tableSize == 4 {
+            if completionTime < 15 {
+                return .green
+            } else if completionTime < 25 {
+                return .blue
+            } else if completionTime < 40 {
+                return .orange
+            } else {
+                return .red.opacity(0.8)
+            }
+        } else { // 5x5
+            if completionTime < 25 {
+                return .green
+            } else if completionTime < 40 {
+                return .blue
+            } else if completionTime < 60 {
+                return .orange
+            } else {
+                return .red.opacity(0.8)
+            }
         }
     }
     
     // 获取玩家的历史记录
     private var historyResults: [GameResult] {
         return gameDataManager.gameResults.filter { 
-            $0.gameType == GameType.schulteTable.rawValue 
+            $0.gameType == GameType.schulteTable.rawValue &&
+            $0.extraData == "\(tableSize)x\(tableSize)"
         }.sorted(by: { $0.date > $1.date })
     }
     
