@@ -145,7 +145,7 @@ struct VisualMemoryGameView: View {
                 }
                 .padding()
                 .onAppear {
-                    boardSize = min(geometry.size.width, geometry.size.height) - 120
+                    boardSize = min(geometry.size.width, geometry.size.height) - 80 // 减小边距，使游戏板更大
                 }
                 .animation(.easeInOut(duration: 0.3), value: gameState)
             }
@@ -413,7 +413,7 @@ struct VisualMemoryGameView: View {
         timer?.invalidate()
         
         // 显示时间从3秒减少到2秒，给用户记忆时间
-        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { [self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { [self] _ in
             // 播放翻转回原始状态音效
             soundService.playSound(named: "go")
             
