@@ -55,17 +55,24 @@ struct VisualMemoryGameView: View {
     
     // 计算当前等级对应的网格大小
     private func gridSizeForLevel(_ level: Int) -> Int {
-        // 按照用户进度动态调整网格大小
+        // 第一关始终使用玩家选择的初始网格大小
+        if level == 1 {
+            return initialGridSize
+        }
+        
+        // 后续关卡按照用户进度动态调整网格大小，但确保不小于初始选择的大小
+        let baseSize = max(initialGridSize, 3) // 确保基础大小不小于初始选择
+        
         if level <= 2 {
-            return 3 // 等级1-2使用3×3
+            return baseSize // 等级2使用基础大小
         } else if level <= 5 {
-            return 4 // 等级3-5使用4×4
+            return max(baseSize, 4) // 等级3-5至少使用4×4
         } else if level <= 9 {
-            return 5 // 等级6-9使用5×5
+            return max(baseSize, 5) // 等级6-9至少使用5×5
         } else if level <= 14 {
-            return 6 // 等级10-14使用6×6
+            return max(baseSize, 6) // 等级10-14至少使用6×6
         } else {
-            return 7 // 等级15+使用7×7
+            return max(baseSize, 7) // 等级15+至少使用7×7
         }
     }
     
