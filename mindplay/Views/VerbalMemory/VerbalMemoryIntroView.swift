@@ -67,9 +67,9 @@ struct VerbalMemoryIntroView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                     
-                    instructionItem(number: "1", text: "You will be shown words, one at a time.")
-                    instructionItem(number: "2", text: "If you've seen a word during the test, click SEEN.")
-                    instructionItem(number: "3", text: "If it's a new word, click NEW.")
+                    instructionItem(number: "1", text: LocalizedStringKey.verbalInstruction1.localized)
+                    instructionItem(number: "2", text: LocalizedStringKey.verbalInstruction2.localized)
+                    instructionItem(number: "3", text: LocalizedStringKey.verbalInstruction3.localized)
                 }
                 .padding()
                 .background(Color(.systemBackground))

@@ -158,6 +158,11 @@
 "three_strikes" = "You have 3 strikes until game over. Your score is how many turns you lasted.";
 "word_explanation" = "Verbal memory is the ability to remember words and other abstractions involving language. This is an important cognitive ability used in everyday decision making and problem solving.";
 
+// Verbal Memory Instructions
+"verbal_instruction_1" = "You will be shown words, one at a time.";
+"verbal_instruction_2" = "If you've seen a word during the test, click SEEN.";
+"verbal_instruction_3" = "If it's a new word, click NEW.";
+
 // Verbal Memory Results
 "excellent_verbal_memory" = "Your verbal memory is excellent! You can remember more words than 90% of people.";
 "good_verbal_memory" = "Your verbal memory is good, better than most people.";

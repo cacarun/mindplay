@@ -221,6 +221,11 @@ struct LocalizedStringKey {
     static let threeStrikes = "three_strikes"
     static let wordExplanation = "word_explanation"
     
+    // 词汇记忆指令
+    static let verbalInstruction1 = "verbal_instruction_1"
+    static let verbalInstruction2 = "verbal_instruction_2"
+    static let verbalInstruction3 = "verbal_instruction_3"
+    
     // 词汇记忆结果
     static let excellentVerbalMemory = "excellent_verbal_memory"
     static let goodVerbalMemory = "good_verbal_memory"

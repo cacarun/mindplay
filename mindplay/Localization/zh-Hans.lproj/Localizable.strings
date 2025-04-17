@@ -159,6 +159,11 @@
 "three_strikes" = "你有3次失误机会，直到游戏结束。你的得分是你坚持的回合数。";
 "word_explanation" = "词汇记忆是记住单词和其他涉及语言的抽象概念的能力。这是日常决策和解决问题中使用的重要认知能力。";
 
+// Verbal Memory Instructions
+"verbal_instruction_1" = "你将会看到一个接一个显示的单词。";
+"verbal_instruction_2" = "如果你在测试中已经见过这个单词，点击\"见过\"。";
+"verbal_instruction_3" = "如果这是一个新单词，点击\"新词\"。";
+
 // 词汇记忆结果
 "excellent_verbal_memory" = "你的词汇记忆力非常出色！你能记住的单词数量超过90%的人。";
 "good_verbal_memory" = "你的词汇记忆力良好，优于大多数人。";
