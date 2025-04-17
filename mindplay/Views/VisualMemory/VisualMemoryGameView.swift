@@ -412,8 +412,8 @@ struct VisualMemoryGameView: View {
         // 取消之前的计时器
         timer?.invalidate()
         
-        // 延长显示时间到3秒，让用户有足够时间记忆
-        timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [self] _ in
+        // 显示时间从3秒减少到2秒，给用户记忆时间
+        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { [self] _ in
             // 播放翻转回原始状态音效
             soundService.playSound(named: "go")
             
@@ -470,6 +470,14 @@ struct VisualMemoryGameView: View {
                 // 检查游戏是否结束
                 if lives <= 0 {
                     endGame()
+                    return
+                } else {
+                    // 重新开始当前关卡
+                    // 短暂延迟以便玩家看到错误反馈
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        // 重置当前关卡
+                        self.setupLevel()
+                    }
                     return
                 }
             }
