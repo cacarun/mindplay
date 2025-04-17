@@ -72,7 +72,7 @@ struct VisualMemoryGameView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                Color(hex: "#4387cb") // 更新背景色
+                Color(hex: "#2b87d1") // 更新背景色
                     .ignoresSafeArea()
                 
                 VStack(spacing: 20) {
@@ -172,7 +172,7 @@ struct VisualMemoryGameView: View {
             VStack {
                 Text(LocalizedStringKey.level.localized)
                     .font(.headline)
-                    .foregroundColor(.white.opacity(0.8))
+                    .foregroundColor(.white)
                 
                 Text("\(currentLevel)")
                     .font(.title)
@@ -184,7 +184,7 @@ struct VisualMemoryGameView: View {
             VStack {
                 Text(LocalizedStringKey.remainingLives.localized)
                     .font(.headline)
-                    .foregroundColor(.white.opacity(0.8))
+                    .foregroundColor(.white)
                 
                 HStack(spacing: 5) {
                     ForEach(0..<3) { index in
@@ -210,12 +210,12 @@ struct VisualMemoryGameView: View {
                 
                 Text(LocalizedStringKey.memorizeSquares.localized)
                     .font(.headline)
-                    .foregroundColor(.white.opacity(0.8))
+                    .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                 
                 Text(LocalizedStringKey.tilesFlashWhite.localized)
                     .font(.body)
-                    .foregroundColor(.white.opacity(0.8))
+                    .foregroundColor(.white)
                     .multilineTextAlignment(.center)
             }
             .padding(.horizontal)
@@ -228,7 +228,7 @@ struct VisualMemoryGameView: View {
                 VStack {
                     Text(LocalizedStringKey.level.localized)
                         .font(.headline)
-                        .foregroundColor(.white.opacity(0.8))
+                        .foregroundColor(.white)
                     
                     Text("\(currentLevel)")
                         .font(.title)
@@ -240,7 +240,7 @@ struct VisualMemoryGameView: View {
                 VStack {
                     Text(LocalizedStringKey.remainingLives.localized)
                         .font(.headline)
-                        .foregroundColor(.white.opacity(0.8))
+                        .foregroundColor(.white)
                     
                     HStack(spacing: 5) {
                         ForEach(0..<3) { index in
@@ -253,7 +253,7 @@ struct VisualMemoryGameView: View {
             }
         }
         .padding()
-        .background(Color(hex: "#3974bb").opacity(0.5)) // 更新准备视图背景色
+        .background(Color(hex: "#3974bb"))  // 去掉透明度设置
         .cornerRadius(16)
     }
     
@@ -262,7 +262,7 @@ struct VisualMemoryGameView: View {
         ZStack {
             // 板背景
             Rectangle()
-                .fill(Color.white.opacity(0.1))
+                .fill(Color(hex: "#2b87d1"))  // 使用与背景色相同的颜色，不透明
                 .frame(width: boardSize, height: boardSize)
                 .cornerRadius(12)
             
