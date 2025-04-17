@@ -314,8 +314,8 @@ struct VisualMemoryGameView: View {
     
     // 方块颜色
     private func tileColor(for tile: MemoryTile) -> Color {
-        if gameState == .memorizing && tile.isTarget {
-            return .white // 记忆阶段，目标方块显示为白色
+        if gameState == .memorizing && tile.isTarget && tile.isFlipped {
+            return .white // 记忆阶段，目标方块显示为白色，但仅当它已被翻转
         } else if tile.isSelected {
             return tile.isTarget ? .white : Color(hex: "#214365") // 修改为白色(点对)和深蓝色(点错)
         } else {
@@ -357,7 +357,7 @@ struct VisualMemoryGameView: View {
         // 创建网格
         setupGrid()
         
-        // 开始记忆阶段
+        // 开始记忆阶段，但方块初始不翻转为白色
         gameState = .memorizing
         
         // 短暂延迟后再显示方块，让用户做好准备
