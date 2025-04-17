@@ -400,11 +400,95 @@ struct VisualMemoryGameView: View {
         }
     }
     
-    // 生成随机目标方块索引
+    // 生成随机目标方块索引，尽量让方块不相邻
     private func generateRandomTargets(count: Int) -> [Int] {
-        var positions = Array(0..<(currentGridSize * currentGridSize))
-        positions.shuffle()
-        return Array(positions.prefix(count))
+        let totalTiles = currentGridSize * currentGridSize
+        
+        // 如果需要的方块数超过可用空间的一半，直接随机
+        if count > totalTiles / 2 {
+            var positions = Array(0..<totalTiles)
+            positions.shuffle()
+            return Array(positions.prefix(count))
+        }
+        
+        var availablePositions = Array(0..<totalTiles)
+        var selectedPositions: [Int] = []
+        
+        // 选择第一个位置
+        if !availablePositions.isEmpty {
+            let randomIndex = Int.random(in: 0..<availablePositions.count)
+            let firstPosition = availablePositions[randomIndex]
+            selectedPositions.append(firstPosition)
+            availablePositions.remove(at: randomIndex)
+        }
+        
+        // 定义获取相邻位置的函数
+        func getAdjacentPositions(for position: Int) -> [Int] {
+            let row = position / currentGridSize
+            let col = position % currentGridSize
+            
+            var adjacent: [Int] = []
+            
+            // 上
+            if row > 0 {
+                adjacent.append(position - currentGridSize)
+            }
+            // 下
+            if row < currentGridSize - 1 {
+                adjacent.append(position + currentGridSize)
+            }
+            // 左
+            if col > 0 {
+                adjacent.append(position - 1)
+            }
+            // 右
+            if col < currentGridSize - 1 {
+                adjacent.append(position + 1)
+            }
+            // 左上
+            if row > 0 && col > 0 {
+                adjacent.append(position - currentGridSize - 1)
+            }
+            // 右上
+            if row > 0 && col < currentGridSize - 1 {
+                adjacent.append(position - currentGridSize + 1)
+            }
+            // 左下
+            if row < currentGridSize - 1 && col > 0 {
+                adjacent.append(position + currentGridSize - 1)
+            }
+            // 右下
+            if row < currentGridSize - 1 && col < currentGridSize - 1 {
+                adjacent.append(position + currentGridSize + 1)
+            }
+            
+            return adjacent
+        }
+        
+        // 继续选择其余位置
+        while selectedPositions.count < count && !availablePositions.isEmpty {
+            // 获取所有已选位置的相邻位置
+            var adjacentToSelected: Set<Int> = []
+            for position in selectedPositions {
+                let adjacent = getAdjacentPositions(for: position)
+                adjacentToSelected.formUnion(adjacent)
+            }
+            
+            // 计算非相邻的可用位置
+            let nonAdjacentAvailable = availablePositions.filter { !adjacentToSelected.contains($0) }
+            
+            // 如果有非相邻位置可用，优先选择；否则从所有可用位置中选择
+            let candidatePositions = nonAdjacentAvailable.isEmpty ? availablePositions : nonAdjacentAvailable
+            let randomIndex = Int.random(in: 0..<candidatePositions.count)
+            let nextPosition = candidatePositions[randomIndex]
+            
+            selectedPositions.append(nextPosition)
+            if let indexToRemove = availablePositions.firstIndex(of: nextPosition) {
+                availablePositions.remove(at: indexToRemove)
+            }
+        }
+        
+        return selectedPositions
     }
     
     // 开始记忆计时器 - 不再使用倒计时，改为固定延迟
