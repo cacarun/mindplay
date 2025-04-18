@@ -76,6 +76,7 @@
 "good_aim" = "你的反应速度和精确度良好，高于大多数人。";
 "average_aim" = "你的反应速度和准确性处于平均水平。";
 "below_average_aim" = "你的反应时间稍慢，可以通过练习来提高手眼协调能力。";
+"exceptional_aim" = "你的手眼协调能力极其出色，反应极速，精确度极高。";
 
 "round_count" = "回合次数";
 "best_score" = "最佳成绩";
@@ -91,6 +92,7 @@
 "good" = "良好";
 "average" = "平均";
 "below_average" = "低于平均";
+"exceptional" = "卓越";
 
 // 游戏界面
 "get_ready" = "准备好";
@@ -105,6 +107,8 @@
 "round_of" = "第 %d 轮 / 共 %d 轮";
 "next_round" = "下一轮";
 "see_results" = "查看结果";
+"tap_to_start" = "点击开始";
+"seconds" = "秒";
 
 // 结果页面
 "your_average_reaction_time" = "你的平均反应时间";
@@ -121,6 +125,9 @@
 "result_factors" = "影响反应时间的因素包括年龄、疲劳、咖啡因摄入和练习。专业运动员的反应时间通常低于200毫秒。";
 "back_to_menu" = "返回菜单";
 "play_again" = "再玩一次";
+"ms_per_click" = "点击间隔(毫秒)";
+"no_data" = "暂无数据";
+"completed" = "完成！";
 
 // 序列记忆结果
 "sequence_results" = "序列记忆结果";

@@ -93,6 +93,7 @@ struct LocalizedStringKey {
     static let good = "good"
     static let average = "average"
     static let belowAverage = "below_average"
+    static let exceptional = "exceptional"
     
     // 序列记忆测试
     static let sequenceMemoryTest = "sequence_memory_test"
@@ -152,6 +153,7 @@ struct LocalizedStringKey {
     static let goodAim = "good_aim"
     static let averageAim = "average_aim"
     static let belowAverageAim = "below_average_aim"
+    static let exceptionalAim = "exceptional_aim"
     
     // 游戏界面
     static let getReady = "get_ready"
@@ -166,6 +168,8 @@ struct LocalizedStringKey {
     static let roundOf = "round_of"
     static let nextRound = "next_round"
     static let seeResults = "see_results"
+    static let tapToStart = "tap_to_start"
+    static let seconds = "seconds"
     
     // 结果页面
     static let yourAverageReactionTime = "your_average_reaction_time"
@@ -182,6 +186,9 @@ struct LocalizedStringKey {
     static let resultFactors = "result_factors"
     static let backToMenu = "back_to_menu"
     static let playAgain = "play_again"
+    static let msPerClick = "ms_per_click"
+    static let noData = "no_data"
+    static let completed = "completed"
     
     // 序列记忆结果页面
     static let sequenceResults = "sequence_results"

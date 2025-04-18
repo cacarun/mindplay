@@ -31,6 +31,7 @@
 "good" = "Good";
 "average" = "Average";
 "below_average" = "Below Average";
+"exceptional" = "Exceptional";
 
 // Sequence Memory Test
 "sequence_memory_test" = "Sequence Memory";
@@ -90,6 +91,7 @@
 "good_aim" = "Your reaction speed and precision are good, better than most people.";
 "average_aim" = "Your reaction speed and accuracy are at an average level.";
 "below_average_aim" = "Your reaction time is slightly slower, but you can improve hand-eye coordination with practice.";
+"exceptional_aim" = "Your hand-eye coordination is exceptional, with extremely fast reactions and outstanding precision.";
 
 // Game Interface
 "get_ready" = "Get Ready";
@@ -104,6 +106,8 @@
 "round_of" = "Round %d of %d";
 "next_round" = "Next Round";
 "see_results" = "See Results";
+"tap_to_start" = "Tap to Start";
+"seconds" = "seconds";
 
 // Results Page
 "your_average_reaction_time" = "Your Average Reaction Time";
@@ -120,6 +124,9 @@
 "result_factors" = "Factors that can affect your reaction time include age, fatigue, caffeine intake, and practice. Professional athletes often have reaction times below 200ms.";
 "back_to_menu" = "Back to Menu";
 "play_again" = "Play Again";
+"ms_per_click" = "Click Interval (ms)";
+"no_data" = "No Data";
+"completed" = "Completed!";
 
 // Sequence Memory Results
 "sequence_results" = "Sequence Memory Results";
