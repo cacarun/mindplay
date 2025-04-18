@@ -192,6 +192,9 @@ struct SchulteTableGameView: View {
                     tableSize: tableSize,
                     onDismiss: { dismiss() },
                     onRestart: { _ in
+                        // 首先关闭结果视图
+                        isShowingResult = false
+                        // 然后重置游戏
                         resetGame()
                         gameState = .ready
                     }
