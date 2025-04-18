@@ -62,22 +62,18 @@ struct SchulteTableIntroView: View {
                 // 最佳成绩和开始按钮
                 HStack(spacing: 15) {
                     // 最佳成绩
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(LocalizedStringKey.bestScore.localized)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        
-                        if let bestScore = gameDataManager.getBestScore(for: .schulteTable, with: "\(tableSize)x\(tableSize)") {
+                    if let bestScore = gameDataManager.getBestScore(for: .schulteTable, with: "\(tableSize)x\(tableSize)") {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(LocalizedStringKey.bestScore.localized)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            
                             Text(String(format: "%.1f s", bestScore))
                                 .font(.headline)
                                 .foregroundColor(.blue)
-                        } else {
-                            Text("-")
-                                .font(.headline)
-                                .foregroundColor(.blue)
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     
                     // 开始测试按钮
                     Button(action: {
