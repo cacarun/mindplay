@@ -248,15 +248,18 @@
 "advanced_level" = "高级水平";
 "elite_performance" = "精英表现";
 "seconds_or_less" = "%d秒或更少";
-"up_to_seconds" = "最多%d秒";
-"your_time" = "你的时间";
-"seconds_short" = "%d秒";
-"average_time" = "平均时间";
-"fastest_time" = "最快时间";
-"finding_number" = "查找：%d";
+
+// 舒尔特表和其他游戏需要的通用键
+"result" = "结果";
+"history" = "历史记录";
+"home" = "返回主页";
+"table" = "表格";
 
 // 舒尔特表结果
-"excellent_schulte_performance" = "精英水平！你的速度和视觉处理能力非常出色。";
-"good_schulte_performance" = "高级水平！你的周边视觉和注意力技能非常好。";
-"average_schulte_performance" = "平均水平。你有扎实的注意力技能。";
-"below_average_schulte_performance" = "初学者水平。通过定期练习，你可以显著提高你的表现。";
+"excellentSchultePerformance" = "你的视觉注意力非常出色，思维反应迅速，专注力集中。";
+
+// 舒尔特表表现描述
+"excellent_perception" = "你的外周视觉和注意力分布能力出色。你能够快速准确地找到目标，视觉处理能力极佳。";
+"good_perception" = "你的视觉感知能力良好。你能够有效使用外周视觉来处理信息，专注力分布平衡。";
+"average_perception" = "你的视觉注意力处于平均水平。通过练习，你可以提高感知速度和信息处理效率。";
+"practice_perception" = "你的视觉感知技能需要练习。定期进行舒尔特表训练可以显著提高你的视觉注意力和信息处理能力。";

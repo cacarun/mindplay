@@ -319,4 +319,16 @@ struct LocalizedStringKey {
     static let goodSchultePerformance = "good_schulte_performance"
     static let averageSchultePerformance = "average_schulte_performance"
     static let belowAverageSchultePerformance = "below_average_schulte_performance"
+    
+    // 舒尔特表表现描述
+    static let excellentPerception = "excellent_perception"
+    static let goodPerception = "good_perception"
+    static let averagePerception = "average_perception"
+    static let practicePerception = "practice_perception"
+    
+    // 舒尔特表和其他游戏需要的通用键
+    static let result = "result"
+    static let history = "history"
+    static let home = "home"
+    static let table = "table"
 }

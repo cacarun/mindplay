@@ -255,8 +255,21 @@
 "fastest_time" = "Fastest Time";
 "finding_number" = "Find: %d";
 
+// Common keys for Schulte Table and other games
+"result" = "Result";
+"history" = "History";
+"home" = "Home";
+"table" = "Table";
+
 // Schulte Table Results
 "excellent_schulte_performance" = "Elite performance! Your speed and visual processing skills are exceptional.";
 "good_schulte_performance" = "Advanced level! Your peripheral vision and attention skills are very good.";
 "average_schulte_performance" = "Average proficiency. You have solid attention skills.";
 "below_average_schulte_performance" = "Beginner level. With regular practice, you can significantly improve your performance.";
+"excellentSchultePerformance" = "Your visual attention is outstanding with quick mental processing and focused concentration.";
+
+// Schulte Table Performance Descriptions
+"excellent_perception" = "Your peripheral vision and attention distribution are excellent. You can locate targets quickly and accurately with exceptional visual processing.";
+"good_perception" = "Your visual perception is good. You effectively use peripheral vision to process information with balanced focus distribution.";
+"average_perception" = "Your visual attention is at an average level. With practice, you can improve perception speed and information processing efficiency.";
+"practice_perception" = "Your visual perception skills need practice. Regular Schulte table training can significantly enhance your visual attention and information processing abilities.";
