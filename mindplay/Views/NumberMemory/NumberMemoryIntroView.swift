@@ -68,7 +68,7 @@ struct NumberMemoryIntroView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                             
-                            Text("\(Int(bestScore)) digits")
+                            Text("\(Int(bestScore)) \(LocalizedStringKey.digits.localized)")
                                 .font(.headline)
                                 .foregroundColor(.blue)
                         }
@@ -120,10 +120,10 @@ struct NumberMemoryIntroView: View {
                     
                     // 评级标准
                     VStack(alignment: .leading, spacing: 8) {
-                        scoreRangeRow(range: "> 11 digits", description: LocalizedStringKey.excellent.localized)
-                        scoreRangeRow(range: "9-11 digits", description: LocalizedStringKey.good.localized)
-                        scoreRangeRow(range: "7-8 digits", description: LocalizedStringKey.average.localized)
-                        scoreRangeRow(range: "< 7 digits", description: LocalizedStringKey.belowAverage.localized)
+                        scoreRangeRow(range: "> 11 \(LocalizedStringKey.digits.localized)", description: LocalizedStringKey.excellent.localized)
+                        scoreRangeRow(range: "9-11 \(LocalizedStringKey.digits.localized)", description: LocalizedStringKey.good.localized)
+                        scoreRangeRow(range: "7-8 \(LocalizedStringKey.digits.localized)", description: LocalizedStringKey.average.localized)
+                        scoreRangeRow(range: "< 7 \(LocalizedStringKey.digits.localized)", description: LocalizedStringKey.belowAverage.localized)
                     }
                     .padding(.top, 8)
                 }

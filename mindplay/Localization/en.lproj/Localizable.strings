@@ -8,6 +8,9 @@
 // General
 "app_name" = "Mind Gym+";
 
+// 通用词汇
+"digits" = "digits";
+
 // Home
 "train_your_brain" = "Train your brain with cognitive games";
 

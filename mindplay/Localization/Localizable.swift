@@ -71,6 +71,7 @@ struct LocalizedStringKey {
     static let aboutTheApp = "about_the_app"
     static let version = "version"
     static let developer = "developer"
+    static let digits = "digits"
     
     // 首页
     static let trainYourBrain = "train_your_brain"
