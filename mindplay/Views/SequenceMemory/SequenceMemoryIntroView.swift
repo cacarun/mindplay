@@ -73,8 +73,6 @@ struct SequenceMemoryIntroView: View {
                                 .foregroundColor(.blue)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    } else {
-                        Spacer()
                     }
                     
                     // 开始测试按钮
@@ -85,7 +83,7 @@ struct SequenceMemoryIntroView: View {
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(height: 44)
-                            .padding(.horizontal, 20)
+                            .frame(maxWidth: .infinity)
                             .background(Color.blue)
                             .cornerRadius(12)
                     }
