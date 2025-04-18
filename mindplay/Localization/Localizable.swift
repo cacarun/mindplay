@@ -240,6 +240,10 @@ struct LocalizedStringKey {
     static let averageVerbalMemory = "average_verbal_memory"
     static let belowAverageVerbalMemory = "below_average_verbal_memory"
     static let wordsRemembered = "words_remembered"
+    static let testComplete = "test_complete"
+    static let yourScore = "your_score"
+    static let excellentMemory = "excellent_memory"
+    static let goodJob = "good_job"
     
     // 猩猩测试
     static let chimpTest = "chimp_test"

@@ -25,116 +25,233 @@ struct VerbalMemoryGameView: View {
     @State private var score = 0 // 得分
     @State private var lives = 3 // 剩余生命
     @State private var isShowingResult = false // 是否显示结果
+    @State private var isAnimating = false // 用于动画控制
+    @State private var wordAppear = false // 单词出现动画
+    @State private var showPulse = false // 脉冲动画效果
+    
+    // 词汇记忆的主题色 - 使用黄色和橙色
+    private let backgroundGradient = LinearGradient(
+        gradient: Gradient(colors: [
+            Color(red: 0.95, green: 0.6, blue: 0.2),
+            Color(red: 0.85, green: 0.4, blue: 0.3)
+        ]),
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
     
     // 用于加载单词列表的常量
     private let wordCount = 500 // 预加载的单词数量
     
     var body: some View {
         ZStack {
-            // 背景颜色
-            Color.indigo
+            // 渐变背景
+            backgroundGradient
                 .ignoresSafeArea()
             
-            VStack {
-                Spacer()
-                
-                // 状态区域
-                HStack(spacing: 40) {
-                    // 分数
-                    VStack {
-                        Text(LocalizedStringKey.currentScore.localized)
-                            .font(.headline)
-                            .foregroundColor(.white.opacity(0.8))
+            // 背景装饰元素
+            GeometryReader { geometry in
+                ZStack {
+                    // 添加一些装饰性圆形
+                    ForEach(0..<5) { i in
+                        let sizes: [CGFloat] = [100, 80, 120, 90, 110]
+                        let posX: [CGFloat] = [0.1, 0.85, 0.25, 0.75, 0.5]
+                        let posY: [CGFloat] = [0.2, 0.15, 0.85, 0.7, 0.3]
+                        let rotations: [Double] = [10, -8, 15, -12, 5]
+                        let durations: [Double] = [7, 8, 6, 9, 7.5]
                         
-                        Text("\(score)")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
+                        Circle()
+                            .stroke(Color.white.opacity(0.08), lineWidth: 2)
+                            .frame(width: sizes[i], height: sizes[i])
+                            .position(
+                                x: max(100, geometry.size.width) * posX[i],
+                                y: max(100, geometry.size.height) * posY[i]
+                            )
+                            .rotationEffect(.degrees(isAnimating ? rotations[i] : 0))
+                            .animation(
+                                Animation.easeInOut(duration: durations[i])
+                                    .repeatForever(autoreverses: true),
+                                value: isAnimating
+                            )
                     }
                     
-                    // 生命值
-                    VStack {
-                        Text(LocalizedStringKey.remainingLives.localized)
-                            .font(.headline)
-                            .foregroundColor(.white.opacity(0.8))
-                        
-                        HStack(spacing: 5) {
-                            ForEach(0..<3) { index in
-                                Image(systemName: index < lives ? "heart.fill" : "heart")
-                                    .foregroundColor(.red)
-                                    .font(.title2)
-                            }
+                    // 单词出现时的脉冲效果 (仅在游戏中显示)
+                    if gameState == .playing && showPulse {
+                        ForEach(0..<3) { i in
+                            Circle()
+                                .stroke(Color.white.opacity(0.15), lineWidth: 2)
+                                .frame(width: 220 + CGFloat(i * 40))
+                                .scaleEffect(isAnimating ? 1.1 : 0.9)
+                                .opacity(isAnimating ? 0.3 : 0.1)
+                                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                                .animation(
+                                    Animation.easeInOut(duration: 1.5 + Double(i) * 0.2)
+                                        .repeatForever(autoreverses: true),
+                                    value: isAnimating
+                                )
                         }
                     }
                 }
-                .padding(.bottom, 40)
-                
-                // 显示单词
-                if gameState == .playing {
-                    Text(currentWord)
-                        .font(.system(size: 44, weight: .bold))
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(Color.white.opacity(0.1))
-                                .frame(width: 300, height: 150)
-                        )
-                        .padding(.bottom, 50)
-                } else if gameState == .ready {
-                    // 准备开始
-                    VStack(spacing: 20) {
-                        Text(LocalizedStringKey.verbalMemoryTest.localized)
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
+            }
+            
+            VStack {
+                // 顶部状态栏
+                HStack(spacing: 40) {
+                    // 分数卡片
+                    VStack {
+                        Text(LocalizedStringKey.currentScore.localized)
+                            .font(.headline)
+                            .foregroundColor(.white.opacity(0.9))
+                        
+                        Text("\(score)")
+                            .font(.system(size: 32, weight: .bold))
                             .foregroundColor(.white)
+                            .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
+                    }
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 20)
+                    .background(Color.white.opacity(0.15))
+                    .cornerRadius(16)
+                    .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
+                    
+                    // 生命值卡片
+                    VStack {
+                        Text(LocalizedStringKey.remainingLives.localized)
+                            .font(.headline)
+                            .foregroundColor(.white.opacity(0.9))
+                        
+                        HStack(spacing: 8) {
+                            ForEach(0..<3) { index in
+                                Image(systemName: index < lives ? "heart.fill" : "heart")
+                                    .foregroundColor(index < lives ? .red : .white.opacity(0.4))
+                                    .font(.title2)
+                                    .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
+                            }
+                        }
+                    }
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 20)
+                    .background(Color.white.opacity(0.15))
+                    .cornerRadius(16)
+                    .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
+                }
+                .padding(.top, 30)
+                .padding(.bottom, 20)
+                
+                Spacer()
+                
+                // 游戏内容区域
+                if gameState == .playing {
+                    // 显示单词
+                    ZStack {
+                        // 单词背景卡片
+                        RoundedRectangle(cornerRadius: 24)
+                            .fill(Color.white.opacity(0.2))
+                            .frame(width: 300, height: 150)
+                            .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
+                        
+                        // 单词
+                        Text(currentWord)
+                            .font(.system(size: 40, weight: .bold))
+                            .foregroundColor(.white)
+                            .shadow(color: Color.black.opacity(0.2), radius: 2, x: 1, y: 1)
+                            .scaleEffect(wordAppear ? 1.0 : 0.7)
+                            .opacity(wordAppear ? 1 : 0)
+                            .animation(.spring(response: 0.4, dampingFraction: 0.6), value: wordAppear)
+                    }
+                    .padding(.bottom, 40)
+                } else if gameState == .ready {
+                    // 开始页面
+                    VStack(spacing: 25) {
+                        // 动画图标
+                        Image(systemName: "brain.head.profile")
+                            .font(.system(size: 70))
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Circle().fill(Color.white.opacity(0.2)))
+                            .scaleEffect(isAnimating ? 1.1 : 0.9)
+                            .animation(
+                                Animation.easeInOut(duration: 2)
+                                    .repeatForever(autoreverses: true),
+                                value: isAnimating
+                            )
+                        
+                        Text(LocalizedStringKey.verbalMemoryTest.localized)
+                            .font(.system(size: 32, weight: .bold))
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .shadow(color: Color.black.opacity(0.2), radius: 2, x: 1, y: 1)
                         
                         Text(LocalizedStringKey.keepWordsInMemory.localized)
-                            .font(.headline)
-                            .foregroundColor(.white.opacity(0.8))
+                            .font(.title3)
+                            .foregroundColor(.white.opacity(0.9))
                             .multilineTextAlignment(.center)
+                            .padding(.horizontal, 30)
                     }
-                    .padding(.bottom, 50)
+                    .padding(.bottom, 40)
                 }
                 
                 // 控制按钮
                 if gameState == .ready {
                     Button(action: {
                         startGame()
+                        // 触觉反馈
+                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                        impactMed.impactOccurred()
                     }) {
                         Text(LocalizedStringKey.startTest.localized)
                             .font(.headline)
-                            .foregroundColor(.indigo)
+                            .foregroundColor(Color(red: 0.95, green: 0.6, blue: 0.2))
                             .padding()
                             .frame(width: 200)
                             .background(Color.white)
-                            .cornerRadius(12)
+                            .cornerRadius(20)
+                            .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 3)
                     }
+                    .scaleEffect(isAnimating ? 1.05 : 1.0)
+                    .animation(
+                        Animation.easeInOut(duration: 1.5)
+                            .repeatForever(autoreverses: true),
+                        value: isAnimating
+                    )
                 } else if gameState == .playing {
                     // SEEN/NEW 按钮
                     HStack(spacing: 20) {
+                        // 见过按钮
                         Button(action: {
                             handleSeen()
+                            // 触觉反馈
+                            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                            impactMed.impactOccurred()
                         }) {
                             Text(LocalizedStringKey.wordSeen.localized)
                                 .font(.headline)
                                 .foregroundColor(.white)
-                                .padding()
-                                .frame(width: 120)
-                                .background(Color.green.opacity(0.8))
-                                .cornerRadius(12)
+                                .padding(.vertical, 16)
+                                .padding(.horizontal, 24)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(Color.green.opacity(0.8))
+                                        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+                                )
                         }
                         
+                        // 新词按钮
                         Button(action: {
                             handleNew()
+                            // 触觉反馈
+                            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                            impactMed.impactOccurred()
                         }) {
                             Text(LocalizedStringKey.wordNew.localized)
                                 .font(.headline)
                                 .foregroundColor(.white)
-                                .padding()
-                                .frame(width: 120)
-                                .background(Color.orange.opacity(0.8))
-                                .cornerRadius(12)
+                                .padding(.vertical, 16)
+                                .padding(.horizontal, 24)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(Color.orange.opacity(0.8))
+                                        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+                                )
                         }
                     }
                 }
@@ -145,6 +262,7 @@ struct VerbalMemoryGameView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .onAppear {
+            isAnimating = true
             loadWords()
         }
         .fullScreenCover(isPresented: $isShowingResult) {
@@ -229,6 +347,9 @@ struct VerbalMemoryGameView: View {
     
     // 显示下一个单词
     private func showNextWord() {
+        // 先将单词隐藏，以便制作动画效果
+        wordAppear = false
+        
         // 随机决定是显示已见过的还是新单词
         let showSeen = !seenWords.isEmpty && Int.random(in: 0..<3) > 0
         
@@ -244,58 +365,86 @@ struct VerbalMemoryGameView: View {
                 currentWord = seenWords.randomElement() ?? ""
             }
         }
+        
+        // 延迟一小段时间后显示单词，制造动画效果
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            showPulse = true
+            wordAppear = true
+        }
     }
     
     // 处理用户点击"见过"按钮
     private func handleSeen() {
         if seenWords.contains(currentWord) {
-            // 正确：玩家确实见过这个单词
+            // 答对了
             score += 1
+            
+            // 成功反馈
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
         } else {
-            // 错误：玩家没见过这个单词
+            // 答错了
             lives -= 1
-            // 现在这个单词也变成见过的了
+            
+            // 错误反馈
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.error)
+            
+            // 将这个词加入到已见过的集合中
             seenWords.insert(currentWord)
         }
         
-        checkGameStatus()
+        // 检查游戏是否结束
+        if lives <= 0 {
+            // 保存游戏结果
+            gameDataManager.saveResult(gameType: .verbalMemory, score: Double(score))
+            
+            // 延迟一小段时间后显示结果，让用户看清当前单词
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                isShowingResult = true
+            }
+            return
+        }
+        
+        // 显示下一个单词
+        showNextWord()
     }
     
     // 处理用户点击"新词"按钮
     private func handleNew() {
-        if seenWords.contains(currentWord) {
-            // 错误：玩家实际上见过这个单词
-            lives -= 1
-        } else {
-            // 正确：这是一个新单词
+        if !seenWords.contains(currentWord) {
+            // 答对了
             score += 1
-            // 将这个单词加入到已见过的集合中
+            
+            // 将这个词加入到已见过的集合中
             seenWords.insert(currentWord)
-        }
-        
-        checkGameStatus()
-    }
-    
-    // 检查游戏状态
-    private func checkGameStatus() {
-        if lives <= 0 {
-            // 游戏结束
-            endGame()
+            
+            // 成功反馈
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
         } else {
-            // 继续游戏
-            showNextWord()
+            // 答错了
+            lives -= 1
+            
+            // 错误反馈
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.error)
         }
-    }
-    
-    // 结束游戏
-    private func endGame() {
-        gameState = .finished
         
-        // 保存最高分
-        gameDataManager.saveResult(gameType: .verbalMemory, score: Double(score))
+        // 检查游戏是否结束
+        if lives <= 0 {
+            // 保存游戏结果
+            gameDataManager.saveResult(gameType: .verbalMemory, score: Double(score))
+            
+            // 延迟一小段时间后显示结果，让用户看清当前单词
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                isShowingResult = true
+            }
+            return
+        }
         
-        // 显示结果页面
-        isShowingResult = true
+        // 显示下一个单词
+        showNextWord()
     }
 }
 

@@ -17,6 +17,8 @@ struct NumberMemoryResultView: View {
     let onDismiss: () -> Void
     let onRestart: () -> Void
     @State private var isAnimating = false
+    @State private var showContent = false
+    @State private var pulseAnimation = false
     
     // 性能评级文本
     private var percentileText: String {
@@ -44,7 +46,7 @@ struct NumberMemoryResultView: View {
         }
     }
     
-    // 背景渐变色 - 使用紫色和蓝色渐变表示记忆和数字
+    // 背景渐变色 - 使用明亮有趣的紫色和蓝色渐变表示记忆和数字
     private let backgroundGradient = LinearGradient(
         gradient: Gradient(colors: [
             Color(red: 0.6, green: 0.4, blue: 0.8),
@@ -96,12 +98,12 @@ struct NumberMemoryResultView: View {
                     }
                     
                     // 添加一些圆形装饰
-                    ForEach(0..<5) { i in
-                        let sizes: [CGFloat] = [100, 80, 120, 90, 110]
-                        let posX: [CGFloat] = [0.1, 0.85, 0.25, 0.75, 0.5]
-                        let posY: [CGFloat] = [0.2, 0.15, 0.85, 0.7, 0.3]
-                        let rotations: [Double] = [10, -8, 15, -12, 5]
-                        let durations: [Double] = [7, 8, 6, 9, 7.5]
+                    ForEach(0..<8) { i in
+                        let sizes: [CGFloat] = [100, 80, 120, 90, 110, 95, 85, 115]
+                        let posX: [CGFloat] = [0.1, 0.85, 0.25, 0.75, 0.5, 0.15, 0.9, 0.6]
+                        let posY: [CGFloat] = [0.2, 0.15, 0.85, 0.7, 0.3, 0.5, 0.4, 0.8]
+                        let rotations: [Double] = [10, -8, 15, -12, 5, -6, 9, -14]
+                        let durations: [Double] = [7, 8, 6, 9, 7.5, 8.5, 6.5, 9.5]
                         
                         Circle()
                             .stroke(Color.white.opacity(0.08), lineWidth: 2)
@@ -124,11 +126,14 @@ struct NumberMemoryResultView: View {
                 VStack(spacing: 24) {
                     // 结果标题
                     Text(LocalizedStringKey.results.localized)
-                        .font(.system(size: 32, weight: .bold))
+                        .font(.system(size: 34, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                         .padding(.top, 30)
                         .shadow(color: Color.black.opacity(0.2), radius: 2, x: 1, y: 1)
+                        .scaleEffect(showContent ? 1.0 : 0.8)
+                        .opacity(showContent ? 1.0 : 0)
+                        .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.1), value: showContent)
                     
                     // Header with main result
                     VStack(spacing: 10) {
@@ -136,16 +141,30 @@ struct NumberMemoryResultView: View {
                             .font(.headline)
                             .foregroundColor(.white.opacity(0.9))
                         
-                        Text("\(digitsRemembered)")
-                            .font(.system(size: 72, weight: .bold))
-                            .foregroundColor(.white)
-                            .shadow(color: Color.black.opacity(0.2), radius: 2, x: 1, y: 1)
-                            .scaleEffect(isAnimating ? 1.05 : 0.95)
-                            .animation(
-                                Animation.easeInOut(duration: 2)
-                                    .repeatForever(autoreverses: true),
-                                value: isAnimating
-                            )
+                        ZStack {
+                            // 数字周围的光环效果
+                            Circle()
+                                .fill(Color.white.opacity(0.2))
+                                .frame(width: 140, height: 140)
+                                .scaleEffect(pulseAnimation ? 1.1 : 0.9)
+                                .animation(
+                                    Animation.easeInOut(duration: 2)
+                                        .repeatForever(autoreverses: true),
+                                    value: pulseAnimation
+                                )
+                            
+                            // 数字
+                            Text("\(digitsRemembered)")
+                                .font(.system(size: 72, weight: .bold))
+                                .foregroundColor(.white)
+                                .shadow(color: Color.black.opacity(0.2), radius: 2, x: 1, y: 1)
+                                .scaleEffect(isAnimating ? 1.05 : 0.95)
+                                .animation(
+                                    Animation.easeInOut(duration: 2)
+                                        .repeatForever(autoreverses: true),
+                                    value: isAnimating
+                                )
+                        }
                         
                         Text(percentileText)
                             .font(.headline)
@@ -158,6 +177,9 @@ struct NumberMemoryResultView: View {
                     .cornerRadius(20)
                     .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
                     .padding(.horizontal)
+                    .scaleEffect(showContent ? 1.0 : 0.8)
+                    .opacity(showContent ? 1.0 : 0)
+                    .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.2), value: showContent)
                     
                     // 表现评级
                     VStack(alignment: .leading, spacing: 16) {
@@ -181,6 +203,9 @@ struct NumberMemoryResultView: View {
                     .cornerRadius(20)
                     .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
                     .padding(.horizontal)
+                    .scaleEffect(showContent ? 1.0 : 0.8)
+                    .opacity(showContent ? 1.0 : 0)
+                    .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.3), value: showContent)
                     
                     // 统计数据
                     VStack(alignment: .leading, spacing: 16) {
@@ -197,19 +222,24 @@ struct NumberMemoryResultView: View {
                             
                             // 图表容器
                             VStack {
-                                HStack(alignment: .bottom, spacing: 4) {
-                                    ForEach(distributionData, id: \.digits) { item in
+                                HStack(alignment: .bottom, spacing: 8) {
+                                    ForEach(0..<distributionData.count, id: \.self) { index in
+                                        let item = distributionData[index]
                                         // 每个柱子
-                                        VStack(spacing: 4) {
+                                        VStack(spacing: 6) {
                                             // 条形图
                                             RoundedRectangle(cornerRadius: 6)
                                                 .fill(getBarColor(for: item.digits))
                                                 .frame(height: CGFloat(item.percentage) * 2)
+                                                .scaleEffect(y: showContent ? 1.0 : 0.01, anchor: .bottom)
+                                                .animation(.spring(response: 0.7, dampingFraction: 0.7).delay(0.4 + Double(index) * 0.1), value: showContent)
                                             
                                             // X轴标签
                                             Text(item.digits)
                                                 .font(.caption)
                                                 .foregroundColor(.white.opacity(0.8))
+                                                .opacity(showContent ? 1.0 : 0)
+                                                .animation(.easeIn.delay(0.6 + Double(index) * 0.1), value: showContent)
                                         }
                                         .frame(maxWidth: .infinity)
                                     }
@@ -234,6 +264,8 @@ struct NumberMemoryResultView: View {
                                             .foregroundColor(.white.opacity(0.6))
                                     }
                                     .frame(width: 30)
+                                    .opacity(showContent ? 1.0 : 0)
+                                    .animation(.easeIn.delay(0.7), value: showContent)
                                     
                                     // 网格线
                                     VStack(alignment: .leading, spacing: 0) {
@@ -252,6 +284,8 @@ struct NumberMemoryResultView: View {
                                             .foregroundColor(.white.opacity(0.2))
                                     }
                                     .frame(maxWidth: .infinity)
+                                    .opacity(showContent ? 1.0 : 0)
+                                    .animation(.easeIn.delay(0.7), value: showContent)
                                 }
                                 .frame(height: 100)
                                 .padding(.bottom, 10)
@@ -269,6 +303,9 @@ struct NumberMemoryResultView: View {
                     .cornerRadius(20)
                     .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
                     .padding(.horizontal)
+                    .scaleEffect(showContent ? 1.0 : 0.8)
+                    .opacity(showContent ? 1.0 : 0)
+                    .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.4), value: showContent)
                     
                     // 解释
                     VStack(alignment: .leading, spacing: 16) {
@@ -287,6 +324,9 @@ struct NumberMemoryResultView: View {
                     .cornerRadius(20)
                     .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
                     .padding(.horizontal)
+                    .scaleEffect(showContent ? 1.0 : 0.8)
+                    .opacity(showContent ? 1.0 : 0)
+                    .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.5), value: showContent)
                     
                     // Action buttons
                     HStack(spacing: 16) {
@@ -309,6 +349,9 @@ struct NumberMemoryResultView: View {
                             .cornerRadius(16)
                             .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 3)
                         }
+                        .scaleEffect(showContent ? 1.0 : 0.8)
+                        .opacity(showContent ? 1.0 : 0)
+                        .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.6), value: showContent)
                         
                         Button(action: {
                             dismiss()
@@ -330,6 +373,9 @@ struct NumberMemoryResultView: View {
                             .cornerRadius(16)
                             .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 3)
                         }
+                        .scaleEffect(showContent ? 1.0 : 0.8)
+                        .opacity(showContent ? 1.0 : 0)
+                        .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.7), value: showContent)
                     }
                     .padding(.horizontal)
                     .padding(.vertical, 20)
@@ -343,9 +389,26 @@ struct NumberMemoryResultView: View {
         }) {
             Image(systemName: "xmark.circle.fill")
                 .foregroundColor(.white)
+                .font(.system(size: 22))
+                .shadow(color: Color.black.opacity(0.2), radius: 1, x: 0, y: 1)
         })
         .onAppear {
-            isAnimating = true
+            // 添加启动动画
+            withAnimation(.easeOut(duration: 0.6)) {
+                isAnimating = true
+                pulseAnimation = true
+            }
+            
+            // 延迟显示内容，创造连续动画效果
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                withAnimation {
+                    showContent = true
+                }
+            }
+            
+            // 应用触觉反馈
+            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+            impactMed.impactOccurred()
         }
     }
     
@@ -362,15 +425,32 @@ struct NumberMemoryResultView: View {
                 performanceColorBars(width: geometry.size.width)
                 
                 // 指示器
-                Circle()
-                    .fill(Color.white)
-                    .frame(width: 20, height: 20)
-                    .shadow(color: Color.black.opacity(0.2), radius: 2, x: 0, y: 1)
-                    .overlay(
-                        Circle()
-                            .stroke(Color.white, lineWidth: 3)
-                    )
-                    .position(x: indicatorPosition(in: geometry.size.width), y: 5)
+                ZStack {
+                    // 添加脉冲效果
+                    Circle()
+                        .fill(Color.white.opacity(0.3))
+                        .frame(width: 26, height: 26)
+                        .scaleEffect(pulseAnimation ? 1.2 : 0.8)
+                        .animation(
+                            Animation.easeInOut(duration: 1.5)
+                                .repeatForever(autoreverses: true),
+                            value: pulseAnimation
+                        )
+                    
+                    Circle()
+                        .fill(Color.white)
+                        .frame(width: 20, height: 20)
+                        .shadow(color: Color.black.opacity(0.2), radius: 2, x: 0, y: 1)
+                        .overlay(
+                            Circle()
+                                .stroke(Color.white, lineWidth: 3)
+                        )
+                }
+                .position(x: indicatorPosition(in: geometry.size.width), y: 5)
+                // 添加滑入动画
+                .offset(x: showContent ? 0 : -50)
+                .opacity(showContent ? 1 : 0)
+                .animation(.spring(response: 0.7, dampingFraction: 0.6).delay(0.4), value: showContent)
             }
         }
         .frame(height: 20)
@@ -383,18 +463,26 @@ struct NumberMemoryResultView: View {
             Rectangle()
                 .fill(Color.red.opacity(0.8))
                 .frame(width: width * 0.25, height: 10)
+                .scaleEffect(x: showContent ? 1 : 0.01, anchor: .leading)
+                .animation(.spring(response: 0.7, dampingFraction: 0.6).delay(0.3), value: showContent)
             
             Rectangle()
                 .fill(Color.orange.opacity(0.8))
                 .frame(width: width * 0.25, height: 10)
+                .scaleEffect(x: showContent ? 1 : 0.01, anchor: .leading)
+                .animation(.spring(response: 0.7, dampingFraction: 0.6).delay(0.35), value: showContent)
             
             Rectangle()
                 .fill(Color.green.opacity(0.8))
                 .frame(width: width * 0.25, height: 10)
+                .scaleEffect(x: showContent ? 1 : 0.01, anchor: .leading)
+                .animation(.spring(response: 0.7, dampingFraction: 0.6).delay(0.4), value: showContent)
             
             Rectangle()
                 .fill(Color.blue.opacity(0.8))
                 .frame(width: width * 0.25, height: 10)
+                .scaleEffect(x: showContent ? 1 : 0.01, anchor: .leading)
+                .animation(.spring(response: 0.7, dampingFraction: 0.6).delay(0.45), value: showContent)
         }
         .clipShape(RoundedRectangle(cornerRadius: 12))
     }
@@ -425,15 +513,33 @@ struct NumberMemoryResultView: View {
         let index = distributionData.firstIndex { $0.digits == userCategory }
         let xOffset = CGFloat(index ?? 2) / CGFloat(distributionData.count) * 0.9 + 0.05
         
-        return Text(LocalizedStringKey.yourResult.localized)
-            .font(.caption)
-            .foregroundColor(.white)
-            .padding(.horizontal, 6)
-            .padding(.vertical, 3)
-            .background(Color(red: 0.5, green: 0.3, blue: 0.8))
-            .cornerRadius(8)
-            .offset(x: -55)
-            .offset(x: UIScreen.main.bounds.width * xOffset * 0.82)
+        return ZStack {
+            // 添加一个脉冲动画
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color(red: 0.5, green: 0.3, blue: 0.8).opacity(0.5))
+                .frame(width: 80, height: 24)
+                .scaleEffect(pulseAnimation ? 1.1 : 1.0)
+                .animation(
+                    Animation.easeInOut(duration: 1.5)
+                        .repeatForever(autoreverses: true),
+                    value: pulseAnimation
+                )
+            
+            Text(LocalizedStringKey.yourResult.localized)
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 3)
+        }
+        .background(Color(red: 0.5, green: 0.3, blue: 0.8))
+        .cornerRadius(8)
+        .shadow(color: Color.black.opacity(0.2), radius: 3, x: 0, y: 2)
+        .offset(x: -55)
+        .offset(x: UIScreen.main.bounds.width * xOffset * 0.82)
+        .scaleEffect(showContent ? 1.0 : 0.5)
+        .opacity(showContent ? 1.0 : 0)
+        .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.6), value: showContent)
     }
     
     // 生成随机位置

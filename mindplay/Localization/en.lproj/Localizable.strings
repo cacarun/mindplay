@@ -179,6 +179,10 @@
 "average_verbal_memory" = "Your verbal memory is average, on par with most people.";
 "below_average_verbal_memory" = "Your verbal memory is below average, but can be improved with practice.";
 "words_remembered" = "Words Remembered";
+"test_complete" = "Test Complete";
+"your_score" = "Your Score";
+"excellent_memory" = "Excellent Memory!";
+"good_job" = "Good Job!";
 
 // Chimp Test
 "chimp_test" = "Chimp Test";

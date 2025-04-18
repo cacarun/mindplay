@@ -180,6 +180,10 @@
 "average_verbal_memory" = "你的词汇记忆力处于平均水平。";
 "below_average_verbal_memory" = "你的词汇记忆力低于平均水平，但通过练习可以提高。";
 "words_remembered" = "记住的单词数";
+"test_complete" = "测试完成";
+"your_score" = "你的分数";
+"excellent_memory" = "记忆力非常出色！";
+"good_job" = "干得不错！";
 
 // 猩猩测试
 "chimp_test" = "猩猩测试";
