@@ -31,10 +31,73 @@ struct NumberMemoryGameView: View {
     @State private var userAnswer = ""
     @State private var digitLength: Int
     @State private var timeRemaining = 0
+    @State private var isAnimating = false
+    @State private var showingNumber = false
+    @State private var pulseAnimation = false
     
     // 计时器
     @State private var timer: Publishers.Autoconnect<Timer.TimerPublisher>?
     @State private var timerCancellable: Cancellable?
+    
+    // 背景渐变色 - 对应不同游戏状态
+    private var backgroundGradient: LinearGradient {
+        switch gameState {
+        case .ready:
+            return LinearGradient(
+                gradient: Gradient(colors: [
+                    Color(red: 0.6, green: 0.4, blue: 0.8),
+                    Color(red: 0.3, green: 0.4, blue: 0.9)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .showing:
+            return LinearGradient(
+                gradient: Gradient(colors: [
+                    Color(red: 0.3, green: 0.5, blue: 0.9),
+                    Color(red: 0.2, green: 0.3, blue: 0.8)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .answering:
+            return LinearGradient(
+                gradient: Gradient(colors: [
+                    Color(red: 0.4, green: 0.3, blue: 0.9),
+                    Color(red: 0.3, green: 0.2, blue: 0.7)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .correct:
+            return LinearGradient(
+                gradient: Gradient(colors: [
+                    Color(red: 0.2, green: 0.7, blue: 0.3),
+                    Color(red: 0.1, green: 0.5, blue: 0.4)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .incorrect:
+            return LinearGradient(
+                gradient: Gradient(colors: [
+                    Color(red: 0.8, green: 0.2, blue: 0.2),
+                    Color(red: 0.6, green: 0.1, blue: 0.2)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .finished:
+            return LinearGradient(
+                gradient: Gradient(colors: [
+                    Color(red: 0.6, green: 0.4, blue: 0.8),
+                    Color(red: 0.3, green: 0.4, blue: 0.9)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        }
+    }
     
     init(startLength: Int = 7) {
         self.startLength = startLength
@@ -44,19 +107,44 @@ struct NumberMemoryGameView: View {
     
     var body: some View {
         ZStack {
-            backgroundColor
+            // 渐变背景
+            backgroundGradient
                 .ignoresSafeArea()
             
-            VStack {
-                Spacer()
-                
-                // 顶部状态区域
-                if gameState == .showing || gameState == .answering {
-                    Text(LocalizedStringKey.timeRemaining.localized(with: timeRemaining))
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding(.bottom, 20)
+            // 背景装饰元素
+            GeometryReader { geometry in
+                ZStack {
+                    // 添加装饰性元素
+                    decorativeElements(in: geometry)
                 }
+            }
+            
+            VStack {
+                // 顶部状态区域
+                VStack(spacing: 8) {
+                    if gameState == .showing || gameState == .answering {
+                        Text(LocalizedStringKey.timeRemaining.localized(with: timeRemaining))
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 20)
+                            .background(Color.white.opacity(0.2))
+                            .cornerRadius(30)
+                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+                    }
+                    
+                    if gameState == .showing || gameState == .answering || gameState == .correct || gameState == .incorrect {
+                        Text(LocalizedStringKey.level.localized + " \(currentLevel)")
+                            .font(.headline)
+                            .foregroundColor(.white.opacity(0.8))
+                            .padding(.top, 8)
+                    }
+                }
+                .padding(.top, 30)
+                .padding(.bottom, 10)
+                
+                Spacer()
                 
                 // 游戏主要区域
                 switch gameState {
@@ -80,6 +168,7 @@ struct NumberMemoryGameView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .onAppear {
+            isAnimating = true
             generateNumber()
         }
         .fullScreenCover(isPresented: Binding<Bool>(
@@ -103,271 +192,393 @@ struct NumberMemoryGameView: View {
         }
     }
     
-    // 背景颜色
-    private var backgroundColor: Color {
-        switch gameState {
-        case .ready:
-            return Color(.systemBackground)
-        case .showing:
-            return Color.blue
-        case .answering:
-            return Color.indigo
-        case .correct:
-            return Color.green
-        case .incorrect:
-            return Color.red
-        case .finished:
-            return Color(.systemBackground)
+    // 装饰性元素
+    private func decorativeElements(in geometry: GeometryProxy) -> some View {
+        ZStack {
+            // 确保视图尺寸有效
+            let safeWidth = max(100, geometry.size.width)
+            let safeHeight = max(100, geometry.size.height)
+            
+            // 添加一些圆形和数字作为装饰
+            ForEach(0..<5) { i in
+                let sizes: [CGFloat] = [100, 80, 120, 90, 110]
+                let posX: [CGFloat] = [0.1, 0.85, 0.25, 0.75, 0.5]
+                let posY: [CGFloat] = [0.2, 0.15, 0.85, 0.7, 0.3]
+                let rotations: [Double] = [10, -8, 15, -12, 5]
+                let durations: [Double] = [7, 8, 6, 9, 7.5]
+                
+                Circle()
+                    .stroke(Color.white.opacity(0.08), lineWidth: 2)
+                    .frame(width: sizes[i], height: sizes[i])
+                    .position(
+                        x: safeWidth * posX[i],
+                        y: safeHeight * posY[i]
+                    )
+                    .rotationEffect(.degrees(isAnimating ? rotations[i] : 0))
+                    .animation(
+                        Animation.easeInOut(duration: durations[i])
+                            .repeatForever(autoreverses: true),
+                        value: isAnimating
+                    )
+            }
+            
+            if gameState == .showing && showingNumber {
+                // 显示数字时的动态特效
+                ForEach(0..<3) { i in
+                    Circle()
+                        .stroke(Color.white.opacity(0.2), lineWidth: 3)
+                        .frame(width: 250 + CGFloat(i * 50))
+                        .scaleEffect(pulseAnimation ? 1.2 : 0.8)
+                        .opacity(pulseAnimation ? 0.1 : 0.3)
+                        .animation(
+                            Animation.easeInOut(duration: 2)
+                                .repeatForever(autoreverses: true)
+                                .delay(Double(i) * 0.3),
+                            value: pulseAnimation
+                        )
+                        .position(x: safeWidth/2, y: safeHeight/2)
+                }
+            }
         }
     }
     
     // 开始视图
     private var startView: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 25) {
+            // 动画图标
+            Image(systemName: "brain")
+                .font(.system(size: 80))
+                .foregroundColor(.white)
+                .padding()
+                .background(Circle().fill(Color.white.opacity(0.2)))
+                .scaleEffect(isAnimating ? 1.1 : 0.9)
+                .animation(
+                    Animation.easeInOut(duration: 2)
+                        .repeatForever(autoreverses: true),
+                    value: isAnimating
+                )
+            
             Text(LocalizedStringKey.numberMemoryTest.localized)
-                .font(.largeTitle)
-                .fontWeight(.bold)
+                .font(.system(size: 32, weight: .bold))
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+                .shadow(color: Color.black.opacity(0.2), radius: 2, x: 1, y: 1)
             
             Text(LocalizedStringKey.rememberLongestNumber.localized)
                 .font(.title3)
+                .foregroundColor(.white.opacity(0.9))
                 .multilineTextAlignment(.center)
+                .padding(.horizontal)
             
             Button(action: {
                 startGame()
+                // 触觉反馈
+                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                impactMed.impactOccurred()
             }) {
                 Text(LocalizedStringKey.startNumberTest.localized)
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(red: 0.4, green: 0.3, blue: 0.8))
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .cornerRadius(12)
+                    .background(Color.white)
+                    .cornerRadius(16)
+                    .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 3)
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 40)
             .padding(.top, 20)
         }
+        .padding(30)
+        .background(Color.white.opacity(0.15))
+        .cornerRadius(30)
+        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
         .padding()
-        .background(Color(.systemBackground))
-        .cornerRadius(16)
-        .shadow(radius: 5)
-        .padding()
-        .frame(maxWidth: 400)
     }
     
     // 数字显示视图
     private var numberDisplayView: some View {
-        VStack(spacing: 30) {
-            Text(LocalizedStringKey.memorizeNumber.localized)
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-            
-            Text(currentNumber)
-                .font(.system(size: 44, weight: .bold, design: .monospaced))
-                .foregroundColor(.white)
+        ZStack {
+            // 背景卡片
+            RoundedRectangle(cornerRadius: 24)
+                .fill(Color.white.opacity(0.15))
+                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
                 .padding(.horizontal)
-                .multilineTextAlignment(.center)
-                .lineLimit(10)
+                
+            VStack(spacing: 30) {
+                Text(LocalizedStringKey.memorizeNumber.localized)
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .shadow(color: Color.black.opacity(0.2), radius: 1, x: 0, y: 1)
+                
+                // 数字显示
+                Text(currentNumber)
+                    .font(.system(size: min(600 / CGFloat(digitLength), 44), weight: .bold, design: .monospaced))
+                    .foregroundColor(.white)
+                    .padding(.horizontal)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(10)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding()
+                    .background(Color.white.opacity(0.2))
+                    .cornerRadius(16)
+                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+                    .scaleEffect(showingNumber ? 1.0 : 0.8)
+                    .opacity(showingNumber ? 1 : 0)
+                    .animation(.spring(response: 0.5, dampingFraction: 0.8), value: showingNumber)
+            }
+            .padding(30)
         }
-        .frame(maxWidth: .infinity, alignment: .center)
-        .padding()
+        .onAppear {
+            pulseAnimation = true
+            // 数字稍微延迟显示，增加动画效果
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                showingNumber = true
+            }
+        }
     }
     
     // 答案输入视图
     private var answerInputView: some View {
-        VStack(spacing: 25) {
+        VStack(spacing: 30) {
             Text(LocalizedStringKey.enterNumber.localized)
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
+                .shadow(color: Color.black.opacity(0.2), radius: 1, x: 0, y: 1)
             
-            TextField("", text: $userAnswer)
-                .font(.system(size: 32, weight: .bold, design: .monospaced))
-                .foregroundColor(.black)
-                .padding()
-                .background(Color.white)
-                .cornerRadius(12)
-                .keyboardType(.numberPad)
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: 350)
-            
-            Button(action: {
-                checkAnswer()
-            }) {
-                Text(LocalizedStringKey.submitAnswer.localized)
-                    .font(.headline)
-                    .foregroundColor(.indigo)
+            // 输入框
+            VStack(spacing: 16) {
+                TextField("", text: $userAnswer)
+                    .font(.system(size: 30, weight: .bold, design: .monospaced))
+                    .foregroundColor(Color(red: 0.4, green: 0.3, blue: 0.8))
                     .padding()
-                    .frame(maxWidth: 200)
                     .background(Color.white)
-                    .cornerRadius(12)
+                    .cornerRadius(16)
+                    .keyboardType(.numberPad)
+                    .multilineTextAlignment(.center)
+                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+                
+                // 提交按钮
+                Button(action: {
+                    checkAnswer()
+                    // 触觉反馈
+                    let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                    impactMed.impactOccurred()
+                }) {
+                    Text(LocalizedStringKey.submitAnswer.localized)
+                        .font(.headline)
+                        .foregroundColor(Color(red: 0.4, green: 0.3, blue: 0.8))
+                        .padding()
+                        .frame(width: 180)
+                        .background(Color.white)
+                        .cornerRadius(16)
+                        .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 3)
+                }
             }
-            .padding(.top, 10)
+            .padding(.horizontal, 40)
         }
-        .frame(maxWidth: .infinity, alignment: .center)
+        .padding(30)
+        .background(Color.white.opacity(0.15))
+        .cornerRadius(30)
+        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
         .padding()
     }
     
     // 答案正确视图
     private var correctView: some View {
         VStack(spacing: 25) {
-            Text(LocalizedStringKey.correct.localized)
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-            
+            // 成功动画
             Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 80))
                 .foregroundColor(.white)
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+                .scaleEffect(isAnimating ? 1.1 : 0.9)
+                .animation(
+                    Animation.easeInOut(duration: 0.8)
+                        .repeatForever(autoreverses: true),
+                    value: isAnimating
+                )
+            
+            Text(LocalizedStringKey.correct.localized)
+                .font(.system(size: 36, weight: .bold))
+                .foregroundColor(.white)
+                .shadow(color: Color.black.opacity(0.2), radius: 2, x: 1, y: 1)
             
             Button(action: {
                 nextLevel()
+                // 触觉反馈
+                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                impactMed.impactOccurred()
             }) {
                 Text(LocalizedStringKey.nextLevel.localized)
                     .font(.headline)
-                    .foregroundColor(.green)
+                    .foregroundColor(Color(red: 0.2, green: 0.6, blue: 0.3))
                     .padding()
-                    .frame(maxWidth: 200)
+                    .frame(width: 200)
                     .background(Color.white)
-                    .cornerRadius(12)
+                    .cornerRadius(16)
+                    .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 3)
             }
-            .padding(.top, 10)
+            .padding(.top, 20)
         }
-        .frame(maxWidth: .infinity, alignment: .center)
+        .padding(30)
+        .background(Color.white.opacity(0.15))
+        .cornerRadius(30)
+        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
         .padding()
     }
     
     // 答案错误视图
     private var incorrectView: some View {
         VStack(spacing: 20) {
-            Text(LocalizedStringKey.wrong.localized)
-                .font(.largeTitle)
-                .fontWeight(.bold)
+            // 错误动画
+            Image(systemName: "xmark.circle.fill")
+                .font(.system(size: 70))
                 .foregroundColor(.white)
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+                .scaleEffect(isAnimating ? 1.1 : 0.9)
+                .animation(
+                    Animation.easeInOut(duration: 0.8)
+                        .repeatForever(autoreverses: true),
+                    value: isAnimating
+                )
             
+            Text(LocalizedStringKey.wrong.localized)
+                .font(.system(size: 36, weight: .bold))
+                .foregroundColor(.white)
+                .shadow(color: Color.black.opacity(0.2), radius: 2, x: 1, y: 1)
+            
+            // 正确答案和用户答案对比
             VStack(alignment: .leading, spacing: 15) {
                 HStack {
                     Text(LocalizedStringKey.correctNumber.localized + ":")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(.white.opacity(0.9))
+                    
+                    Spacer()
                     
                     Text(currentNumber)
-                        .font(.headline)
+                        .font(.system(.headline, design: .monospaced))
                         .foregroundColor(.white)
                 }
+                .padding(.vertical, 6)
                 
                 HStack {
                     Text(LocalizedStringKey.yourNumber.localized + ":")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(.white.opacity(0.9))
+                    
+                    Spacer()
                     
                     Text(userAnswer)
-                        .font(.headline)
+                        .font(.system(.headline, design: .monospaced))
                         .foregroundColor(.white)
                 }
+                .padding(.vertical, 6)
             }
             .padding()
             .background(Color.white.opacity(0.1))
-            .cornerRadius(12)
-            .frame(maxWidth: 350)
+            .cornerRadius(16)
+            .padding(.vertical, 10)
             
+            // 查看结果按钮
             Button(action: {
-                finishGame()
+                // 保存游戏结果
+                gameDataManager.saveResult(gameType: .numberMemory, score: Double(digitLength - 1))
+                gameState = .finished
+                // 触觉反馈
+                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                impactMed.impactOccurred()
             }) {
                 Text(LocalizedStringKey.seeResults.localized)
                     .font(.headline)
-                    .foregroundColor(.red)
+                    .foregroundColor(Color(red: 0.7, green: 0.2, blue: 0.2))
                     .padding()
-                    .frame(maxWidth: 200)
+                    .frame(width: 200)
                     .background(Color.white)
-                    .cornerRadius(12)
+                    .cornerRadius(16)
+                    .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 3)
             }
             .padding(.top, 10)
         }
-        .frame(maxWidth: .infinity, alignment: .center)
+        .padding(30)
+        .background(Color.white.opacity(0.15))
+        .cornerRadius(30)
+        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
         .padding()
-    }
-    
-    // MARK: - 游戏逻辑
-    
-    // 开始游戏
-    private func startGame() {
-        currentLevel = 1
-        digitLength = startLength
-        gameState = .showing
-        startShowingNumber()
     }
     
     // 生成随机数字
     private func generateNumber() {
-        var newNumber = ""
-        for _ in 0..<digitLength {
-            // 生成1-9的随机数字，避免以0开头
-            if newNumber.isEmpty {
-                newNumber += String(Int.random(in: 1...9))
+        currentNumber = (0..<digitLength).map { _ in String(Int.random(in: 0...9)) }.joined()
+    }
+    
+    // 开始游戏
+    private func startGame() {
+        // 重置状态
+        userAnswer = ""
+        showingNumber = false
+        pulseAnimation = false
+        generateNumber()
+        
+        // 显示数字阶段
+        gameState = .showing
+        
+        // 计算显示时间（最少5秒）
+        let showTime = max(5, digitLength)
+        timeRemaining = showTime
+        
+        // 设置计时器
+        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        timerCancellable = timer?.sink { _ in
+            if timeRemaining > 0 {
+                timeRemaining -= 1
             } else {
-                newNumber += String(Int.random(in: 0...9))
-            }
-        }
-        currentNumber = newNumber
-    }
-    
-    // 开始显示数字
-    private func startShowingNumber() {
-        // 取消可能存在的旧计时器
-        timerCancellable?.cancel()
-        
-        // 计算显示时间：每一位数字1秒，最少5秒
-        let displayTime = max(5, digitLength)
-        timeRemaining = displayTime
-        
-        // 创建并启动计时器
-        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-        timerCancellable = timer?.sink { _ in
-            if timeRemaining > 0 {
-                timeRemaining -= 1
-                if timeRemaining == 0 {
-                    timerCancellable?.cancel()
-                    gameState = .answering
-                    userAnswer = ""
-                    startAnswerTimer()
-                }
+                // 时间到，进入回答阶段
+                switchToAnsweringState()
             }
         }
     }
     
-    // 开始答题计时器
-    private func startAnswerTimer() {
-        // 取消可能存在的旧计时器
+    // 切换到回答阶段
+    private func switchToAnsweringState() {
+        // 取消原计时器
         timerCancellable?.cancel()
         
-        // 答题时间固定为30秒
-        timeRemaining = 30
+        // 设置回答阶段
+        gameState = .answering
+        timeRemaining = 30 // 30秒时间回答
         
-        // 创建并启动计时器
+        // 新计时器
         timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         timerCancellable = timer?.sink { _ in
             if timeRemaining > 0 {
                 timeRemaining -= 1
-                if timeRemaining == 0 {
-                    timerCancellable?.cancel()
-                    // 时间到，判断为错误
-                    gameState = .incorrect
-                }
+            } else {
+                // 时间到，自动判定为答错
+                checkAnswer()
             }
         }
     }
     
     // 检查答案
     private func checkAnswer() {
-        // 取消当前计时器
+        // 取消计时器
         timerCancellable?.cancel()
         
-        // 检查答案是否正确
         if userAnswer == currentNumber {
+            // 答案正确
             gameState = .correct
+            // 触觉反馈 - 成功
+            let notification = UINotificationFeedbackGenerator()
+            notification.notificationOccurred(.success)
         } else {
+            // 答案错误
             gameState = .incorrect
+            // 触觉反馈 - 错误
+            let notification = UINotificationFeedbackGenerator()
+            notification.notificationOccurred(.error)
         }
     }
     
@@ -375,22 +586,34 @@ struct NumberMemoryGameView: View {
     private func nextLevel() {
         currentLevel += 1
         digitLength += 1
+        userAnswer = ""
+        showingNumber = false
+        pulseAnimation = false
         generateNumber()
-        gameState = .showing
-        startShowingNumber()
-    }
-    
-    // 完成游戏
-    private func finishGame() {
-        // 保存游戏结果（记忆的最大位数）
-        gameDataManager.saveResult(gameType: .numberMemory, score: Double(digitLength - 1))
         
-        // 显示结果
-        gameState = .finished
+        // 显示数字阶段
+        gameState = .showing
+        
+        // 计算显示时间
+        let showTime = max(5, digitLength)
+        timeRemaining = showTime
+        
+        // 设置计时器
+        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        timerCancellable = timer?.sink { _ in
+            if timeRemaining > 0 {
+                timeRemaining -= 1
+            } else {
+                // 时间到，进入回答阶段
+                switchToAnsweringState()
+            }
+        }
     }
 }
 
 #Preview {
-    NumberMemoryGameView(startLength: 7)
-        .environmentObject(GameDataManager())
+    NavigationStack {
+        NumberMemoryGameView()
+            .environmentObject(GameDataManager())
+    }
 } 
