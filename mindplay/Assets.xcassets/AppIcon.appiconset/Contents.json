@@ -58,10 +58,9 @@
         },
         {
             "size": "60x60",
-            "idiom": "universal",
+            "idiom": "iphone",
             "filename": "icon-60@2x.png",
-            "scale": "2x",
-            "platform": "ios"
+            "scale": "2x"
         },
         {
             "size": "60x60",
@@ -107,14 +106,13 @@
         },
         {
             "size": "1024x1024",
-            "idiom": "universal",
+            "idiom": "ios-marketing",
             "filename": "icon-1024.png",
-            "scale": "1x",
-            "platform": "ios"
+            "scale": "1x"
         }
     ],
     "info": {
         "version": 1,
-        "author": "icon.wuruihong.com"
+        "author": "icon.devbyway.com"
     }
 }
