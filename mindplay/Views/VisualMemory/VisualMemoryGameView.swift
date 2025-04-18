@@ -30,6 +30,8 @@ struct VisualMemoryGameView: View {
     @State private var mistakes = 0 // 当前级别的错误次数
     @State private var isShowingResult = false
     @State private var currentGridSize: Int // 当前网格大小（随等级变化）
+    @State private var isAnimating = false // 添加动画控制状态
+    @State private var showSuccessConfetti = false // 成功时显示彩色粒子
     
     // 方块状态
     @State private var tiles: [MemoryTile] = []
@@ -45,6 +47,16 @@ struct VisualMemoryGameView: View {
     
     // 音效服务
     private let soundService = SoundService.shared
+    
+    // 视觉记忆的主题渐变色 - 紫色/靛蓝色
+    private let backgroundGradient = LinearGradient(
+        gradient: Gradient(colors: [
+            Color(red: 0.4, green: 0.2, blue: 0.8),
+            Color(red: 0.2, green: 0.3, blue: 0.7)
+        ]),
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
     
     // 初始化方法
     init(gridSize: Int) {
@@ -79,8 +91,57 @@ struct VisualMemoryGameView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                Color(hex: "#2b87d1") // 更新背景色
+                // 渐变背景
+                backgroundGradient
                     .ignoresSafeArea()
+                
+                // 背景装饰元素
+                ZStack {
+                    // 添加一些装饰性方块，表示视觉记忆
+                    ForEach(0..<6) { i in
+                        let positions = [
+                            CGPoint(x: geometry.size.width * 0.1, y: geometry.size.height * 0.2),
+                            CGPoint(x: geometry.size.width * 0.85, y: geometry.size.height * 0.15),
+                            CGPoint(x: geometry.size.width * 0.7, y: geometry.size.height * 0.85),
+                            CGPoint(x: geometry.size.width * 0.25, y: geometry.size.height * 0.7),
+                            CGPoint(x: geometry.size.width * 0.15, y: geometry.size.height * 0.5),
+                            CGPoint(x: geometry.size.width * 0.75, y: geometry.size.height * 0.6)
+                        ]
+                        
+                        let sizes: [CGFloat] = [60, 70, 65, 55, 50, 60]
+                        let opacities: [Double] = [0.07, 0.05, 0.08, 0.06, 0.07, 0.05]
+                        
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.white.opacity(opacities[i]))
+                            .frame(width: sizes[i], height: sizes[i])
+                            .position(positions[i])
+                            .rotationEffect(.degrees(isAnimating ? Double(i * 8) : 0))
+                            .animation(
+                                Animation.easeInOut(duration: Double(i) + 4)
+                                    .repeatForever(autoreverses: true),
+                                value: isAnimating
+                            )
+                    }
+                    
+                    // 成功时的彩色粒子
+                    if showSuccessConfetti {
+                        ForEach(0..<15) { i in
+                            Circle()
+                                .fill(confettiColor(for: i))
+                                .frame(width: CGFloat.random(in: 5...15), height: CGFloat.random(in: 5...15))
+                                .position(
+                                    x: geometry.size.width * 0.5 + CGFloat.random(in: -100...100),
+                                    y: geometry.size.height * 0.5 + CGFloat.random(in: -100...100)
+                                )
+                                .opacity(isAnimating ? 0 : 1)
+                                .animation(
+                                    Animation.easeOut(duration: Double.random(in: 0.5...1.2))
+                                        .delay(Double.random(in: 0...0.3)),
+                                    value: isAnimating
+                                )
+                        }
+                    }
+                }
                 
                 VStack(spacing: 20) {
                     // 状态区域 - 在所有状态下都显示
@@ -105,54 +166,122 @@ struct VisualMemoryGameView: View {
                                 .frame(width: boardSize, height: boardSize)
                                 .transition(.opacity)
                         } else if gameState != .gameOver {
-                            gameBoard
-                                .transition(.opacity)
+                            VStack(spacing: 15) {
+                                // 游戏状态提示放在容器上方
+                                if gameState == .memorizing {
+                                    Text(LocalizedStringKey.tilesFlashWhite.localized)
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                        .multilineTextAlignment(.center)
+                                        .fixedSize(horizontal: false, vertical: true) // 允许文本换行
+                                        .frame(width: boardSize * 0.9, height: 60, alignment: .center) // 固定高度
+                                        .padding(.vertical, 8)
+                                        .padding(.horizontal, 16)
+                                        .background(Color.white.opacity(0.2))
+                                        .cornerRadius(10)
+                                        .scaleEffect(isAnimating ? 1.05 : 1.0)
+                                        .animation(
+                                            Animation.easeInOut(duration: 0.5)
+                                                .repeatForever(autoreverses: true),
+                                            value: isAnimating
+                                        )
+                                } else if gameState == .playing {
+                                    Text(LocalizedStringKey.memorizeAndPick.localized)
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                        .multilineTextAlignment(.center)
+                                        .fixedSize(horizontal: false, vertical: true) // 允许文本换行
+                                        .frame(width: boardSize * 0.9, height: 60, alignment: .center) // 固定高度
+                                        .padding(.vertical, 8)
+                                        .padding(.horizontal, 16)
+                                        .background(Color.white.opacity(0.2))
+                                        .cornerRadius(10)
+                                } else {
+                                    // 占位视图，确保布局一致性
+                                    Color.clear
+                                        .frame(width: boardSize * 0.9, height: 60)
+                                        .padding(.vertical, 8)
+                                        .padding(.horizontal, 16)
+                                }
+                                
+                                // 游戏板
+                                gameBoard
+                                    .transition(.opacity)
+                            }
                         } else {
                             // 占位视图保持大小一致
                             Color.clear
                                 .frame(width: boardSize, height: boardSize)
                         }
                     }
-                    .frame(width: boardSize, height: boardSize)
+                    .frame(width: boardSize, height: boardSize + 50) // 增加高度以容纳提示文本
                     
                     Spacer(minLength: 20)
                     
                     // 控制按钮区域 - 在所有状态下保持相同高度
                     VStack {
                         if gameState == .ready {
-                            Button(action: startGame) {
-                                Text(LocalizedStringKey.startTest.localized)
-                                    .font(.headline)
-                                    .foregroundColor(.blue)
-                                    .padding()
-                                    .frame(width: 200)
-                                    .background(Color.white)
-                                    .cornerRadius(12)
+                            Button(action: {
+                                // 触觉反馈
+                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                                impactMed.impactOccurred()
+                                startGame()
+                            }) {
+                                HStack {
+                                    Image(systemName: "play.fill")
+                                        .font(.headline)
+                                    
+                                    Text(LocalizedStringKey.startTest.localized)
+                                        .font(.headline)
+                                }
+                                .foregroundColor(Color(red: 0.4, green: 0.2, blue: 0.8))
+                                .padding(.vertical, 16)
+                                .frame(width: 200)
+                                .background(Color.white)
+                                .cornerRadius(20)
+                                .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 3)
                             }
+                            .scaleEffect(isAnimating ? 1.05 : 1.0)
+                            .animation(
+                                Animation.easeInOut(duration: 1.8)
+                                    .repeatForever(autoreverses: true),
+                                value: isAnimating
+                            )
                             .transition(.opacity)
                         } else if gameState == .levelComplete {
-                            Button(action: nextLevel) {
-                                Text(LocalizedStringKey.nextLevel.localized)
-                                    .font(.headline)
-                                    .foregroundColor(.blue)
-                                    .padding()
-                                    .frame(width: 200)
-                                    .background(Color.white)
-                                    .cornerRadius(12)
+                            Button(action: {
+                                // 触觉反馈
+                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                                impactMed.impactOccurred()
+                                nextLevel()
+                            }) {
+                                HStack {
+                                    Image(systemName: "arrow.right.circle.fill")
+                                        .font(.headline)
+                                    
+                                    Text(LocalizedStringKey.nextLevel.localized)
+                                        .font(.headline)
+                                }
+                                .foregroundColor(Color(red: 0.4, green: 0.2, blue: 0.8))
+                                .padding(.vertical, 16)
+                                .frame(width: 200)
+                                .background(Color.white)
+                                .cornerRadius(20)
+                                .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 3)
                             }
                             .transition(.opacity)
                         } else {
                             // 占位视图保持高度一致
                             Color.clear
-                                .frame(height: 44)
+                                .frame(height: 60)
                         }
                     }
-                    .frame(height: 60)
                     .padding(.bottom, 20)
                 }
                 .padding()
                 .onAppear {
                     boardSize = min(geometry.size.width, geometry.size.height) - 80 // 减小边距，使游戏板更大
+                    isAnimating = true
                 }
                 .animation(.easeInOut(duration: 0.3), value: gameState)
             }
@@ -175,129 +304,124 @@ struct VisualMemoryGameView: View {
     // 状态视图
     private var statusView: some View {
         HStack(spacing: 40) {
-            // 等级
+            // 等级卡片
             VStack {
                 Text(LocalizedStringKey.level.localized)
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.white.opacity(0.9))
                 
                 Text("\(currentLevel)")
-                    .font(.title)
-                    .fontWeight(.bold)
+                    .font(.system(size: 32, weight: .bold))
                     .foregroundColor(.white)
+                    .shadow(color: Color.black.opacity(0.2), radius: 1, x: 0, y: 1)
             }
+            .padding(.vertical, 12)
+            .padding(.horizontal, 20)
+            .background(Color.white.opacity(0.15))
+            .cornerRadius(16)
+            .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
             
             // 生命值
             VStack {
                 Text(LocalizedStringKey.remainingLives.localized)
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(.white.opacity(0.9))
                 
-                HStack(spacing: 5) {
+                HStack(spacing: 8) {
                     ForEach(0..<3) { index in
                         Image(systemName: index < lives ? "heart.fill" : "heart")
                             .foregroundColor(.red)
                             .font(.title2)
+                            .shadow(color: Color.black.opacity(0.2), radius: 1, x: 0, y: 1)
                     }
                 }
             }
+            .padding(.vertical, 12)
+            .padding(.horizontal, 20)
+            .background(Color.white.opacity(0.15))
+            .cornerRadius(16)
+            .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
         }
-        .padding(.bottom)
     }
     
     // 游戏准备视图
     private var readyView: some View {
-        VStack(spacing: 20) {
-            // 游戏标题和说明
-            VStack(spacing: 16) {
-                Text(LocalizedStringKey.visualMemoryTest.localized)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                
-                Text(LocalizedStringKey.memorizeSquares.localized)
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                
-                Text(LocalizedStringKey.tilesFlashWhite.localized)
-                    .font(.body)
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-            }
-            .padding(.horizontal)
+        VStack(spacing: 25) {
+            // 视觉记忆图标
+            Image(systemName: "square.on.square.fill")
+                .font(.system(size: 70))
+                .foregroundColor(.white)
+                .padding(25)
+                .background(
+                    Circle()
+                        .fill(Color.white.opacity(0.15))
+                        .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
+                )
+                .scaleEffect(isAnimating ? 1.1 : 0.9)
+                .animation(
+                    Animation.easeInOut(duration: 1.5)
+                        .repeatForever(autoreverses: true),
+                    value: isAnimating
+                )
             
-            Spacer(minLength: 20)
+            Text(LocalizedStringKey.visualMemoryTest.localized)
+                .font(.system(size: 32, weight: .bold))
+                .foregroundColor(.white)
+                .shadow(color: Color.black.opacity(0.2), radius: 2, x: 1, y: 1)
+                .multilineTextAlignment(.center)
             
-            // 等级和生命值
-            HStack(spacing: 40) {
-                // 等级
-                VStack {
-                    Text(LocalizedStringKey.level.localized)
-                        .font(.headline)
-                        .foregroundColor(.white)
-                    
-                    Text("\(currentLevel)")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                }
-                
-                // 生命值
-                VStack {
-                    Text(LocalizedStringKey.remainingLives.localized)
-                        .font(.headline)
-                        .foregroundColor(.white)
-                    
-                    HStack(spacing: 5) {
-                        ForEach(0..<3) { index in
-                            Image(systemName: "heart.fill")
-                                .foregroundColor(.red)
-                                .font(.title2)
-                        }
-                    }
-                }
-            }
+            Text(LocalizedStringKey.memorizeSquares.localized)
+                .font(.headline)
+                .foregroundColor(.white.opacity(0.9))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .padding()
-        .background(Color(hex: "#3974bb"))  // 去掉透明度设置
-        .cornerRadius(16)
+        .frame(width: boardSize, height: boardSize)
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.white.opacity(0.15))
+                .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
+        )
     }
     
-    // 游戏板视图
+    // 游戏板
     private var gameBoard: some View {
         ZStack {
-            // 板背景
-            Rectangle()
-                .fill(Color(hex: "#2b87d1"))  // 使用与背景色相同的颜色，不透明
+            // 方块背景
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.white.opacity(0.15))
                 .frame(width: boardSize, height: boardSize)
-                .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
             
             // 网格布局
+            let tileSize = (boardSize - CGFloat(currentGridSize + 1) * tileSpacing) / CGFloat(currentGridSize)
+            
             VStack(spacing: tileSpacing) {
                 ForEach(0..<currentGridSize, id: \.self) { row in
                     HStack(spacing: tileSpacing) {
                         ForEach(0..<currentGridSize, id: \.self) { column in
                             let index = row * currentGridSize + column
                             
-                            if index < tiles.count {
-                                memoryTileView(tile: tiles[index], index: index)
-                            } else {
-                                // 占位符
-                                Rectangle()
-                                    .fill(Color.clear)
-                                    .frame(width: tileSize, height: tileSize)
-                            }
+                            tileView(for: index, size: tileSize)
+                                .onTapGesture {
+                                    if gameState == .playing {
+                                        handleTileTap(index: index)
+                                    }
+                                }
                         }
                     }
                 }
             }
+            .padding(tileSpacing)
         }
     }
     
     // 方块视图
-    private func memoryTileView(tile: MemoryTile, index: Int) -> some View {
-        Button(action: {
+    private func tileView(for index: Int, size: CGFloat) -> some View {
+        let tile = tiles[index]
+        return Button(action: {
             if gameState == .playing {
                 handleTileTap(index: index)
             }
@@ -305,7 +429,7 @@ struct VisualMemoryGameView: View {
             ZStack {
                 Rectangle()
                     .fill(tileColor(for: tile))
-                    .frame(width: tileSize, height: tileSize)
+                    .frame(width: size, height: size)
                     .cornerRadius(8)
             }
             .rotation3DEffect(
@@ -328,12 +452,6 @@ struct VisualMemoryGameView: View {
         } else {
             return Color(hex: "#3974bb") // 默认颜色修改为指定的蓝色
         }
-    }
-    
-    // 计算方块大小
-    private var tileSize: CGFloat {
-        let availableSpace = boardSize - (tileSpacing * CGFloat(currentGridSize - 1))
-        return availableSpace / CGFloat(currentGridSize)
     }
     
     // MARK: - 游戏逻辑
@@ -595,8 +713,20 @@ struct VisualMemoryGameView: View {
     
     // 进入下一级
     private func nextLevel() {
+        // 继续游戏
         currentLevel += 1
+        mistakes = 0
         setupLevel()
+        
+        // 显示庆祝粒子效果
+        showSuccessConfetti = true
+        // 重置动画状态触发粒子动画
+        isAnimating.toggle()
+        
+        // 延迟后隐藏粒子
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            showSuccessConfetti = false
+        }
     }
     
     // 结束游戏
@@ -608,6 +738,12 @@ struct VisualMemoryGameView: View {
         
         // 显示结果页面
         isShowingResult = true
+    }
+    
+    // 彩色粒子颜色
+    private func confettiColor(for index: Int) -> Color {
+        let colors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple, .pink]
+        return colors[index % colors.count]
     }
 }
 
