@@ -273,3 +273,28 @@
 "good_perception" = "Your visual perception is good. You effectively use peripheral vision to process information with balanced focus distribution.";
 "average_perception" = "Your visual attention is at an average level. With practice, you can improve perception speed and information processing efficiency.";
 "practice_perception" = "Your visual perception skills need practice. Regular Schulte table training can significantly enhance your visual attention and information processing abilities.";
+
+// Last Circle Game
+"last_circle_test" = "Last Circle";
+"tap_newest_circle" = "Tap the newest circle";
+"watch_colors_and_opacity" = "Watch for color and opacity changes";
+"about_last_circle_test" = "About Last Circle";
+"last_circle_description" = "This game tests your visual attention and working memory. You need to identify and tap the newest circle in each round while dealing with distractions. As the game progresses, the difficulty gradually increases.";
+"start_round" = "Start Round";
+"circles_count" = "Circle Count";
+"round_time" = "Round Time";
+"points_scored" = "Points Scored";
+"score_explanation" = "Scoring is based on your reaction speed. The faster you react, the higher your score!";
+
+// Last Circle Game Rules
+"last_circle_rule1" = "Tap the newest circle that appears each round";
+"last_circle_rule2" = "Existing circles may randomly change color";
+"last_circle_rule3" = "Existing circles may randomly become more transparent";
+"last_circle_rule4" = "Time limits increase with each round, raising the difficulty";
+
+// Last Circle Results
+"excellent_last_circle_memory" = "Excellent! Your visual memory and attention are outstanding, allowing you to accurately identify targets among distractions.";
+"good_last_circle_memory" = "Great job! Your visual processing and reaction skills are above average.";
+"average_last_circle_memory" = "Good. Your visual attention is at an average level.";
+"below_average_last_circle_memory" = "Your visual memory and attention could use some practice. With regular training, you can improve your identification skills.";
+"last_circle_explanation" = "Visual attention and working memory are crucial for many daily tasks, from driving to learning new skills. With practice, you can significantly enhance these cognitive abilities.";

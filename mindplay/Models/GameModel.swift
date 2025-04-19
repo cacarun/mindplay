@@ -17,6 +17,7 @@ enum GameType: String, CaseIterable, Identifiable {
     case chimpTest = "Chimp Test"
     case visualMemory = "Visual Memory"
     case schulteTable = "Schulte Table"
+    case lastCircle = "Last Circle"
     // Future games will be added here
     
     var id: String { self.rawValue }
@@ -40,6 +41,8 @@ enum GameType: String, CaseIterable, Identifiable {
             return LocalizedStringKey.visualMemoryTest.localized
         case .schulteTable:
             return LocalizedStringKey.schulteTableTest.localized
+        case .lastCircle:
+            return LocalizedStringKey.lastCircleTest.localized
         }
     }
     
@@ -61,6 +64,8 @@ enum GameType: String, CaseIterable, Identifiable {
             return "Remember an increasingly large board of squares."
         case .schulteTable:
             return "Enhance your attention and peripheral vision."
+        case .lastCircle:
+            return "Tap the newest circle while tracking changes in color and opacity."
         }
     }
     
@@ -82,6 +87,8 @@ enum GameType: String, CaseIterable, Identifiable {
             return "eye.fill"
         case .schulteTable:
             return "grid"
+        case .lastCircle:
+            return "circle.circle.fill"
         }
     }
 }
@@ -146,6 +153,9 @@ class GameDataManager: ObservableObject {
         case .schulteTable:
             // For schulte table, lower is better (faster time)
             return filteredResults.min(by: { $0.score < $1.score })?.score
+        case .lastCircle:
+            // For Last Circle, higher is better
+            return filteredResults.max(by: { $0.score < $1.score })?.score
         }
     }
     

@@ -43,6 +43,9 @@
 		8BDB08112DABFD5B0036C18B /* SchulteTableGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB080E2DABFD5B0036C18B /* SchulteTableGameView.swift */; };
 		8BDB08122DABFD5B0036C18B /* SchulteTableResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB080F2DABFD5B0036C18B /* SchulteTableResultView.swift */; };
 		8BDB08132DABFD5B0036C18B /* SchulteTableIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB08102DABFD5B0036C18B /* SchulteTableIntroView.swift */; };
+		8BDB08212DB3638C0036C18B /* LastCircleGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB081E2DB3638C0036C18B /* LastCircleGameView.swift */; };
+		8BDB08222DB3638C0036C18B /* LastCircleIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB081F2DB3638C0036C18B /* LastCircleIntroView.swift */; };
+		8BDB08232DB3638C0036C18B /* LastCircleResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDB08202DB3638C0036C18B /* LastCircleResultView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +87,9 @@
 		8BDB080E2DABFD5B0036C18B /* SchulteTableGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchulteTableGameView.swift; sourceTree = "<group>"; };
 		8BDB080F2DABFD5B0036C18B /* SchulteTableResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchulteTableResultView.swift; sourceTree = "<group>"; };
 		8BDB08102DABFD5B0036C18B /* SchulteTableIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchulteTableIntroView.swift; sourceTree = "<group>"; };
+		8BDB081E2DB3638C0036C18B /* LastCircleGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastCircleGameView.swift; sourceTree = "<group>"; };
+		8BDB081F2DB3638C0036C18B /* LastCircleIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastCircleIntroView.swift; sourceTree = "<group>"; };
+		8BDB08202DB3638C0036C18B /* LastCircleResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastCircleResultView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +146,7 @@
 		8BDB07B32DA233360036C18B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8BDB081D2DB3638C0036C18B /* LastCircle */,
 				8BDB080D2DABFD5B0036C18B /* SchulteTable */,
 				8BDB08062DABECEE0036C18B /* VisualMemory */,
 				8BDB07F92DAB72A10036C18B /* ChimpTest */,
@@ -276,6 +283,16 @@
 			path = SchulteTable;
 			sourceTree = "<group>";
 		};
+		8BDB081D2DB3638C0036C18B /* LastCircle */ = {
+			isa = PBXGroup;
+			children = (
+				8BDB081E2DB3638C0036C18B /* LastCircleGameView.swift */,
+				8BDB081F2DB3638C0036C18B /* LastCircleIntroView.swift */,
+				8BDB08202DB3638C0036C18B /* LastCircleResultView.swift */,
+			);
+			path = LastCircle;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -352,9 +369,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BDB07FF2DAB72A10036C18B /* ChimpTestGameView.swift in Sources */,
+				8BDB08222DB3638C0036C18B /* LastCircleIntroView.swift in Sources */,
 				8BDB07BB2DA233360036C18B /* HomeView.swift in Sources */,
 				8BDB07BE2DA233370036C18B /* ReactionTimeResultView.swift in Sources */,
 				8BDB07FE2DAB72A10036C18B /* ChimpTestResultView.swift in Sources */,
+				8BDB08232DB3638C0036C18B /* LastCircleResultView.swift in Sources */,
 				8BDB07E92DA81C010036C18B /* NumberMemoryIntroView.swift in Sources */,
 				8BDB08122DABFD5B0036C18B /* SchulteTableResultView.swift in Sources */,
 				8BDB07E32DA807EC0036C18B /* AimTrainerIntroView.swift in Sources */,
@@ -381,6 +400,7 @@
 				8BDB07CC2DA2C0EE0036C18B /* SequenceMemoryIntroView.swift in Sources */,
 				8BDB08112DABFD5B0036C18B /* SchulteTableGameView.swift in Sources */,
 				8BDB07CD2DA2C0EE0036C18B /* SequenceMemoryGameView.swift in Sources */,
+				8BDB08212DB3638C0036C18B /* LastCircleGameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -263,3 +263,28 @@
 "good_perception" = "你的视觉感知能力良好。你能够有效使用外周视觉来处理信息，专注力分布平衡。";
 "average_perception" = "你的视觉注意力处于平均水平。通过练习，你可以提高感知速度和信息处理效率。";
 "practice_perception" = "你的视觉感知技能需要练习。定期进行舒尔特表训练可以显著提高你的视觉注意力和信息处理能力。";
+
+// Last Circle 游戏
+"last_circle_test" = "记忆圆圈";
+"tap_newest_circle" = "点击新出现的圆圈";
+"watch_colors_and_opacity" = "注意颜色和透明度的变化";
+"about_last_circle_test" = "关于记忆圆圈";
+"last_circle_description" = "这个游戏测试你的视觉注意力和工作记忆能力。你需要在干扰因素下识别并点击每回合新出现的圆圈。随着游戏进行，难度会逐渐增加。";
+"start_round" = "开始回合";
+"circles_count" = "圆圈数量";
+"round_time" = "回合时间";
+"points_scored" = "获得分数";
+"score_explanation" = "得分是基于你的反应速度计算的。反应越快，得分越高！";
+
+// Last Circle 游戏规则
+"last_circle_rule1" = "点击每回合新出现的圆形";
+"last_circle_rule2" = "已存在的圆可能随机改变颜色";
+"last_circle_rule3" = "已存在的圆可能随机变得更透明";
+"last_circle_rule4" = "每回合时间限制会逐渐增加，提高难度";
+
+// Last Circle 结果
+"excellent_last_circle_memory" = "太棒了！你的视觉记忆和注意力非常出色，能够在干扰因素下准确识别目标。";
+"good_last_circle_memory" = "干得好！你的视觉处理和反应能力高于平均水平。";
+"average_last_circle_memory" = "不错。你的视觉注意力处于平均水平。";
+"below_average_last_circle_memory" = "你的视觉记忆和注意力需要练习。通过定期训练，你可以提高识别能力。";
+"last_circle_explanation" = "视觉注意力和工作记忆在日常任务中至关重要，从驾驶到学习新技能。通过练习，你可以显著提高这些认知能力。";

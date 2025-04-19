@@ -331,4 +331,29 @@ struct LocalizedStringKey {
     static let history = "history"
     static let home = "home"
     static let table = "table"
+    
+    // Last Circle 游戏
+    static let lastCircleTest = "last_circle_test"
+    static let tapNewestCircle = "tap_newest_circle"
+    static let watchColorsAndOpacity = "watch_colors_and_opacity"
+    static let aboutLastCircleTest = "about_last_circle_test"
+    static let lastCircleDescription = "last_circle_description"
+    static let startRound = "start_round"
+    static let circlesCount = "circles_count"
+    static let roundTime = "round_time"
+    static let pointsScored = "points_scored"
+    static let scoreExplanation = "score_explanation"
+    
+    // Last Circle 游戏规则
+    static let lastCircleRule1 = "last_circle_rule1"
+    static let lastCircleRule2 = "last_circle_rule2"
+    static let lastCircleRule3 = "last_circle_rule3"
+    static let lastCircleRule4 = "last_circle_rule4"
+    
+    // Last Circle 结果
+    static let excellentLastCircleMemory = "excellent_last_circle_memory"
+    static let goodLastCircleMemory = "good_last_circle_memory"
+    static let averageLastCircleMemory = "average_last_circle_memory"
+    static let belowAverageLastCircleMemory = "below_average_last_circle_memory"
+    static let lastCircleExplanation = "last_circle_explanation"
 }
