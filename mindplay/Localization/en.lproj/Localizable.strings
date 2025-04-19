@@ -298,3 +298,26 @@
 "average_last_circle_memory" = "Good. Your visual attention is at an average level.";
 "below_average_last_circle_memory" = "Your visual memory and attention could use some practice. With regular training, you can improve your identification skills.";
 "last_circle_explanation" = "Visual attention and working memory are crucial for many daily tasks, from driving to learning new skills. With practice, you can significantly enhance these cognitive abilities.";
+
+// NPuzzle Game
+"N-Puzzle Test" = "N-Puzzle Test";
+"Sliding Puzzle" = "Sliding Puzzle";
+"Move tiles to restore order" = "Move tiles to restore order";
+"Grid Size" = "Grid Size";
+"Time Used" = "Time Used";
+"Moves" = "Moves";
+"Reset" = "Reset";
+"Hint" = "Hint";
+"Puzzle Completed!" = "Puzzle Completed!";
+"Start Puzzle" = "Start Puzzle";
+"Tap tiles adjacent to the empty space to move them" = "Tap tiles adjacent to the empty space to move them";
+"Arrange all numbers in ascending order" = "Arrange all numbers in ascending order";
+"The empty space should be in the bottom right corner" = "The empty space should be in the bottom right corner";
+"Complete with minimum moves and time" = "Complete with minimum moves and time";
+"About N-Puzzle Test" = "About N-Puzzle Test";
+"This test challenges your spatial reasoning and planning skills. Solve the puzzle by moving tiles one at a time." = "This test challenges your spatial reasoning and planning skills. Solve the puzzle by moving tiles one at a time.";
+"N-Puzzle helps improve your spatial intelligence, problem solving strategy, and planning ability. Research shows this exercise can enhance your logical thinking patterns." = "N-Puzzle helps improve your spatial intelligence, problem solving strategy, and planning ability. Research shows this exercise can enhance your logical thinking patterns.";
+"Your puzzle-solving skills are excellent! You have great spatial reasoning and planning abilities." = "Your puzzle-solving skills are excellent! You have great spatial reasoning and planning abilities.";
+"You have good puzzle-solving skills with solid spatial reasoning." = "You have good puzzle-solving skills with solid spatial reasoning.";
+"Your puzzle-solving is on par with the average. Regular practice will help improve your skills." = "Your puzzle-solving is on par with the average. Regular practice will help improve your skills.";
+"Your puzzle-solving skills need some work. Don't worry - practice makes perfect!" = "Your puzzle-solving skills need some work. Don't worry - practice makes perfect!";

@@ -288,3 +288,26 @@
 "average_last_circle_memory" = "不错。你的视觉注意力处于平均水平。";
 "below_average_last_circle_memory" = "你的视觉记忆和注意力需要练习。通过定期训练，你可以提高识别能力。";
 "last_circle_explanation" = "视觉注意力和工作记忆在日常任务中至关重要，从驾驶到学习新技能。通过练习，你可以显著提高这些认知能力。";
+
+// NPuzzle 游戏
+"N-Puzzle Test" = "N宫格拼图";
+"Sliding Puzzle" = "滑动拼图";
+"Move tiles to restore order" = "移动方块，恢复顺序";
+"Grid Size" = "网格大小";
+"Time Used" = "已用时间";
+"Moves" = "步数";
+"Reset" = "重置";
+"Hint" = "提示";
+"Puzzle Completed!" = "拼图完成！";
+"Start Puzzle" = "开始拼图";
+"Tap tiles adjacent to the empty space to move them" = "点击空白格相邻的方块来移动它们";
+"Arrange all numbers in ascending order" = "按升序排列所有数字";
+"The empty space should be in the bottom right corner" = "空白格应该在右下角";
+"Complete with minimum moves and time" = "用最少的步数和时间完成";
+"About N-Puzzle Test" = "关于N宫格拼图测试";
+"This test challenges your spatial reasoning and planning skills. Solve the puzzle by moving tiles one at a time." = "这个测试挑战你的空间推理和规划能力。通过一次移动一个方块来解决拼图。";
+"N-Puzzle helps improve your spatial intelligence, problem solving strategy, and planning ability. Research shows this exercise can enhance your logical thinking patterns." = "N宫格拼图有助于提高你的空间智能、解决问题的策略和规划能力。研究表明，这种练习可以增强你的逻辑思维模式。";
+"Your puzzle-solving skills are excellent! You have great spatial reasoning and planning abilities." = "你的解谜技能非常出色！你有很强的空间推理和规划能力。";
+"You have good puzzle-solving skills with solid spatial reasoning." = "你有良好的解谜技能和扎实的空间推理能力。";
+"Your puzzle-solving is on par with the average. Regular practice will help improve your skills." = "你的解谜能力处于平均水平。定期练习将有助于提高你的技能。";
+"Your puzzle-solving skills need some work. Don't worry - practice makes perfect!" = "你的解谜技能需要一些练习。别担心，熟能生巧！";

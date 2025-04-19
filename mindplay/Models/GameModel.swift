@@ -18,6 +18,7 @@ enum GameType: String, CaseIterable, Identifiable {
     case visualMemory = "Visual Memory"
     case schulteTable = "Schulte Table"
     case lastCircle = "Last Circle"
+    case nPuzzle = "N Puzzle"
     // Future games will be added here
     
     var id: String { self.rawValue }
@@ -43,6 +44,8 @@ enum GameType: String, CaseIterable, Identifiable {
             return LocalizedStringKey.schulteTableTest.localized
         case .lastCircle:
             return LocalizedStringKey.lastCircleTest.localized
+        case .nPuzzle:
+            return LocalizedStringKey.nPuzzleTest.localized
         }
     }
     
@@ -66,6 +69,8 @@ enum GameType: String, CaseIterable, Identifiable {
             return "grid"
         case .lastCircle:
             return "circle.circle.fill"
+        case .nPuzzle:
+            return "square.grid.3x3.bottomright.filled"
         }
     }
 }
@@ -133,6 +138,9 @@ class GameDataManager: ObservableObject {
         case .lastCircle:
             // For Last Circle, higher is better
             return filteredResults.max(by: { $0.score < $1.score })?.score
+        case .nPuzzle:
+            // For NPuzzle, lower is better (fewer moves)
+            return filteredResults.min(by: { $0.score < $1.score })?.score
         }
     }
     

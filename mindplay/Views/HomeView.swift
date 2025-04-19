@@ -126,6 +126,8 @@ struct GameCardView: View {
             return LinearGradient(gradient: Gradient(colors: [Color.mint, Color.cyan]), startPoint: .topLeading, endPoint: .bottomTrailing)
         case .lastCircle:
             return LinearGradient(gradient: Gradient(colors: [Color(red: 0.3, green: 0.6, blue: 0.9), Color(red: 0.5, green: 0.2, blue: 0.8)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+        case .nPuzzle:
+            return LinearGradient(gradient: Gradient(colors: [Color(red: 0.1, green: 0.6, blue: 0.7), Color(red: 0.2, green: 0.4, blue: 0.6)]), startPoint: .topLeading, endPoint: .bottomTrailing)
         }
     }
     
@@ -194,6 +196,8 @@ struct GameCardView: View {
             return AnyView(SchulteTableIntroView())
         case .lastCircle:
             return AnyView(LastCircleIntroView())
+        case .nPuzzle:
+            return AnyView(NPuzzleIntroView())
         }
     }
 }
