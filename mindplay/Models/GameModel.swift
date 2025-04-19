@@ -46,29 +46,6 @@ enum GameType: String, CaseIterable, Identifiable {
         }
     }
     
-    var description: String {
-        switch self {
-        case .reactionTime:
-            return "Test your reaction speed by tapping when the screen changes color."
-        case .sequenceMemory:
-            return "Remember an increasingly long pattern of button presses."
-        case .aimTrainer:
-            return "Click the targets as quickly and accurately as you can."
-        case .numberMemory:
-            return "Remember the longest number you can."
-        case .verbalMemory:
-            return "Remember and recall words or phrases."
-        case .chimpTest:
-            return "Test your memory and cognitive abilities."
-        case .visualMemory:
-            return "Remember an increasingly large board of squares."
-        case .schulteTable:
-            return "Enhance your attention and peripheral vision."
-        case .lastCircle:
-            return "Tap the newest circle while tracking changes in color and opacity."
-        }
-    }
-    
     var iconName: String {
         switch self {
         case .reactionTime:
