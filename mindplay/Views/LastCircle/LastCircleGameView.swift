@@ -28,7 +28,7 @@ struct GameCircle: Identifiable {
 
 struct LastCircleGameView: View {
     @EnvironmentObject var gameDataManager: GameDataManager
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     @State private var gameState: LastCircleGameState = .ready
     @State private var circles: [GameCircle] = []
     @State private var score: Int = 0
@@ -40,6 +40,7 @@ struct LastCircleGameView: View {
     @State private var isAnimating = false
     @State private var showParticles = false
     @State private var particlePosition: CGPoint = .zero
+    @State private var showResult = false
     
     // 游戏配置
     let circleCount: Int // 最大圆圈数量
@@ -223,16 +224,18 @@ struct LastCircleGameView: View {
                 .opacity(0)
             }
         }
-        .navigationDestination(isPresented: Binding<Bool>(
-            get: { gameState == .finished },
-            set: { _ in }
-        )) {
+        .fullScreenCover(isPresented: $showResult) {
             LastCircleResultView(
                 score: score,
                 rounds: round,
                 circleCount: circleCount,
-                reactionTimes: reactionTimes
+                reactionTimes: reactionTimes,
+                onDismiss: {
+                    // 完全返回到首页
+                    dismiss()
+                }
             )
+            .environmentObject(gameDataManager)
         }
         .onAppear {
             isAnimating = true
@@ -244,7 +247,7 @@ struct LastCircleGameView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: Button(action: {
             if gameState != .finished {
-                presentationMode.wrappedValue.dismiss()
+                dismiss()
             }
         }) {
             Image(systemName: "chevron.left")
@@ -381,6 +384,9 @@ struct LastCircleGameView: View {
         
         // 保存分数
         gameDataManager.saveResult(gameType: .lastCircle, score: Double(score), extraData: String(circleCount))
+        
+        // 显示结果页面
+        showResult = true
     }
     
     // 开始计时器

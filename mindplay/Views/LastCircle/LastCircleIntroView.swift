@@ -12,7 +12,6 @@ struct LastCircleIntroView: View {
     @State private var selectedCircleCount: Int = 10
     @State private var isAnimating = false
     @State private var isShowingGame = false
-    @Environment(\.presentationMode) var presentationMode
     
     // 可选择的圆圈数量
     private let circleCounts = [8, 10, 12, 15, 20]
@@ -50,29 +49,6 @@ struct LastCircleIntroView: View {
                         )
                 }
             }
-            
-            // 返回按钮
-            VStack {
-                HStack {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(.white)
-                            .padding(12)
-                            .background(Color.white.opacity(0.2))
-                            .clipShape(Circle())
-                    }
-                    .padding(.leading, 16)
-                    .padding(.top, 16)
-                    
-                    Spacer()
-                }
-                
-                Spacer()
-            }
-            .zIndex(1)
             
             // 主内容
             ScrollView {
@@ -288,7 +264,6 @@ struct LastCircleIntroView: View {
             }
         }
         .navigationBarTitle("", displayMode: .inline)
-        .navigationBarHidden(true)
         .onAppear {
             isAnimating = true
         }
