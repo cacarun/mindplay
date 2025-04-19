@@ -364,13 +364,15 @@ struct NPuzzleGameView: View {
     // 洗牌算法 - 确保拼图有解
     private func shuffleTiles() {
         let totalTiles = gridSize * gridSize
-        var currentEmptyPos = totalTiles - 1
-        let moves = 100 + gridSize * 20 // 移动次数随难度增加
         
-        // 确保空白方块位置正确
-        if let emptyTileIndex = tiles.firstIndex(where: { $0.id == 0 }) {
-            tiles[emptyTileIndex].currentPosition = currentEmptyPos
-        }
+        // 首先确保所有方块在初始有序位置
+        setupTiles()
+        
+        // 空白方块初始位置（右下角）
+        var currentEmptyPos = totalTiles - 1
+        
+        // 移动次数应根据网格大小调整，确保充分打乱
+        let moves = gridSize * gridSize * 20
         
         for _ in 0..<moves {
             // 获取空白位置的相邻位置
@@ -391,6 +393,54 @@ struct NPuzzleGameView: View {
         
         // 更新空白方块位置
         emptyTilePosition = currentEmptyPos
+        
+        // 验证棋盘可解性（调试模式下使用）
+        #if DEBUG
+        if !isPuzzleSolvable() {
+            print("警告：生成的拼图不可解，重新洗牌")
+            shuffleTiles() // 如果不可解则重新洗牌
+        }
+        #endif
+    }
+    
+    // 计算当前棋盘的逆序数，验证棋盘可解性
+    private func isPuzzleSolvable() -> Bool {
+        // 创建一个不包含空白方块的数组，用于计算逆序数
+        var numbers: [Int] = []
+        var emptyRow = 0
+        
+        // 首先按当前位置排序所有方块
+        let sortedTiles = tiles.sorted { $0.currentPosition < $1.currentPosition }
+        
+        // 收集非空白方块的ID，并记录空白方块所在行
+        for tile in sortedTiles {
+            if tile.id != 0 {
+                numbers.append(tile.id)
+            } else {
+                // 计算空白方块所在行（从0开始）
+                emptyRow = tile.currentPosition / gridSize
+            }
+        }
+        
+        // 计算逆序数
+        var inversions = 0
+        for i in 0..<numbers.count {
+            for j in i+1..<numbers.count {
+                if numbers[i] > numbers[j] {
+                    inversions += 1
+                }
+            }
+        }
+        
+        // 根据网格大小和逆序数判断可解性
+        if gridSize % 2 == 1 {
+            // 奇数阶棋盘（3×3，5×5等）：逆序数必须为偶数
+            return inversions % 2 == 0
+        } else {
+            // 偶数阶棋盘（4×4等）：逆序数加上空白方块所在行（从底部数）必须为偶数
+            let emptyRowFromBottom = gridSize - 1 - emptyRow
+            return (inversions + emptyRowFromBottom) % 2 == 0
+        }
     }
     
     // 验证并修正方块位置
