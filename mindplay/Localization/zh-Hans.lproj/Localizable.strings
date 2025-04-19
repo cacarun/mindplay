@@ -290,7 +290,7 @@
 "last_circle_explanation" = "视觉注意力和工作记忆在日常任务中至关重要，从驾驶到学习新技能。通过练习，你可以显著提高这些认知能力。";
 
 // NPuzzle 游戏
-"n_puzzle_test" = "数字华容道测试";
+"n_puzzle_test" = "数字华容道";
 "sliding_puzzle" = "滑块拼图";
 "move_tiles" = "移动方块以恢复顺序";
 "time_used" = "用时";

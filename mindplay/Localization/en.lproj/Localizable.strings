@@ -300,7 +300,7 @@
 "last_circle_explanation" = "Visual attention and working memory are crucial for many daily tasks, from driving to learning new skills. With practice, you can significantly enhance these cognitive abilities.";
 
 // NPuzzle Game
-"n_puzzle_test" = "N-Puzzle Test";
+"n_puzzle_test" = "N-Puzzle";
 "sliding_puzzle" = "Sliding Puzzle";
 "move_tiles" = "Move tiles to restore order";
 "time_used" = "Time Used";
