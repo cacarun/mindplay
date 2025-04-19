@@ -13,13 +13,13 @@ struct LastCircleResultView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var isAnimating = false
     @State private var chartAnimation = false
-    @State private var navigateToGame = false
     
     let score: Int
     let rounds: Int
     let circleCount: Int
     let reactionTimes: [Double]
     let onDismiss: () -> Void
+    let onRestart: (Int) -> Void  // 添加 onRestart 回调函数
     
     // 背景渐变
     private let backgroundGradient = LinearGradient(
@@ -271,13 +271,13 @@ struct LastCircleResultView: View {
                             .foregroundColor(Color(red: 0.3, green: 0.3, blue: 0.8))
                         }
                         
-                        // 再玩一次按钮
+                        // 再玩一次按钮 - 修改实现方式
                         Button {
                             // 触觉反馈
                             let impactMed = UIImpactFeedbackGenerator(style: .medium)
                             impactMed.impactOccurred()
                             dismiss()
-                            navigateToGame = true
+                            onRestart(circleCount)
                         } label: {
                             HStack {
                                 Image(systemName: "arrow.counterclockwise")
@@ -318,10 +318,6 @@ struct LastCircleResultView: View {
                 .foregroundColor(.white.opacity(0.7))
                 .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
         })
-        .fullScreenCover(isPresented: $navigateToGame) {
-            LastCircleGameView(circleCount: circleCount)
-                .environmentObject(gameDataManager)
-        }
     }
     
     // 根据分数获取表现评级
@@ -389,7 +385,8 @@ struct LastCircleResultView: View {
         rounds: 12,
         circleCount: 10,
         reactionTimes: [1.2, 1.1, 0.9, 1.3, 1.0, 0.8, 0.9, 1.2, 0.7, 1.1, 0.9, 1.0],
-        onDismiss: {}
+        onDismiss: {},
+        onRestart: {_ in}
     )
     .environmentObject(GameDataManager())
 } 

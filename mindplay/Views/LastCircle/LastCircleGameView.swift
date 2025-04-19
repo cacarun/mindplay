@@ -233,6 +233,18 @@ struct LastCircleGameView: View {
                 onDismiss: {
                     // 完全返回到首页
                     dismiss()
+                },
+                onRestart: { circleCount in
+                    // 重新开始游戏
+                    showResult = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        // 设置为准备状态，而不是直接开始游戏
+                        gameState = .ready
+                        round = 0
+                        score = 0
+                        circles = []
+                        reactionTimes = []
+                    }
                 }
             )
             .environmentObject(gameDataManager)
@@ -245,16 +257,6 @@ struct LastCircleGameView: View {
         }
         .navigationBarTitle("", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: Button(action: {
-            if gameState != .finished {
-                dismiss()
-            }
-        }) {
-            Image(systemName: "chevron.left")
-                .foregroundColor(.white)
-                .padding(8)
-                .background(Circle().fill(Color.white.opacity(0.15)))
-        })
     }
     
     // 开始游戏
