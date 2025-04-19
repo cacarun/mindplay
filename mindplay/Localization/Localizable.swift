@@ -103,7 +103,7 @@ struct LocalizedStringKey {
     static let sequenceWillGetLonger = "sequence_will_get_longer"
     static let level = "level"
     static let yourTurn = "your_turn"
-    static let gridSize = "grid_size"
+    static let gridSize = "Grid Size"
     static let correct = "correct"
     static let wrong = "wrong"
     static let gameOver = "game_over"
@@ -382,56 +382,6 @@ struct LocalizedStringKey {
 
 extension LocalizedStringKey {
     var localized: String {
-        // 将键名转换为字符串
-        let keyString = String(describing: self)
-        
-        // NPuzzle游戏的键直接使用NSLocalizedString本地化
-        switch keyString {
-        case "nPuzzleTest":
-            return NSLocalizedString("N-Puzzle Test", comment: "N数字拼图测试名称")
-        case "slidingPuzzle":
-            return NSLocalizedString("Sliding Puzzle", comment: "滑动拼图")
-        case "moveTiles":
-            return NSLocalizedString("Move tiles to restore order", comment: "移动方块恢复顺序")
-        case "timeUsed":
-            return NSLocalizedString("Time Used", comment: "已用时间")
-        case "movesMade":
-            return NSLocalizedString("Moves", comment: "移动步数")
-        case "resetPuzzle":
-            return NSLocalizedString("Reset", comment: "重置")
-        case "showHint":
-            return NSLocalizedString("Hint", comment: "提示")
-        case "puzzleCompleted":
-            return NSLocalizedString("Puzzle Completed!", comment: "拼图完成！")
-        case "startPuzzle":
-            return NSLocalizedString("Start Puzzle", comment: "开始拼图")
-        case "nPuzzleRule1":
-            return NSLocalizedString("Tap tiles adjacent to the empty space to move them", comment: "点击空格相邻的方块来移动它们")
-        case "nPuzzleRule2":
-            return NSLocalizedString("Arrange all numbers in ascending order", comment: "按升序排列所有数字")
-        case "nPuzzleRule3":
-            return NSLocalizedString("The empty space should be in the bottom right corner", comment: "空白格应该在右下角")
-        case "nPuzzleRule4":
-            return NSLocalizedString("Complete with minimum moves and time", comment: "用最少的步数和时间完成")
-        case "aboutNPuzzleTest":
-            return NSLocalizedString("About N-Puzzle Test", comment: "关于N数字拼图测试")
-        case "nPuzzleDescription":
-            return NSLocalizedString("This test challenges your spatial reasoning and planning skills. Solve the puzzle by moving tiles one at a time.", comment: "这个测试挑战你的空间推理和规划能力。通过一次移动一个方块来解决拼图。")
-        case "nPuzzleExplanation":
-            return NSLocalizedString("N-Puzzle helps improve your spatial intelligence, problem solving strategy, and planning ability. Research shows this exercise can enhance your logical thinking patterns.", comment: "N数字拼图有助于提高你的空间智能、解决问题的策略和规划能力。研究表明，这种练习可以增强你的逻辑思维模式。")
-        case "excellentNPuzzleSkill":
-            return NSLocalizedString("Your puzzle-solving skills are excellent! You have great spatial reasoning and planning abilities.", comment: "你的解谜技能非常出色！你有很强的空间推理和规划能力。")
-        case "goodNPuzzleSkill":
-            return NSLocalizedString("You have good puzzle-solving skills with solid spatial reasoning.", comment: "你有良好的解谜技能和扎实的空间推理能力。")
-        case "averageNPuzzleSkill":
-            return NSLocalizedString("Your puzzle-solving is on par with the average. Regular practice will help improve your skills.", comment: "你的解谜能力处于平均水平。定期练习将有助于提高你的技能。")
-        case "belowAverageNPuzzleSkill":
-            return NSLocalizedString("Your puzzle-solving skills need some work. Don't worry - practice makes perfect!", comment: "你的解谜技能需要一些练习。别担心，熟能生巧！")
-        case "gridSize":
-            return NSLocalizedString("Grid Size", comment: "网格大小")
-        default:
-            // 处理其他键，直接使用键名进行本地化
-            return NSLocalizedString(keyString, comment: "")
-        }
+        return NSLocalizedString(String(describing: self), comment: "")
     }
 }
